@@ -1,1 +1,66 @@
 /* Empty. Add your own CSS if you like */
+
+.question {
+  height: 100px;
+  overflow: hidden;
+  background-color: #F7F7F7;
+  border-bottom: 1px solid grey;
+}
+
+.question-active {
+  background-color: #D6E9F8;
+  height: 120px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.active-rank {
+  line-height: 120px;
+  width: 60px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.left-content {
+  height: 100px;
+  width: auto;
+  overflow: hidden;
+  padding: 5px;
+}
+.left-content-active {
+  height: 120px;
+  width: auto;
+  overflow: hidden;
+  padding: 5px;
+}
+.right-content {
+  float: right;
+  width: 60px;
+  height: 100px;
+}
+
+.rate-icon {
+  margin-top: 0px;
+  padding: 0;
+  color: #1a8ac2;
+  font-size: 50px;
+  line-height: 40px;
+}
+
+.question-text-container {
+  height: 70px;
+}
+
+.question-text-container-active {
+  height: 90px;
+}
+
+.subheader {
+  width: 100%;
+  height: 40px;
+  background-color: grey;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  line-height: 40px;
+}
