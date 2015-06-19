@@ -80,5 +80,5 @@ var app = angular.module('starter', ['ionic'])
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
+  $urlRouterProvider.otherwise('/app/playlists');
 });
