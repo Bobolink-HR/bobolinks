@@ -17,16 +17,21 @@
 
     <!-- firebase js -->
     <script src="lib/firebase/firebase.js"></script>
-    <script src="lib/angularfire/index.js"></script>
+    <script src="lib/angularfire/dist/angularfire.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
     <script src="app.js"></script>
+    <script src="components/Firebase/FirebaseFactory.js"></script>
+
     <script src="components/AppCtrl.js"></script>
-    <script src="components/PlaylistCtrl.js"></script>
     <script src="components/Landing/LandingCtrl.js"></script>
+    <!-- TODO: DELETE BELOW -->
+      <script src="components/PlaylistCtrl.js"></script>
+
+    <!-- TODO: DELETE ABOVE -->
   </head>
 
   <body ng-app="starter">
