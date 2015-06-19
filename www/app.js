@@ -32,15 +32,25 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     controller: 'AppCtrl'
   })
 
-    .state('app.landing', {
-      url: "/landing",
-      views: {
-        'menuContent': {
-          templateUrl: "components/Landing/landing.html",
-          controller: 'LandingCtrl'
-        }
-      },
-    });
+  .state('app.landing', {
+    url: "/landing",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Landing/landing.html",
+        controller: 'LandingCtrl'
+      }
+    },
+  })
+  // This is a placeholder view for testing the forum
+  .state('app.forum', {
+    url: "/forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/forum/forum.html",
+        controller: 'ForumCtrl'
+      }
+    },
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/landing');
 });
