@@ -2,7 +2,7 @@
   <ion-content>
 
     <!-- Navigation -->
-    <div class="button-bar">
+    <div class="button-bar" ng-init="tog=1">
       <a class="button" ng-class="{'active-button':tog==1}" ng-model="active" ng-click="tog=1; switchView(true)">Active</a>
       <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
     </div>
