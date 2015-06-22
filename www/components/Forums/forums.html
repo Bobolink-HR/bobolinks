@@ -7,10 +7,9 @@
       <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
     </div>
 
-    <!-- Forums List -->
-    <ion-list>
-      <ion-item ng-repeat="forum in forums" class="card">
-        <div ng-show="forum.active && active || !forum.active && complete" ng-hide="!forum.active && active || forum.active && complete">
+    <!-- Active Forums List -->
+    <ion-list class="list card" ng-show="active" ng-hide="complete">
+      <ion-item ng-repeat="forum in forums" class="card" ng-if="forum.active">
           <div class="item item-divider">
             {{forum.title}}
           </div>
@@ -20,7 +19,21 @@
           <div class="item item-divider">
             {{forum.date}}
           </div>
-        </div>
+      </ion-item>
+    </ion-list>
+
+    <!-- Complete Forums List -->
+    <ion-list class="list card" ng-show="complete" ng-hide="active">
+      <ion-item ng-repeat="forum in forums" class="card" ng-if="!forum.active">
+          <div class="item item-divider">
+            {{forum.title}}
+          </div>
+          <div class="item item-text-wrap">
+            {{forum.description}}
+          </div>
+          <div class="item item-divider">
+            {{forum.date}}
+          </div>
       </ion-item>
     </ion-list>
 
