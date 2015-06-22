@@ -46,7 +46,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: "/forum",
     views: {
       'menuContent': {
-        templateUrl: "components/forum/forum.html",
+        templateUrl: "components/forum/forumGuest.html",
         controller: 'ForumCtrl'
       }
     },

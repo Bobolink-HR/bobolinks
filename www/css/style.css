@@ -7,19 +7,19 @@
   border-bottom: 1px solid grey;
 }
 
-.question-active {
+.active-background {
   background-color: #D6E9F8;
-  height: 120px;
-  font-size: 16px;
-  font-weight: bold;
+}
+
+.active-arrow {
+  display: none;
 }
 
 .active-rank {
-  line-height: 120px;
-  width: 60px;
-  font-size: 30px;
-  text-align: center;
+  position: absolute;
+  top: 30px;
 }
+
 
 .left-content {
   height: 100px;
@@ -27,12 +27,7 @@
   overflow: hidden;
   padding: 5px;
 }
-.left-content-active {
-  height: 120px;
-  width: auto;
-  overflow: hidden;
-  padding: 5px;
-}
+
 .right-content {
   float: right;
   width: 60px;
@@ -72,6 +67,7 @@
   line-height: 30px;
   font-size: 20px;
   font-weight: bold;
+  color: #2a2d33;
 }
 
 .question-text-container {
@@ -84,10 +80,10 @@
 
 .subheader {
   width: 100%;
-  height: 40px;
+  height: 30px;
   background-color: grey;
   text-align: center;
   color: white;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 16px;
+  line-height: 30px;
 }
