@@ -17,7 +17,7 @@ app.controller('ForumCtrl', ['$scope', function($scope) {
       name: 'Ben Steinberg',
       rank: 0
     },
-  ]
+  ];
 
 }]);
 
@@ -31,8 +31,7 @@ app.directive('question', function() {
       ngName: '@',
       ngRank: '@'
     },
-    template: '<div class="question">' +
-  '<div class="right-content">' +
+    template: '<div class="right-content">' +
   '<div class="up arrow-container"></div>' +
   '<div class="rank-container">{{ngRank}}</div>' +
   '<div class="down arrow-container"></div>' +
@@ -42,7 +41,6 @@ app.directive('question', function() {
      ' <p>{{ngQuestion}}</p>' +
     '</div>' +
     '<p class="question-name">{{ngName}}</p>' +
-  '</div>' +
-'</div>'
+  '</div>'
   }
 })
