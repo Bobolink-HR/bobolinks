@@ -1,5 +1,32 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content>
-    
+    <div class="button-bar">
+      <a class="button">Active</a>
+      <a class="button">Complete</a>
+    </div>
+    <ion-list>
+      <ion-item ng-repeat="forum in forums" class="card">
+        <div class="item item-divider">
+          {{forum.title}}
+        </div>
+        <div class="item item-text-wrap">
+          {{forum.description}}
+        </div>
+        <div class="item item-divider">
+          {{forum.date}}
+        </div>
+      </ion-item>
+      <!-- <div class="card">
+        <div class="item item-divider">
+          I'm a Header in a Card!
+        </div>
+        <div class="item item-text-wrap">
+          This is a basic Card with some text.
+        </div>
+        <div class="item item-divider">
+          I'm a Footer in a Card!
+        </div>
+      </div> -->
+    </ion-list>
   </ion-content>
 </ion-view>
