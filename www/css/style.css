@@ -21,6 +21,10 @@
   top: 30px;
 }
 
+.answered-question {
+  background-color: #EFF9EE;
+}
+
 
 .left-content {
   min-height: 100px;

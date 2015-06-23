@@ -18,7 +18,7 @@
     </div>
 
     <div id="pending-questions" ng-show="!!pendingQuestions[0]">
-      <div class="subheader">Pending</div>
+      <div class="subheader" ng-click="getNextActiveQuestion()">Pending</div>
       <div class="question" ng-repeat="question in pendingQuestions | orderBy: '-rank'">
         <ng-pending-question question="question"></ng-question>
       </div>
@@ -26,8 +26,8 @@
 
     <div id="answered-questions" ng-show="!!answeredQuestions[0]">
       <div class="subheader">Answered</div>
-      <div class="question" ng-repeat="question in answeredQuestions | orderBy: '-rank'">
-        <ng-pending-question question="question"></ng-question>
+      <div class="question answered-question" ng-repeat="question in answeredQuestions | orderBy: '-rank'">
+        <ng-answered-question question="question"></ng-question>
       </div>
     </div> 
     
