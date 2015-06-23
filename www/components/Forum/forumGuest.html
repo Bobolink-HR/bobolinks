@@ -1,5 +1,5 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
-  <ion-content>
+  <ion-content ng-controller="ForumsCtrl">
     <div class="question active-background">
       <div class="right-content">
       <div class="up arrow-container active-arrow"></div>
@@ -13,36 +13,30 @@
         <p class="question-name">Ben Steinberg</p>
       </div>
     </div>
-    <div class="subheader">Pending Questions</div>
+    <div class="subheader">Pending</div>
     <div id="pending-questions">
-      <div class="question">
+    <div class="question" ng-repeat="question in dummyData | orderBy: '-rank'">
+       <!-- <div question ng-question="{{question.question}}" ng-name="{{question.name}}" ng-rank="{{question.rank}}"></div> -->
+       <div class="question" question-id="{{question.id}}">
         <div class="right-content">
-        <div class="up arrow-container"></div>
-        <div class="rank-container">5</div>
-        <div class="down arrow-container"></div>
+        <div class="up arrow-container" ng-click="upVote(question.id)"></div>
+        <div class="rank-container">{{question.rank}}</div>
+        <div class="down arrow-container" ng-click="downVote(question.id)"></div>
         </div>  
         <div class="left-content">
           <div class="question-text-container">
-            <p>Can you please explain why we need to use an asynchronous callback in the function?</p>
+            <p>{{question.question}}</p>
           </div>
-          <p>Ben Steinberg</p>
-        </div>
-      </div>
-      <div class="question">
-        <div class="right-content">
-        <div class="up arrow-container"></div>
-        <div class="rank-container">5</div>
-        <div class="down arrow-container"></div>
-        </div>  
-        <div class="left-content">
-          <div class="question-text-container">
-            <p>Can you please explain why we need to use an asynchronous callback in the function?Can you please explain why we need to use an asynchronous callback in the function?Can you please explain why we need to use an asynchronous callback in the function?</p>
-          </div>
-          <p class="question-name">Ben Steinberg</p>
+          <p>{{question.name}}</p>
         </div>
       </div>
     </div>
+    <div class="subheader">Answered</div>
 
 
   </ion-content>
+<!--   <ion-footer-bar id="footer" >
+    <div class="title">Ask Question</div>
+    <input id="question-input" type="text" />
+  </ion-footer-bar> -->
 </ion-view>
