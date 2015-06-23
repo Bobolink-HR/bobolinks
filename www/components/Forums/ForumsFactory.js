@@ -1,50 +1,24 @@
 function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   var forumRef = FirebaseRef.child('Forums');
-
   var forumArray = $firebaseArray(forumRef);
 
   //Get a list of Forums
   function getForums() {
-    return forumArray;
+    return forumArray; // Returns a $firebaseArray collection of all forums
   }
+
   //Get a forum
-  function getForum(forumID) {
-    return $firebaseObject(forumRef.child(forumID));
+  function getForum(forumID) { // Pass a string representing the forumID
+    return $firebaseObject(forumRef.child(forumID)); // Returns a $firebaseObject of all items
   }
 
   //Save a forum
-  function saveForum(forum) {
-    var testForum = {
-      title: 'Forum #1',
-      description: 'Description of Forum #1',
-      creatorID: 'simplelogin:1',
-      private: false,
-      createdAt: new Date(),
-      questions: {
-        question1: {
-          text: "Why do my feet hurt?",
-          ranking: 2,
-          userID: 'simplelogin: 1'
-        },
-        question2: {
-          text: "Why do penguins wear tuxedos?",
-          ranking: -2,
-          userID: 'simplelogin: 2'
-        }
-      }
-    };
-    return forumArray.$add(testForum); // Returns a promise
-
-    console.log("saveForum called");
+  function saveForum(forum) { // Pass this the forum object to be saved to the database
+    return forumArray.$add(forum); // Returns a promise
   }
 
   return {
-    // forumRef: forumRef,
-    // forumArray: forumArray,
-    // FirebaseRef: FirebaseRef,
-    // firebaseArray: $firebaseArray,
-    // firebaseObject, $firebaseObject,
     getForums: getForums,
     getForum: getForum,
     saveForum: saveForum

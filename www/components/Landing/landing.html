@@ -1,7 +1,33 @@
 <ion-view view-title="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content>
-    <h1>Forum</h1>
-    {{forum}}
+    <h1>Get a Forum</h1>
+    <!-- {{forum.title}} -->
+    <span>Title: <b>{{forum.title}}</b></span> <br />
+    <span>Description: <b>{{forum.description}}</b></span> <br />
+    <span>Creator: <b>{{forum.creatorID}}</b></span>
+    <h1>Create a Forum</h1>
+      <form>
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Title</span>
+            <input type="text" ng-model="newForum.title">
+          </label>
+          <label class="item item-input">
+            <textarea placeholder="Description" ng-model="newForum.description"></textarea>
+          </label>
+          <li class="item item-toggle">
+             Private
+             <label class="toggle toggle-assertive">
+               <input type="checkbox" ng-model="newForum.private">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+          <button type="button" class="button button-positive button-full" ng-click="addForum(newForum)">Submit</button>
+        </div>
+      </form>
+    <hr />
     <h1>Forums</h1>
     {{forums}}
     <!-- <h1>$scope.title: {{firebaseRefDataIllustration}}</h1>
@@ -21,6 +47,5 @@
     </div>
 
     <hr /> -->
-
   </ion-content>
 </ion-view>
