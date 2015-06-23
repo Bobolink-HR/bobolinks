@@ -59,7 +59,16 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         controller: 'ForumsCtrl'
       }
     }
-  });
+  })
+  .state('app.new-forum', {
+    url: "/new-forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewForum/new-forum.html",
+        controller: 'NewForumCtrl'
+      }
+    }
+  })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/landing');
 });
