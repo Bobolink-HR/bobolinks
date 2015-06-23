@@ -56,7 +56,6 @@
 .down {
   width: 0; 
   height: 0; 
-  margin-top: 2px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #A3CE9C;
@@ -66,8 +65,8 @@
 .rank-container {
   position: relative;
   height: 30px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 7px;
+  margin-bottom: 7px;
   text-align: center;
   line-height: 30px;
   font-size: 20px;
@@ -95,6 +94,22 @@
   color: white;
   border: none;
 }
+#footer {
+  /*background-color: #f8f9fa;*/
+  background-color: green;
+  font-size: 20px;
+  color: white;
+  line-height: 35px;
+  text-align: center;
+  height: 100px;
+}
+
+#question-input {
+  margin-top: 50px;
+}
+
+
+
 
 
 /* Moderator Forums css below */
