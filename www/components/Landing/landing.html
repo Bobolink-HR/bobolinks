@@ -1,9 +1,12 @@
 <ion-view view-title="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content>
-    <h1>$scope.title: {{firebaseRefDataIllustration}}</h1>
+    <h1>Forum</h1>
+    {{forum}}
+    <h1>Forums</h1>
+    {{forums}}
+    <!-- <h1>$scope.title: {{firebaseRefDataIllustration}}</h1>
     <hr />
 
-    <!-- How to display a firebase object -->
     <p>{{john.FirstName}}</p>
     <p>{{john.LastName}}</p>
     <p>{{john.Email}}</p>
@@ -11,14 +14,13 @@
 
     <hr />
 
-    <!-- How to iterate over a firebase collection with angular -->
     <div ng-repeat="user in users">
       <p>First Name: {{user.FirstName}}</p>
       <p>Last Name: {{user.LastName}}</p>
       <p>Email: {{user.Email}}</p>
     </div>
 
-    <hr />
+    <hr /> -->
 
   </ion-content>
 </ion-view>
