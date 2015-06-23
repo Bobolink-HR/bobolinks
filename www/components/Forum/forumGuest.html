@@ -1,24 +1,42 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="ForumsCtrl">
-    <div class="question active-background">
-      <div class="right-content">
-      <div class="up arrow-container active-arrow"></div>
-      <div class="rank-container active-rank">5</div>
-      <div class="down arrow-container active-arrow"></div>
-      </div>  
-      <div class="left-content">
-        <div class="question-text-container">
-          <p>Can you please explain why we need to use an asynchronous callback in the function?</p>
+    <div id="active-qustion" ng-show="!!activeQuestion" ng-click="nextQuestion()">
+      <div class="subheader">Active</div>
+      <div class="question active-background">
+        <div class="right-content">
+          <div class="up arrow-container active-arrow"></div>
+          <div class="rank-container active-rank">{{activeQuestion.rank}}</div>
+          <div class="down arrow-container active-arrow"></div>
+        </div>  
+        <div class="left-content">
+          <div class="question-text-container">
+            <p>{{activeQuestion.text}}</p>
+          </div>
+          <p class="question-name">{{activeQuestion.name}}</p>
         </div>
-        <p class="question-name">Ben Steinberg</p>
       </div>
     </div>
-    <div class="subheader">Pending</div>
-    <div id="pending-questions">
-    <div class="question" ng-repeat="question in dummyData | orderBy: '-rank'">
-       <ng-question question="question"></ng-question>
+
+    <div id="pending-questions" ng-show="!!pendingQuestions[0]">
+      <div class="subheader">Pending</div>
+      <div class="question" ng-repeat="question in pendingQuestions | orderBy: '-rank'">
+        <ng-pending-question question="question"></ng-question>
+      </div>
     </div> 
-    <div class="subheader">Answered</div>
+
+    <div id="answered-questions" ng-show="!!answeredQuestions[0]">
+      <div class="subheader">Answered</div>
+      <div class="question" ng-repeat="question in answeredQuestions | orderBy: '-rank'">
+        <ng-pending-question question="question"></ng-question>
+      </div>
+    </div> 
+    
+
+
+
+
+
+
     <form ng-submit="createTask(task)">
         <div class="list">
           <label class="item item-input">
@@ -28,7 +46,7 @@
         <div class="padding">
           <button type="submit" class="button button-block button-positive">Create Task</button>
         </div>
-      </form>
+    </form>
 
   </ion-content>
 <!--   <ion-footer-bar id="footer" >
