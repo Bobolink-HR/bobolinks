@@ -1,24 +1,34 @@
-<ion-view view-title ="{{title}}">
+<ion-view view-title="{{title}}">
   <ion-content>
-    <div class="list">
-      <div class="item-text-wrap">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Forum Title</span>
-          <input type="text" placeholder="Forum Title">
+    <h1>Create a Forum</h1>
+
+    <!-- Forum creation input form -->
+    <form>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="newForum.title" required>
         </label>
-      </div>
-      <div class="item-text-wrap">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Description</span>
-          <input type="text" placeholder="Description">
+        <label class="item item-input">
+          <textarea placeholder="Description" ng-model="newForum.description" required></textarea>
         </label>
+        <li class="item item-toggle">
+           Private
+           <label class="toggle toggle-assertive">
+             <input type="checkbox" ng-model="newForum.private">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
       </div>
-      <div class="item-text-wrap">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Date</span>
-          <input type="text" placeholder="Date">
-        </label>
-      </div>
-    </div>
+    </form>
+
   </ion-content>
+
+  <!-- Footer Navigation -->
+  <ion-footer-bar class="bar-positive">
+    <button type="button" class="title button button-clear button-block" ng-click="addForum(newForum)">SUBMIT</button>
+  </ion-footer-bar>
+
 </ion-view>
