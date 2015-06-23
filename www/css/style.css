@@ -94,6 +94,22 @@
   color: white;
   border: none;
 }
+#footer {
+  /*background-color: #f8f9fa;*/
+  background-color: green;
+  font-size: 20px;
+  color: white;
+  line-height: 35px;
+  text-align: center;
+  height: 100px;
+}
+
+#question-input {
+  margin-top: 50px;
+}
+
+
+
 
 
 /* Moderator Forums css below */
