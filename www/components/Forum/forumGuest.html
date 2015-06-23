@@ -16,23 +16,19 @@
     <div class="subheader">Pending</div>
     <div id="pending-questions">
     <div class="question" ng-repeat="question in dummyData | orderBy: '-rank'">
-       <!-- <div question ng-question="{{question.question}}" ng-name="{{question.name}}" ng-rank="{{question.rank}}"></div> -->
-       <div class="question" question-id="{{question.id}}">
-        <div class="right-content">
-        <div class="up arrow-container" ng-click="upVote(question.id)"></div>
-        <div class="rank-container">{{question.rank}}</div>
-        <div class="down arrow-container" ng-click="downVote(question.id)"></div>
-        </div>  
-        <div class="left-content">
-          <div class="question-text-container">
-            <p>{{question.question}}</p>
-          </div>
-          <p>{{question.name}}</p>
-        </div>
-      </div>
-    </div>
+       <ng-question question="question"></ng-question>
+    </div> 
     <div class="subheader">Answered</div>
-
+    <form ng-submit="createTask(task)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Create Task</button>
+        </div>
+      </form>
 
   </ion-content>
 <!--   <ion-footer-bar id="footer" >
