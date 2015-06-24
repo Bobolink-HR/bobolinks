@@ -18,14 +18,14 @@
     </div>
 
     <div id="pending-questions" ng-show="!!pendingQuestions[0]">
-      <div class="subheader" ng-click="getNextActiveQuestion()">Pending</div>
+      <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{pendingQuestions.length}})</div>
       <div class="question" ng-repeat="question in pendingQuestions | orderBy: '-rank'">
         <ng-pending-question question="question"></ng-question>
       </div>
     </div> 
 
     <div id="answered-questions" ng-show="!!answeredQuestions[0]">
-      <div class="subheader">Answered</div>
+      <div class="subheader">Answered ({{answeredQuestions.length}})</div>
       <div class="question answered-question" ng-repeat="question in answeredQuestions | orderBy: '-rank'">
         <ng-answered-question question="question"></ng-question>
       </div>
@@ -37,7 +37,7 @@
 
 
 
-    <form ng-submit="createTask(task)">
+   <!--  <form ng-submit="createTask(task)">
         <div class="list">
           <label class="item item-input">
             <input type="text" placeholder="What do you need to do?" ng-model="task.title">
@@ -46,7 +46,7 @@
         <div class="padding">
           <button type="submit" class="button button-block button-positive">Create Task</button>
         </div>
-    </form>
+    </form> -->
 
   </ion-content>
 <!--   <ion-footer-bar id="footer" >
