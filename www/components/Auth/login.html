@@ -4,9 +4,9 @@
       <form> 
         <div class="list">
           <label class="item item-input">
-            <textarea placeholder="Url" ng-model="newForum.description"></textarea>
+            <textarea ng-click="clearContents(this)"placeholder="Url" ng-model="url.text" ></textarea>
           </label>
-          <button type="button" class="button button-positive button-full" ng-click="addForum(newForum)">Submit</button>
+          <button type="button" class="button button-positive button-full" ng-click="moveUrl(url.text)">Submit</button>
         </div>
       </form>
   </ion-content>
