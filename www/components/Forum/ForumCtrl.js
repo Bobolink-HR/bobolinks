@@ -1,46 +1,51 @@
 app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsFactory) {
-  $scope.title = "Example Forum";
+  
+  // This is dummy data
+  $scope.forumId = 'JsWjcMAbUt4dFbqBQUn';
+  $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
+    questions: {
+      pending: [{
+        id: "0",
+        text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
+        name: 'Ben Steinberg',
+        rank: 0,
+        status: 'pending'
+      },
+      {
+        id: "1",
+        text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
+        name: 'Amy Steinberg',
+        rank: 0,
+        status: 'pending'
+      },
+      {
+        id: "2",
+        text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
+        name: 'John Smith',
+        rank: 0,
+        status: 'pending'
+      }], 
+      active: {
+        id: "6",
+        text: 'This is currently the active question.  Hopefully this will work.',
+        name: 'Michael Jordan',
+        rank: 5,
+        status: 'active'
+      }, 
+      answered: []
+    }
+  };
 
 
-  $scope.forum = {JsWjcMAbUt4dFbqBQUn: {createdAt: "", creatorID: "simplelogin:1", private: false, questions: {
-    pending: [{
-      id: "0",
-      text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-      name: 'Ben Steinberg',
-      rank: 0,
-      status: 'pending'
-    },
-    {
-      id: "1",
-      text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-      name: 'Amy Steinberg',
-      rank: 0,
-      status: 'pending'
-    },
-    {
-      id: "2",
-      text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-      name: 'John Smith',
-      rank: 0,
-      status: 'pending'
-    }], 
-    active: {
-      id: "6",
-      text: 'This is currently the active question.  Hopefully this will work.',
-      name: 'Michael Jordan',
-      rank: 5,
-      status: 'active'
-    }, 
-    answered: []}
-  }};
+  //Fast assignment to question lists and activeQuestion
+  $scope.pendingQuestions = $scope.forum.questions.pending;
+  $scope.activeQuestion = $scope.forum.questions.active;
+  $scope.answeredQuestions = $scope.forum.questions.answered;
 
 
-  $scope.pendingQuestions = $scope.forum.JsWjcMAbUt4dFbqBQUn.questions.pending;
-  $scope.activeQuestion = $scope.forum.JsWjcMAbUt4dFbqBQUn.questions.active;
-  $scope.answeredQuestions = $scope.forum.JsWjcMAbUt4dFbqBQUn.questions.answered;
-
+  // This function is called when active quesiotn is clicked
+  // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
-    console.log("B");
     $scope.removeActiveQuestion();
     $scope.getNextActiveQuestion();
   };
@@ -59,11 +64,14 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
   $scope.getNextActiveQuestion = function() {
     if ($scope.pendingQuestions.length > 0) {
       var nextQuestion = $scope.pendingQuestions.shift();
+      var temp;
+      console.log($scope.pendingQuestions.length);
 
       for (var i = 0; i < $scope.pendingQuestions.length; i++) {
         if ($scope.pendingQuestions[i].rank > nextQuestion.rank) {
-          $scope.pendingQuestions.push(nextQuestion);
-          nextQuestion = $scope.pendingQuestions[i];
+          var temp = $scope.pendingQuestions[i];
+          $scope.pendingQuestions[i] = nextQuestion;
+          nextQuestion = temp;
         }
       }
       $scope.activeQuestion = nextQuestion;
@@ -71,6 +79,7 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
   };
 }]);
 
+// Custom directive for pending questions
 app.directive('ngPendingQuestion', function() {
   return {
     restrict: 'E',
@@ -101,6 +110,7 @@ app.directive('ngPendingQuestion', function() {
   };
 });
 
+// Custom directive for answered questions
 app.directive('ngAnsweredQuestion', function() {
   return {
     restrict: 'E',
