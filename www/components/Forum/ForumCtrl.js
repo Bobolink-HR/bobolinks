@@ -1,41 +1,55 @@
-app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory) {
-  
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory, test) {
   console.log($stateParams);
+  var test = $ForumsFactory.getForum('-JsXe8s3AwhtbITOCjmX');
+  test.$loaded(function(data) {
+    // console.log(data);
+    // console.log(data.questions);
+    $scope.forum = data;
+    console.log(data);
+    console.log($scope.forum);
+    console.log($scope.forum.questions.active);
+    $scope.pendingQuestions = $scope.forum.questions.pending;
+    $scope.activeQuestion = $scope.forum.questions.active;
+    $scope.answeredQuestions = $scope.forum.questions.answered;
+  });
   // This is dummy data
+ 
   $scope.forumId = 'JsWjcMAbUt4dFbqBQUn';
-  $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
-    questions: {
-      pending: [{
-        id: "0",
-        text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Ben Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "1",
-        text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Amy Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "2",
-        text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'John Smith',
-        rank: 0,
-        status: 'pending'
-      }], 
-      active: {
-        id: "6",
-        text: 'This is currently the active question.  Hopefully this will work.',
-        name: 'Michael Jordan',
-        rank: 5,
-        status: 'active'
-      }, 
-      answered: []
-    }
-  };
+  // $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
+  //   questions: {
+  //     pending: [{
+  //       id: "0",
+  //       text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'Ben Steinberg',
+  //       rank: 0,
+  //       status: 'pending'
+  //     },
+  //     {
+  //       id: "1",
+  //       text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'Amy Steinberg',
+  //       rank: 0,
+  //       status: 'pending'
+  //     },
+  //     {
+  //       id: "2",
+  //       text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'John Smith',
+  //       rank: 0,
+  //       status: 'pending'
+  //     }], 
+  //     active: {
+  //       id: "6",
+  //       text: 'This is currently the active question.  Hopefully this will work.',
+  //       name: 'Michael Jordan',
+  //       rank: 5,
+  //       status: 'active'
+  //     }, 
+  //     answered: []
+  //   }
+  // };
+
+  console.log($scope.forum);
   $scope.isLoggedIn = true;
 
 
@@ -67,7 +81,6 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function
     if ($scope.pendingQuestions.length > 0) {
       var nextQuestion = $scope.pendingQuestions.shift();
       var temp;
-      console.log($scope.pendingQuestions.length);
 
       for (var i = 0; i < $scope.pendingQuestions.length; i++) {
         if ($scope.pendingQuestions[i].rank > nextQuestion.rank) {

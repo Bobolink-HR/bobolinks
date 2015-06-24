@@ -49,6 +49,18 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
+    },
+    resolve: {
+      test: function($stateParams) {
+        console.log("AAAAA");
+        console.log($stateParams.forumid);
+        // var forumId = '-JsXe8s3AwhtbITOCjmX';
+        // console.log($ForumsFactory.getForum);
+        // var forum = $ForumsFactory.getForum(forumId);
+        // console.log(forum);
+
+
+      }
     }
   })
   .state('app.forums', {
