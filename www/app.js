@@ -72,6 +72,15 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+  .state('app.new-forum', {
+    url: "/new-forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewForum/new-forum.html",
+        controller: 'NewForumCtrl'
+      }
+    }
+  })
   .state('app.addQuestion', {
     url: "/add_question",
     views: {
