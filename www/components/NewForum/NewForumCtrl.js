@@ -4,14 +4,18 @@ app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, Foru
   $scope.newForum = {};
 
   $scope.addForum = function(newForum) {
-    console.log('newForum: ', newForum)
     $scope.newForum.creatorID = "simplelogin:1"; //Update this to be the actual user ID
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
-    // THIS IS WHERE THE DATES AND TIMES WOULD BE MODIFIED
-    // $scope.newForum.date = JSON.stringify(newForum.date.toString());
-    // $scope.newForum.start = JSON.stringify(newForum.start);
-    // $scope.newForum.end = JSON.stringify(newForum.end);
-    console.log('scope.newForum', $scope.newForum);
+
+    // Convert start to the user input date and time as a string
+    $scope.newForum.start = newForum.startDate.toString().slice(0,16).concat( newForum.start.toString().slice(16,33) );
+    delete $scope.newForum.startDate;
+
+    // Convert end to the user input date and time as a string
+    $scope.newForum.end = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
+    delete $scope.newForum.endDate;
+
+    // Save the forum to Firebase
     ForumsFactory.saveForum(newForum).then(function(ref) {
       var id = ref.key();
       // $scope.forum = ForumsFactory.getForum(id);
@@ -21,3 +25,4 @@ app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, Foru
     });
   }
 }]);
+

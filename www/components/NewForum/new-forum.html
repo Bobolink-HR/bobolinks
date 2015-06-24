@@ -17,12 +17,10 @@
           <textarea placeholder="Description" ng-model="newForum.description" required></textarea>
         </label>
 
-   <!--  
-        THESE ARE THE DATES AND TIMES I'M WORKING ON
-        
+        <!--  Start Date and Time -->
         <label class="item item-input">
-          <span class="input-label">Date</span>
-          <input type="date" ng-model="newForum.date" required>
+          <span class="input-label">Start Date</span>
+          <input type="date" ng-model="newForum.startDate" required>
         </label>
 
         <label class="item item-input">
@@ -30,11 +28,16 @@
           <input type="time" ng-model="newForum.start" placeholder="HH:mm:ss" required>
         </label>
 
+        <!--  End Date and Time -->
+        <label class="item item-input">
+          <span class="input-label">End Date</span>
+          <input type="date" ng-model="newForum.endDate" required>
+        </label>
+
         <label class="item item-input">
           <span class="input-label">End Time</span>
           <input type="time" ng-model="newForum.end" placeholder="HH:mm:ss" required>
         </label>
- -->
 
         <!-- Private/Public Forum -->
         <li class="item item-toggle">
