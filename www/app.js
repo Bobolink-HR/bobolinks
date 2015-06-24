@@ -59,6 +59,15 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         controller: 'ForumsCtrl'
       }
     }
+  })
+  .state('app.addQuestion', {
+    url: "/add_question",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Forum/addQuestion.html",
+        controller: 'AddQuestionCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/landing');

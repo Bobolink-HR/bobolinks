@@ -78,6 +78,8 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
       $scope.activeQuestion = nextQuestion;
     }
   };
+
+
 }]);
 
 // Custom directive for pending questions
