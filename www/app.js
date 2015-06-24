@@ -32,6 +32,16 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     controller: 'AppCtrl'
   })
 
+  .state('app.login', {
+    url: "/login",
+    views: {
+      'menuContent' : {
+        templateUrl: "components/Auth/login.html",
+        controller: 'AuthCtrl'
+      }
+    }
+  })
+
   .state('app.landing', {
     url: "/landing",
     views: {
@@ -61,5 +71,5 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
+  $urlRouterProvider.otherwise('/app/login');
 });
