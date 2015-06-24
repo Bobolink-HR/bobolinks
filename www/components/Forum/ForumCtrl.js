@@ -1,5 +1,6 @@
-app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsFactory) {
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory) {
   
+  console.log($stateParams);
   // This is dummy data
   $scope.forumId = 'JsWjcMAbUt4dFbqBQUn';
   $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 

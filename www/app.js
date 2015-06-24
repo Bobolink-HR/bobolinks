@@ -43,7 +43,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
-    url: "/forum",
+    url: "/forum/:forumid",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
