@@ -3,15 +3,38 @@
     <h1>Create a Forum</h1>
 
     <!-- Forum creation input form -->
-    <form>
+    <form name="forumForm">
       <div class="list">
+
+        <!-- Forum Title -->
         <label class="item item-input">
           <span class="input-label">Title</span>
           <input type="text" ng-model="newForum.title" required>
         </label>
+
+        <!-- Forum Description -->
         <label class="item item-input">
           <textarea placeholder="Description" ng-model="newForum.description" required></textarea>
         </label>
+
+<!-- includes: date, start and end time
+        <label class="item item-input">
+          <span class="input-label">Date</span>
+          <input type="date" ng-model="newForum.date" required>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Start Time</span>
+          <input type="time" ng-model="newForum.start" placeholder="HH:mm:ss" required>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">End Time</span>
+          <input type="time" ng-model="newForum.end" placeholder="HH:mm:ss" required>
+        </label>
+
+ -->
+        <!-- Private/Public Forum -->
         <li class="item item-toggle">
            Private
            <label class="toggle toggle-assertive">
@@ -21,14 +44,14 @@
              </div>
            </label>
         </li>
+
       </div>
+
+      <!-- Valid Form Submit -->
+      <button type="button" class="button button-positive button-full" ng-click="addForum(newForum)">SUBMIT</button>
     </form>
 
   </ion-content>
 
-  <!-- Footer Navigation -->
-  <ion-footer-bar class="bar-positive">
-    <button type="button" class="title button button-clear button-block" ng-click="addForum(newForum)">SUBMIT</button>
-  </ion-footer-bar>
 
 </ion-view>

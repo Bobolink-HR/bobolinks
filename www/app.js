@@ -46,7 +46,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: "/forum",
     views: {
       'menuContent': {
-        templateUrl: "components/Forum/forumGuest.html",
+        templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
     }
@@ -60,15 +60,15 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  .state('app.new-forum', {
-    url: "/new-forum",
+  .state('app.addQuestion', {
+    url: "/add_question",
     views: {
       'menuContent': {
-        templateUrl: "components/NewForum/new-forum.html",
-        controller: 'NewForumCtrl'
+        templateUrl: "components/Forum/addQuestion.html",
+        controller: 'AddQuestionCtrl'
       }
     }
-  })
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/landing');
 });

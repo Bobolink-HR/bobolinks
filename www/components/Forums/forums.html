@@ -10,30 +10,30 @@
     <!-- Active Forums List -->
     <ion-list class="list card" ng-show="active" ng-hide="complete">
       <ion-item ng-repeat="forum in forums" class="card" ng-if="forum.active">
-          <div class="item item-divider">
-            {{forum.title}}
-          </div>
-          <div class="item item-text-wrap">
-            {{forum.description}}
-          </div>
-          <div class="item item-divider">
-            {{forum.date}}
-          </div>
+        <div class="item item-divider">
+          {{forum.title}}
+        </div>
+        <div class="item item-text-wrap">
+          {{forum.description}}
+        </div>
+        <div class="item item-divider">
+          {{forum.date}}
+        </div>
       </ion-item>
     </ion-list>
 
     <!-- Complete Forums List -->
     <ion-list class="list card" ng-show="complete" ng-hide="active">
       <ion-item ng-repeat="forum in forums" class="card" ng-if="!forum.active">
-          <div class="item item-divider">
-            {{forum.title}}
-          </div>
-          <div class="item item-text-wrap">
-            {{forum.description}}
-          </div>
-          <div class="item item-divider">
-            {{forum.date}}
-          </div>
+        <div class="item item-divider">
+          {{forum.title}}
+        </div>
+        <div class="item item-text-wrap">
+          {{forum.description}}
+        </div>
+        <div class="item item-divider">
+          {{forum.date}}
+        </div>
       </ion-item>
     </ion-list>
   </ion-content>
