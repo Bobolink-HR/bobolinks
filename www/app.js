@@ -56,7 +56,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: "/forum",
     views: {
       'menuContent': {
-        templateUrl: "components/Forum/forumGuest.html",
+        templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
     }
@@ -67,6 +67,24 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       'menuContent': {
         templateUrl: "components/Forums/forums.html",
         controller: 'ForumsCtrl'
+      }
+    }
+  })
+  .state('app.new-forum', {
+    url: "/new-forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewForum/new-forum.html",
+        controller: 'NewForumCtrl'
+      }
+    }
+  })
+  .state('app.addQuestion', {
+    url: "/add_question",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Forum/addQuestion.html",
+        controller: 'AddQuestionCtrl'
       }
     }
   });
