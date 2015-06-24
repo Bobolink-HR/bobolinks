@@ -35,6 +35,7 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
       answered: []
     }
   };
+  $scope.isLoggedIn = true;
 
 
   //Fast assignment to question lists and activeQuestion
@@ -69,7 +70,7 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
 
       for (var i = 0; i < $scope.pendingQuestions.length; i++) {
         if ($scope.pendingQuestions[i].rank > nextQuestion.rank) {
-          var temp = $scope.pendingQuestions[i];
+          temp = $scope.pendingQuestions[i];
           $scope.pendingQuestions[i] = nextQuestion;
           nextQuestion = temp;
         }
@@ -118,16 +119,16 @@ app.directive('ngAnsweredQuestion', function() {
       question: '='
     },
     template: '<div class="right-content">' +
-  '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
-  '<div class="rank-container active-rank">{{question.rank}}</div>' +
-  '<div class="down arrow-container active-arrow" ng-click="downVote()"></div>' +
-  '</div>  ' +
- ' <div class="left-content">' +
+    '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
+    '<div class="rank-container active-rank">{{question.rank}}</div>' +
+    '<div class="down arrow-container active-arrow" ng-click="downVote()"></div>' +
+    '</div>  ' +
+    ' <div class="left-content">' +
     '<div class="question-text-container">' +
      ' <p>{{question.text}}</p>' +
-    '</div>' +
-    '<p class="question-name">{{question.name}}</p>' +
-  '</div>',
+      '</div>' +
+      '<p class="question-name">{{question.name}}</p>' +
+     '</div>',
    link: function(scope, element, attribute) {
       scope.upVote = function() {
         scope.question.rank++;
