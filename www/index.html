@@ -19,6 +19,9 @@
     <script src="lib/firebase/firebase.js"></script>
     <script src="lib/angularfire/dist/angularfire.min.js"></script>
 
+    <!-- moment js -->
+    <script src="lib/moment/moment.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -34,6 +37,10 @@
     <script src="components/Forum/AddQuestionCtrl.js"></script>
     <script src="components/Forums/ForumsCtrl.js"></script>
     <script src="components/NewForum/NewForumCtrl.js"></script>
+    
+    <script>
+      moment().format();
+    </script>
   </head>
 
   <body ng-app="starter">
