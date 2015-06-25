@@ -1,0 +1,63 @@
+<ion-view view-title="{{title}}"> 
+  <ion-content>
+
+  <div id="container" class="container">
+
+    <!-- LOGIN -->
+    <form id="frmLogin" role="form">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="txtEmail">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="txtPass">Password</label>
+            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
+        </div>
+        <button type="submit" class="btn btn-default btn-block">Login</button>
+        <br/>
+        <br/>
+         <h4>Login with</h4>
+ <a href="#" class="btn btn-primary bt-social" data-provider="facebook">Facebook</a>
+ <a href="#" class="btn btn-info bt-social" data-provider="twitter">Twitter</a>
+
+        <!-- <a href="#" class="btn btn-danger bt-social" data-provider="google">Google+</a> --> <a href="#" class="btn btn-default bt-social" data-provider="github">GitHub</a>
+ <a href="#" class="btn btn-warning" id="btAnon">Anonymous</a>
+
+    </form>
+    <!-- / LOGIN -->
+
+    <!-- LOGOUT -->
+    <form id="frmLogout" role="form">
+      <h2>You are logged out!</h2>
+    </form>
+    <!-- / LOGOUT -->
+
+    <!-- REGISTER -->
+    <form id="frmRegister" role="form">
+         <h2>Register</h2>
+
+        <div class="form-group">
+            <label for="txtRegEmail">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="txtRegPass">Password</label>
+            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
+        </div>
+        <button type="submit" class="btn btn-default">Register</button>
+    </form>
+    <!-- / REGISTER -->
+
+    <hr />
+    <!-- ALERT BOX -->
+    <div id="alert" class="alert" role="alert">
+         <h4 id="alert-title">You are not logged in</h4>
+
+        <p id="alert-detail"></p>
+    </div>
+    <!-- / ALERT BOX -->
+
+</div>
+  </ion-content>
+</ion-view>
