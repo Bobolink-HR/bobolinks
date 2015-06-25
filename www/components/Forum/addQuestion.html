@@ -1,16 +1,19 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="AddQuestionCtrl">
-   <form id="forum-question-form">
-     <p class="field-description">Name</p>
-     <input id="forum-question-input" ng-model="name" type="text" name="name" placeholder="Default is anonymous" />
-     <p class="field-description">Question</p>
-     <input id="question-field" ng-model="text" type="textfield" name="name" placeholder="Enter your question here" />
-     <input id="forum-question-submit" type="submit" value="Submit" ng-click="submitQuestion()"/>
-   </form>
+
+   <form>
+      <p class="forum-question-form-label">Name</p>
+      <label class="item item-input">
+        <input class="forum-question-input" placeholder="Name (default is Anonymous)"></textarea>
+      </label>
+
+      <p class="forum-question-form-label">Question (required)</p>
+      <label class="item item-input">
+        <textarea class="forum-question-textarea"placeholder="Enter your question here"></textarea>
+      </label>
+
+      <button type="button" class="button button-positive button-full" >Submit Question</button>
+    </form>
 
   </ion-content>
-<!--   <ion-footer-bar id="footer" >
-    <div class="title">Ask Question</div>
-    <input id="question-input" type="text" />
-  </ion-footer-bar> -->
 </ion-view>

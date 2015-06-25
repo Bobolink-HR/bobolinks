@@ -6,7 +6,6 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
    /// BEGIN PLACEHOLDER
    ////////////////////
   forumId = '-JsbZ_jVQWJB7K8dG_sn'; // For testing purposes only
-  $scope.isLoggedIn = true;
   /////////////////////
    /// END PLACEHOLDER
    ////////////////////
