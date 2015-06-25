@@ -61,12 +61,30 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
-    url: "/forum",
+    url: "/forum/:forumid",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
+    },
+    resolve: {
+      forumData: function($stateParams, $location, ForumsFactory) {
+        // Pull forum from Firebase database
+        var forum = ForumsFactory.getForum($stateParams.forumid);
+
+
+        forum.$loaded(function() {
+          // If forum title is undefined (aka forum doesn't exist), redirect to home
+          if (forum.title === undefined) {
+            $location.path('/home');
+          } 
+        });
+
+      },
+      simpleObj:  function(){
+        return {value: 'simple!'};
+      },
     }
   })
   .state('app.forums', {
