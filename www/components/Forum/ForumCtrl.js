@@ -26,7 +26,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
     $scope.removeActiveQuestion();
-    // $scope.getNextActiveQuestion();
+    $scope.getNextActiveQuestion();
   };
 
   // If there is an active question, move it to answered questions array
@@ -35,7 +35,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
     if (!!$scope.questionActive) {
       console.log($scope.questionActive);
       $scope.questionsAnswered.$add($scope.questionActive[0]);
-      // $scope.questionActive.$remove(0);
+      $scope.questionActive.$remove(0);
     }
   };
 
@@ -43,15 +43,19 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // if there are any pending questions
   $scope.getNextActiveQuestion = function() {
     if ($scope.questionsPending.length > 0) {
-      var nextQuestion = $scope.Questions[0];
+      var nextQuestion = $scope.questionsPending[0];
 
+      // Loop through pending questions to find question with the highest rank
       for (var i = 1; i < $scope.questionsPending.length; i++) {
         if ($scope.questionsPending[i].rank > nextQuestion.rank) {
           nextQuestion = $scope.questionsPending[i];
         }
       }
 
-      $scope.activeQuestion.$add(nextQuestion);
+      // Remove the next active question from questions pending
+      // and add it to questionActive
+      // $scope.questionsPending.$remove(nextQuestion);
+      $scope.questionActive.$add(nextQuestion);
     }
   };
 
