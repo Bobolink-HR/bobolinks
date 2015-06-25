@@ -12,6 +12,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function
 
   // });
 
+  // console.log($ForumsFactory.test());
   $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
 
   // $scope.test2 = $ForumsFactory.getAnsweredQuestions('-JsbZ_jVQWJB7K8dG_sn');

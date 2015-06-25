@@ -1,6 +1,8 @@
 function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   var forumRef = FirebaseRef.child('Forums');
+  console.log(forumRef);
+  console.log("BBB");
   var forumArray = $firebaseArray(forumRef);
 
   //Get a list of Forums
@@ -9,8 +11,12 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   //Get a forum
-  function getForum(forumID) { // Pass a string representing the forumID
-    return $firebaseObject(forumRef.child(forumID)); // Returns a $firebaseObject of all items
+  function getForum(forumId) { // Pass a string representing the forumID
+    return $firebaseObject(forumRef.child(forumId)); // Returns a $firebaseObject of all items
+  }
+
+  function getQuestions(forumId, status) {
+    return $firebaseArray(forumRef.child(forumId + '/questions/' + status));
   }
 
   //Save a forum
@@ -21,7 +27,8 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   return {
     getForums: getForums,
     getForum: getForum,
-    saveForum: saveForum
+    saveForum: saveForum,
+    getQuestions: getQuestions
   };
 }
 
