@@ -14,6 +14,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // Set Forum object to $scope.forum with two way binding
   $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "forum");
 
+
   // Create an array for each question status
   $scope.questionActive = $ForumsFactory.getQuestions(forumId, 'active');
   $scope.questionsPending = $ForumsFactory.getQuestions(forumId, 'pending');

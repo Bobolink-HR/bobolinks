@@ -69,9 +69,18 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     },
     resolve: {
-      forumData: function($stateParams, ForumsFactory) {
-        console.log($stateParams);
-        return ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn');
+      forumData: function($stateParams, $location, ForumsFactory) {
+        // Pull forum from Firebase database
+        var forum = ForumsFactory.getForum($stateParams.forumid);
+
+
+        forum.$loaded(function() {
+          // If forum title is undefined (aka forum doesn't exist), redirect to home
+          if (forum.title === undefined) {
+            $location.path('/home');
+          } 
+        });
+
       },
       simpleObj:  function(){
         return {value: 'simple!'};
