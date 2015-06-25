@@ -61,12 +61,21 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
-    url: "/forum",
+    url: "/forum/:forumid",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
+    },
+    resolve: {
+      forumData: function($stateParams, ForumsFactory) {
+        console.log($stateParams);
+        return ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn');
+      },
+      simpleObj:  function(){
+        return {value: 'simple!'};
+      },
     }
   })
   .state('app.forums', {

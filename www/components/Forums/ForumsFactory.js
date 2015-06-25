@@ -9,8 +9,12 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   //Get a forum
-  function getForum(forumID) { // Pass a string representing the forumID
-    return $firebaseObject(forumRef.child(forumID)); // Returns a $firebaseObject of all items
+  function getForum(forumId) { // Pass a string representing the forumID
+    return $firebaseObject(forumRef.child(forumId)); // Returns a $firebaseObject of all items
+  }
+
+  function getQuestions(forumId, status) {
+    return $firebaseArray(forumRef.child(forumId + '/questions/' + status));
   }
 
   //Save a forum
@@ -20,7 +24,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   //Add a question
   function addQuestion(forumID, question) { // Pass the forum ID and the question to add to it
-    var questionRef = forumRef.child(forumID).child('questions');
+    var questionRef = forumRef.child(forumID).child('questions/pending');
     var questionArray = $firebaseArray(questionRef); // Creates a question reference
     return questionArray.$add(question); // Returns a promise when the question is added
   }
@@ -31,6 +35,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getForums: getForums,
     getForum: getForum,
     saveForum: saveForum,
+    getQuestions: getQuestions,
     addQuestion: addQuestion
   };
 }

@@ -1,47 +1,25 @@
-app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsFactory) {
-  
-  // This is dummy data
-  $scope.forumId = 'JsWjcMAbUt4dFbqBQUn';
-  $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
-    questions: {
-      pending: [{
-        id: "0",
-        text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Ben Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "1",
-        text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Amy Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "2",
-        text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'John Smith',
-        rank: 0,
-        status: 'pending'
-      }], 
-      active: {
-        id: "6",
-        text: 'This is currently the active question.  Hopefully this will work.',
-        name: 'Michael Jordan',
-        rank: 5,
-        status: 'active'
-      }, 
-      answered: []
-    }
-  };
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', function($scope, $stateParams, $ForumsFactory, $firebase) {
+
+  var forumId = $stateParams.forumid;
+
+   /////////////////////
+   /// BEGIN PLACEHOLDER
+   ////////////////////
+  forumId = '-JsbZ_jVQWJB7K8dG_sn'; // For testing purposes only
   $scope.isLoggedIn = true;
+  /////////////////////
+   /// END PLACEHOLDER
+   ////////////////////
+
+  // Set Forum object to $scope.forum with two way binding
+  $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "forum");
+
+  // Create an array for each question status
+  $scope.questionActive = $ForumsFactory.getQuestions(forumId, 'active');
+  $scope.questionsPending = $ForumsFactory.getQuestions(forumId, 'pending');
+  $scope.questionsAnswered = $ForumsFactory.getQuestions(forumId, 'answered');
 
 
-  //Fast assignment to question lists and activeQuestion
-  $scope.pendingQuestions = $scope.forum.questions.pending;
-  $scope.activeQuestion = $scope.forum.questions.active;
-  $scope.answeredQuestions = $scope.forum.questions.answered;
 
 
   // This function is called when active quesiotn is clicked
@@ -54,28 +32,30 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
   // If there is an active question, move it to answered questions array
   // and set active question to null
   $scope.removeActiveQuestion = function() {
-    if (!!$scope.activeQuestion) {
-      $scope.answeredQuestions.push($scope.activeQuestion);
-      $scope.activeQuestion = null;
+    if (!!$scope.questionActive) {
+      console.log($scope.questionActive);
+      $scope.questionsAnswered.$add($scope.questionActive[0]);
+      $scope.questionActive.$remove(0);
     }
   };
 
   // Set the active question to the pending question with the highest rank
   // if there are any pending questions
   $scope.getNextActiveQuestion = function() {
-    if ($scope.pendingQuestions.length > 0) {
-      var nextQuestion = $scope.pendingQuestions.shift();
-      var temp;
-      console.log($scope.pendingQuestions.length);
+    if ($scope.questionsPending.length > 0) {
+      var nextQuestion = $scope.questionsPending[0];
 
-      for (var i = 0; i < $scope.pendingQuestions.length; i++) {
-        if ($scope.pendingQuestions[i].rank > nextQuestion.rank) {
-          temp = $scope.pendingQuestions[i];
-          $scope.pendingQuestions[i] = nextQuestion;
-          nextQuestion = temp;
+      // Loop through pending questions to find question with the highest rank
+      for (var i = 1; i < $scope.questionsPending.length; i++) {
+        if ($scope.questionsPending[i].rank > nextQuestion.rank) {
+          nextQuestion = $scope.questionsPending[i];
         }
       }
-      $scope.activeQuestion = nextQuestion;
+
+      // Remove the next active question from questions pending
+      // and add it to questionActive
+      // $scope.questionsPending.$remove(nextQuestion);
+      $scope.questionActive.$add(nextQuestion);
     }
   };
 
@@ -86,9 +66,6 @@ app.controller('ForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsF
 app.directive('ngPendingQuestion', function() {
   return {
     restrict: 'E',
-    scope: {
-      question: '='
-    },
     template: '<div class="right-content">' +
   '<div class="up arrow-container" ng-click="upVote()"></div>' +
   '<div class="rank-container">{{question.rank}}</div>' +
@@ -100,13 +77,17 @@ app.directive('ngPendingQuestion', function() {
     '</div>' +
     '<p class="question-name">{{question.name}}</p>' +
   '</div>',
-   link: function(scope, element, attribute) {
-      scope.upVote = function() {
-        scope.question.rank++;
+   link: function($scope, element, attribute) {
+      $scope.upVote = function() {
+        $scope.question.rank++;
+        // Save the change to Firebase
+        $scope.questionsPending.$save($scope.question);
       };
 
-      scope.downVote = function() {
-        scope.question.rank--;
+      $scope.downVote = function() {
+        $scope.question.rank--;
+        // Save the change to Firebase
+        $scope.questionsPending.$save($scope.question);
       };
     }
    
@@ -117,9 +98,6 @@ app.directive('ngPendingQuestion', function() {
 app.directive('ngAnsweredQuestion', function() {
   return {
     restrict: 'E',
-    scope: {
-      question: '='
-    },
     template: '<div class="right-content">' +
     '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
     '<div class="rank-container active-rank">{{question.rank}}</div>' +
@@ -130,17 +108,7 @@ app.directive('ngAnsweredQuestion', function() {
      ' <p>{{question.text}}</p>' +
       '</div>' +
       '<p class="question-name">{{question.name}}</p>' +
-     '</div>',
-   link: function(scope, element, attribute) {
-      scope.upVote = function() {
-        scope.question.rank++;
-      };
-
-      scope.downVote = function() {
-        scope.question.rank--;
-      };
-    }
-   
+     '</div>',   
   };
 });
 
