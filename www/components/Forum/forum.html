@@ -1,6 +1,6 @@
 <ion-view view-title ="{{test.title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="ForumCtrl">
-    <div id="active-qustion" ng-show="!!activeQuestion" ng-click="nextQuestion()">
+    <div id="active-qustion" ng-show="!!questionActive" ng-click="nextQuestion()">
       <div class="subheader">Active</div>
       <div class="question active-background">
         <div class="right-content">
@@ -17,21 +17,21 @@
       </div>
     </div>
 
-    <div id="pending-questions" ng-show="!!pendingQuestions[0]">
-      <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{pendingQuestions.length}})</div>
-      <div class="question" ng-repeat="(key, question) in test.questions.pending | orderBy: '-rank'">
+    <div id="pending-questions" ng-show="!!questionsPending[0]">
+      <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{questionsPending.length}})</div>
+      <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
         <ng-pending-question question="question"></ng-question>
       </div>
     </div> 
 
-    <div id="answered-questions" ng-show="!!answeredQuestions[0]">
+    <div id="answered-questions" ng-show="!!questionsAnswered[0]">
       <div class="subheader">Answered ({{answeredQuestions.length}})</div>
       <div class="question answered-question" ng-repeat="question in forum.questions.answered | orderBy: '-rank'">
         <ng-answered-question question="question"></ng-question>
       </div>
     </div> 
 
-    <p ng-model="test">{{test}}</p>
+    <p>{{questionsPending}}</p>
     
 
 

@@ -1,10 +1,19 @@
-app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory) {
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', function($scope, $stateParams, $ForumsFactory, $firebase) {
   // console.log($stateParams);
 
-  //TODO: Figure out if you can prevent view from loading until the forum data loads
-  // $scope.test = $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn');
 
 
+
+
+  // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending').$bindTo($scope, "pending");
+  // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
+
+  // $scope.questionActive = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'active');
+  $scope.questionsPending = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending');
+ 
+  // $scope.questionsAnswered = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'answered');
+
+  // console.log()
   // $scope.test.$loaded(function(data) {
   //   // console.log(data);
   //   $scope.pendingQuestions = data.questions.pending.slice(1);
@@ -12,8 +21,8 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function
 
   // });
 
-  // console.log($ForumsFactory.test());
-  $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
+  // console.log($ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending'));
+  // $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
 
   // $scope.test2 = $ForumsFactory.getAnsweredQuestions('-JsbZ_jVQWJB7K8dG_sn');
   // console.log($scope.test2);
@@ -31,48 +40,43 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function
 
 
   // This is dummy data
-  $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
-    questions: {
-      pending: [{
-        id: "0",
-        text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Ben Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "1",
-        text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-        name: 'Amy Steinberg',
-        rank: 0,
-        status: 'pending'
-      },
-      {
-        id: "2",
-        text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-        name: 'John Smith',
-        rank: 0,
-        status: 'pending'
-      }], 
-      active: {
-        id: "6",
-        text: 'This is currently the active question.  Hopefully this will work.',
-        name: 'Michael Jordan',
-        rank: 5,
-        status: 'active'
-      }, 
-      answered: []
-    }
-  };
+  // $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
+  //   questions: {
+  //     pending: [{
+  //       id: "0",
+  //       text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'Ben Steinberg',
+  //       rank: 0,
+  //       status: 'pending'
+  //     },
+  //     {
+  //       id: "1",
+  //       text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'Amy Steinberg',
+  //       rank: 0,
+  //       status: 'pending'
+  //     },
+  //     {
+  //       id: "2",
+  //       text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
+  //       name: 'John Smith',
+  //       rank: 0,
+  //       status: 'pending'
+  //     }], 
+  //     active: {
+  //       id: "6",
+  //       text: 'This is currently the active question.  Hopefully this will work.',
+  //       name: 'Michael Jordan',
+  //       rank: 5,
+  //       status: 'active'
+  //     }, 
+  //     answered: []
+  //   }
+  // };
 
   // console.log($scope.forum);
   $scope.isLoggedIn = true;
 
-
-  //Fast assignment to question lists and activeQuestion
-  $scope.pendingQuestions = $scope.forum.questions.pending;
-  $scope.activeQuestion = $scope.forum.questions.active;
-  $scope.answeredQuestions = $scope.forum.questions.answered;
 
 
   // This function is called when active quesiotn is clicked
@@ -116,9 +120,6 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function
 app.directive('ngPendingQuestion', function() {
   return {
     restrict: 'E',
-    scope: {
-      question: '='
-    },
     template: '<div class="right-content">' +
   '<div class="up arrow-container" ng-click="upVote()"></div>' +
   '<div class="rank-container">{{question.rank}}</div>' +
@@ -130,13 +131,21 @@ app.directive('ngPendingQuestion', function() {
     '</div>' +
     '<p class="question-name">{{question.name}}</p>' +
   '</div>',
-   link: function(scope, element, attribute) {
-      scope.upVote = function() {
-        scope.question.rank++;
+   link: function($scope, element, attribute) {
+      $scope.upVote = function() {
+        $scope.question.rank++;
+        // Find the index of question in questionsPending array and save that index
+        // By saving the index, we update the data in Firebase
+        var pendingQuestionIndex = $scope.questionsPending.$indexFor($scope.question.id);
+        $scope.questionsPending.$save(pendingQuestionIndex);
       };
 
-      scope.downVote = function() {
-        scope.question.rank--;
+      $scope.downVote = function() {
+        $scope.question.rank--;
+        // Find the index of question in questionsPending array and save that index
+        // By saving the index, we update the data in Firebase
+        var pendingQuestionIndex = $scope.questionsPending.$indexFor($scope.question.id);
+        $scope.questionsPending.$save(pendingQuestionIndex);
       };
     }
    
@@ -160,17 +169,7 @@ app.directive('ngAnsweredQuestion', function() {
      ' <p>{{question.text}}</p>' +
       '</div>' +
       '<p class="question-name">{{question.name}}</p>' +
-     '</div>',
-   link: function(scope, element, attribute) {
-      scope.upVote = function() {
-        scope.question.rank++;
-      };
-
-      scope.downVote = function() {
-        scope.question.rank--;
-      };
-    }
-   
+     '</div>',   
   };
 });
 
