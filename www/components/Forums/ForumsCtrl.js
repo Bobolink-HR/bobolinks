@@ -21,13 +21,8 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', function($scope, Forums
   // Sets status property of forum to delete
   $scope.remove = function(forum){
     ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
-
       $scope.forum.status = 'delete'; 
-      console.log('scope.forum: ', $scope.forum)
     });
-    // console.log('scope.forum: ', $scope.forum);
-    console.log('forum', forum);
-    // forum.$save();
   };
 }]);
 
