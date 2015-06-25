@@ -31,17 +31,25 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
   })
-
-  .state('app.login', {
-    url: "/login",
+  .state('app.home', {
+    url: "/home",
     views: {
       'menuContent' : {
-        templateUrl: "components/Auth/login.html",
-        controller: 'AuthCtrl'
+        templateUrl: "components/Auth/home.html",
+        controller: 'HomeCtrl'
       }
     }
   })
 
+  .state('app.login', {
+    url:"/login",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Auth/login.html",
+        controller: 'LoginCtrl'
+      }
+    }
+  })
   .state('app.landing', {
     url: "/landing",
     views: {
@@ -49,7 +57,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Landing/landing.html",
         controller: 'LandingCtrl'
       }
-    }
+    },
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
@@ -89,5 +97,5 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/home');
 });
