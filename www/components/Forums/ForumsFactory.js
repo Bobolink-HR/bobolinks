@@ -18,10 +18,20 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return forumArray.$add(forum); // Returns a promise
   }
 
+  //Add a question
+  function addQuestion(forumID, question) { // Pass the forum ID and the question to add to it
+    var questionRef = forumRef.child(forumID).child('questions');
+    var questionArray = $firebaseArray(questionRef); // Creates a question reference
+    return questionArray.$add(question); // Returns a promise when the question is added
+  }
+
+  //TODO: Edit a question
+
   return {
     getForums: getForums,
     getForum: getForum,
-    saveForum: saveForum
+    saveForum: saveForum,
+    addQuestion: addQuestion
   };
 }
 

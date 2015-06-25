@@ -16,11 +16,17 @@ app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'Foru
   //Shows the root data returned from Firebase, for understanding
   $scope.firebaseRefDataIllustration = $firebaseObject(FirebaseRef);
 
-  $scope.newForum = {};
+  $scope.newForum = {}, $scope.newQuestion = {};
 
   $scope.addForum = function(newForum) {
     $scope.newForum.creatorID = "simplelogin:1"; //Update this to be the actual user ID
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
+
+    $scope.newForum.questions.question1 = {
+      text: "Why do my feet hurt?",
+      ranking: 2,
+      userID: 'simplelogin: 1'
+    };
 
     ForumsFactory.saveForum(newForum).then(function(ref) {
       var id = ref.key();
@@ -29,7 +35,22 @@ app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'Foru
     }).catch(function(err) {
       console.error(err);
     });
-  }
+  };
+
+  $scope.addQuestion = function(forumID, newQuestion) {
+    $scope.newQuestion.userID = 'simplelogin:1';
+    $scope.newQuestion.createdAt = JSON.stringify(new Date().toString());
+    $scope.newQuestion.votingRank = 0;
+    $scope.newQuestion.answered = false;
+
+    ForumsFactory.addQuestion(forumID, newQuestion).then(function(ref) {
+      var id = ref.key();
+      $scope.forum = ForumsFactory.getForum(forumID);
+      console.log("added a new question with id " + id);
+    }).catch(function(err) {
+      console.error(err);
+    });
+  };
 
   var whichUser = "John";
   $scope.john = $firebaseObject(FirebaseRef.child('Users').child(whichUser));
@@ -46,17 +67,23 @@ app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'Foru
     description: 'Description of Forum #1',
     creatorID: 'simplelogin:1',
     private: false,
+    phoneNumber: "123-456-7890",
+    status: "active",
     createdAt: JSON.stringify(new Date().toString()),
+    startsAt: null,
+    endsAt: null,
     questions: {
-      question1: {
+      questionID1: {
         text: "Why do my feet hurt?",
-        ranking: 2,
-        userID: 'simplelogin: 1'
+        votingRank: 2,
+        userID: 'simplelogin: 1',
+        answered: false
       },
-      question2: {
+      questionID2: {
         text: "Why do penguins wear tuxedos?",
-        ranking: -2,
-        userID: 'simplelogin: 2'
+        votingRank: -2,
+        userID: 'simplelogin: 2',
+        answered: false
       }
     }
   };
