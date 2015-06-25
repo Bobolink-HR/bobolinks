@@ -40,12 +40,13 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  .state('app.register', {
-    url: "/register",
+
+  .state('app.login', {
+    url:"/login",
     views: {
-      'menuContent' : {
-        templateUrl: "components/Auth/register.html",
-        controller: 'RegisterCtrl'
+      'menuContent': {
+        templateUrl: "components/Auth/login.html",
+        controller: 'LoginCtrl'
       }
     }
   })
@@ -56,7 +57,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Landing/landing.html",
         controller: 'LandingCtrl'
       }
-    }
+    },
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {

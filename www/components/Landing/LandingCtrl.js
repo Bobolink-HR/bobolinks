@@ -6,7 +6,7 @@ app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'Foru
   console.log("ForumsFactory:", ForumsFactory);
 
   //firebaseRef is the returned firebase reference from our Firebase factory
-  console.log("FirebaseREf:", FirebaseRef);
+  console.log("FirebaseRef:", FirebaseRef);
   //fireBase Object function to convert a firebase reference to into a synchronized object
   console.log("FirebaseObject:", $firebaseObject);
 

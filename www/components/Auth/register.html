@@ -1,63 +1,31 @@
-<ion-view view-title="{{title}}"> 
-  <ion-content>
+<ion-modal-view>
 
-  <div id="container" class="container">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">Create New Account</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+  </ion-header-bar>
 
-    <!-- LOGIN -->
-    <form id="frmLogin" role="form">
-        <h2>Login</h2>
-        <div class="form-group">
-            <label for="txtEmail">Email address</label>
-            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
-        </div>
-        <div class="form-group">
-            <label for="txtPass">Password</label>
-            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
-        </div>
-        <button type="submit" class="btn btn-default btn-block">Login</button>
-        <br/>
-        <br/>
-         <h4>Login with</h4>
- <a href="#" class="btn btn-primary bt-social" data-provider="facebook">Facebook</a>
- <a href="#" class="btn btn-info bt-social" data-provider="twitter">Twitter</a>
+  <ion-content class="padding">
+    <div class="list">
 
-        <!-- <a href="#" class="btn btn-danger bt-social" data-provider="google">Google+</a> --> <a href="#" class="btn btn-default bt-social" data-provider="github">GitHub</a>
- <a href="#" class="btn btn-warning" id="btAnon">Anonymous</a>
+      <label class="item item-input">
+        <span class="input-label">Email Address</span>
+        <input ng-model="user.email" type="text">
+      </label>
 
-    </form>
-    <!-- / LOGIN -->
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input ng-model="user.password" type="password">
+      </label>
 
-    <!-- LOGOUT -->
-    <form id="frmLogout" role="form">
-      <h2>You are logged out!</h2>
-    </form>
-    <!-- / LOGOUT -->
+      <label class="item item-input">
+        <span class="input-label">Display Name</span>
+        <input ng-model="user.displayname" type="text">
+      </label>
 
-    <!-- REGISTER -->
-    <form id="frmRegister" role="form">
-         <h2>Register</h2>
-
-        <div class="form-group">
-            <label for="txtRegEmail">Email address</label>
-            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
-        </div>
-        <div class="form-group">
-            <label for="txtRegPass">Password</label>
-            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
-        </div>
-        <button type="submit" class="btn btn-default">Register</button>
-    </form>
-    <!-- / REGISTER -->
-
-    <hr />
-    <!-- ALERT BOX -->
-    <div id="alert" class="alert" role="alert">
-         <h4 id="alert-title">You are not logged in</h4>
-
-        <p id="alert-detail"></p>
+      <button class="button button-full button-positive" ng-click="createUser(user)">Create</button>
+      
     </div>
-    <!-- / ALERT BOX -->
-
-</div>
   </ion-content>
-</ion-view>
+
+</ion-modal-view>
