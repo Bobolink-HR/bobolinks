@@ -1,55 +1,70 @@
-app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory, test) {
-  console.log($stateParams);
-  var test = $ForumsFactory.getForum('-JsXe8s3AwhtbITOCjmX');
-  test.$loaded(function(data) {
-    // console.log(data);
-    // console.log(data.questions);
-    $scope.forum = data;
-    console.log(data);
-    console.log($scope.forum);
-    console.log($scope.forum.questions.active);
-    $scope.pendingQuestions = $scope.forum.questions.pending;
-    $scope.activeQuestion = $scope.forum.questions.active;
-    $scope.answeredQuestions = $scope.forum.questions.answered;
-  });
-  // This is dummy data
- 
-  $scope.forumId = 'JsWjcMAbUt4dFbqBQUn';
-  // $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
-  //   questions: {
-  //     pending: [{
-  //       id: "0",
-  //       text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'Ben Steinberg',
-  //       rank: 0,
-  //       status: 'pending'
-  //     },
-  //     {
-  //       id: "1",
-  //       text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'Amy Steinberg',
-  //       rank: 0,
-  //       status: 'pending'
-  //     },
-  //     {
-  //       id: "2",
-  //       text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'John Smith',
-  //       rank: 0,
-  //       status: 'pending'
-  //     }], 
-  //     active: {
-  //       id: "6",
-  //       text: 'This is currently the active question.  Hopefully this will work.',
-  //       name: 'Michael Jordan',
-  //       rank: 5,
-  //       status: 'active'
-  //     }, 
-  //     answered: []
-  //   }
-  // };
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', function($scope, $stateParams, $ForumsFactory) {
+  // console.log($stateParams);
 
-  console.log($scope.forum);
+  //TODO: Figure out if you can prevent view from loading until the forum data loads
+  // $scope.test = $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn');
+
+
+  // $scope.test.$loaded(function(data) {
+  //   // console.log(data);
+  //   $scope.pendingQuestions = data.questions.pending.slice(1);
+  //   $scope.answeredQuestions = data.questions.answered;
+
+  // });
+
+  $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
+
+  // $scope.test2 = $ForumsFactory.getAnsweredQuestions('-JsbZ_jVQWJB7K8dG_sn');
+  // console.log($scope.test2);
+  // console.log("AAAA");
+  // console.log(test2);
+  // $scope.pendingQuestions = $scope.test.id.questions.pending;
+
+
+  // $scope.title = $scope.test.title;
+  $scope.id = '-JsbZ_jVQWJB7K8dG_sn';
+
+  // $scope.alpha = forumData;
+  // console.log(forumData);
+  // console.log($scope.test.id.questions);
+
+
+  // This is dummy data
+  $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
+    questions: {
+      pending: [{
+        id: "0",
+        text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
+        name: 'Ben Steinberg',
+        rank: 0,
+        status: 'pending'
+      },
+      {
+        id: "1",
+        text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
+        name: 'Amy Steinberg',
+        rank: 0,
+        status: 'pending'
+      },
+      {
+        id: "2",
+        text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
+        name: 'John Smith',
+        rank: 0,
+        status: 'pending'
+      }], 
+      active: {
+        id: "6",
+        text: 'This is currently the active question.  Hopefully this will work.',
+        name: 'Michael Jordan',
+        rank: 5,
+        status: 'active'
+      }, 
+      answered: []
+    }
+  };
+
+  // console.log($scope.forum);
   $scope.isLoggedIn = true;
 
 

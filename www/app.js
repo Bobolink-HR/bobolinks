@@ -61,16 +61,13 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     },
     resolve: {
-      test: function($stateParams) {
-        console.log("AAAAA");
-        console.log($stateParams.forumid);
-        // var forumId = '-JsXe8s3AwhtbITOCjmX';
-        // console.log($ForumsFactory.getForum);
-        // var forum = $ForumsFactory.getForum(forumId);
-        // console.log(forum);
-
-
-      }
+      forumData: function($stateParams, ForumsFactory) {
+        console.log($stateParams);
+        return ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn');
+      },
+      simpleObj:  function(){
+        return {value: 'simple!'};
+      },
     }
   })
   .state('app.forums', {
