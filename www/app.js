@@ -31,7 +31,25 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
   })
+  .state('app.home', {
+    url: "/home",
+    views: {
+      'menuContent' : {
+        templateUrl: "components/Auth/home.html",
+        controller: 'HomeCtrl'
+      }
+    }
+  })
 
+  .state('app.login', {
+    url:"/login",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Auth/login.html",
+        controller: 'LoginCtrl'
+      }
+    }
+  })
   .state('app.landing', {
     url: "/landing",
     views: {
@@ -39,14 +57,14 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Landing/landing.html",
         controller: 'LandingCtrl'
       }
-    }
+    },
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
     url: "/forum",
     views: {
       'menuContent': {
-        templateUrl: "components/Forum/forumGuest.html",
+        templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
     }
@@ -59,7 +77,25 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         controller: 'ForumsCtrl'
       }
     }
+  })
+  .state('app.new-forum', {
+    url: "/new-forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewForum/new-forum.html",
+        controller: 'NewForumCtrl'
+      }
+    }
+  })
+  .state('app.addQuestion', {
+    url: "/add_question",
+    views: {
+      'menuContent': {
+        templateUrl: "components/Forum/addQuestion.html",
+        controller: 'AddQuestionCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/landing');
+  $urlRouterProvider.otherwise('/app/home');
 });

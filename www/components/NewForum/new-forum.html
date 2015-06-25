@@ -1,0 +1,62 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+    <h1>Create a Forum</h1>
+
+    <!-- Forum creation input form -->
+    <form name="forumForm">
+      <div class="list">
+
+        <!-- Forum Title -->
+        <label class="item item-input">
+          <span class="input-label">Title</span>
+          <input type="text" ng-model="newForum.title" required>
+        </label>
+
+        <!-- Forum Description -->
+        <label class="item item-input">
+          <textarea placeholder="Description" ng-model="newForum.description" required></textarea>
+        </label>
+
+        <!--  Start Date and Time -->
+        <label class="item item-input">
+          <span class="input-label">Start Date</span>
+          <input type="date" ng-model="newForum.startDate" required>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Start Time</span>
+          <input type="time" ng-model="newForum.start" placeholder="HH:mm:ss" required>
+        </label>
+
+        <!--  End Date and Time -->
+        <label class="item item-input">
+          <span class="input-label">End Date</span>
+          <input type="date" ng-model="newForum.endDate" required>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">End Time</span>
+          <input type="time" ng-model="newForum.end" placeholder="HH:mm:ss" required>
+        </label>
+
+        <!-- Private/Public Forum -->
+        <li class="item item-toggle">
+           Private
+           <label class="toggle toggle-assertive">
+             <input type="checkbox" ng-model="newForum.private">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+
+      </div>
+
+      <!-- Valid Form Submit -->
+      <button type="button" class="button button-positive button-full" ng-click="addForum(newForum)">SUBMIT</button>
+    </form>
+
+  </ion-content>
+
+
+</ion-view>
