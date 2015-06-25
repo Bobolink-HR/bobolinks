@@ -59,10 +59,6 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
     }
   };
 
-  $scope.showAddQuestionForm = function() {
-    console.log("HEARD!");
-  };
-
 
 }]);
 

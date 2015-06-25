@@ -105,12 +105,17 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  .state('app.addQuestion', {
-    url: "/add_question",
+  .state('app.newQuestion', {
+    url: "/new_question?forumKey",
     views: {
       'menuContent': {
-        templateUrl: "components/Forum/addQuestion.html",
-        controller: 'AddQuestionCtrl'
+        templateUrl: "components/NewQuestion/newQuestion.html",
+        controller: 'NewQuestionCtrl'
+      }
+    },
+    resolve: {
+      test: function($stateParams) {
+        console.log($stateParams);
       }
     }
   });
