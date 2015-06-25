@@ -1,82 +1,24 @@
 app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', function($scope, $stateParams, $ForumsFactory, $firebase) {
-  // console.log($stateParams);
 
+  var forumId = $stateParams.forumid;
 
-
-
-
-  // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending').$bindTo($scope, "pending");
-  // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
-
-  $scope.questionActive = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'active');
-  console.log($scope.questionActive);
-  $scope.questionsPending = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending');
- 
-  $scope.questionsAnswered = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'answered');
-
-  // console.log()
-  // $scope.test.$loaded(function(data) {
-  //   // console.log(data);
-  //   $scope.pendingQuestions = data.questions.pending.slice(1);
-  //   $scope.answeredQuestions = data.questions.answered;
-
-  // });
-
-  // console.log($ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending'));
-  // $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
-
-  // $scope.test2 = $ForumsFactory.getAnsweredQuestions('-JsbZ_jVQWJB7K8dG_sn');
-  // console.log($scope.test2);
-  // console.log("AAAA");
-  // console.log(test2);
-  // $scope.pendingQuestions = $scope.test.id.questions.pending;
-
-
-  // $scope.title = $scope.test.title;
-  $scope.id = '-JsbZ_jVQWJB7K8dG_sn';
-
-  // $scope.alpha = forumData;
-  // console.log(forumData);
-  // console.log($scope.test.id.questions);
-
-
-  // This is dummy data
-  // $scope.forum = {createdAt: "", creatorID: "simplelogin:1", private: false, title: "Ben's Town Hall", 
-  //   questions: {
-  //     pending: [{
-  //       id: "0",
-  //       text: 'AAACan you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'Ben Steinberg',
-  //       rank: 0,
-  //       status: 'pending'
-  //     },
-  //     {
-  //       id: "1",
-  //       text: 'BBBCan you please explain why we need to use an asynchronous callback in the function?  Can you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'Amy Steinberg',
-  //       rank: 0,
-  //       status: 'pending'
-  //     },
-  //     {
-  //       id: "2",
-  //       text: 'CCCCan you please explain why we need to use an asynchronous callback in the function?',
-  //       name: 'John Smith',
-  //       rank: 0,
-  //       status: 'pending'
-  //     }], 
-  //     active: {
-  //       id: "6",
-  //       text: 'This is currently the active question.  Hopefully this will work.',
-  //       name: 'Michael Jordan',
-  //       rank: 5,
-  //       status: 'active'
-  //     }, 
-  //     answered: []
-  //   }
-  // };
-
-  // console.log($scope.forum);
+   /////////////////////
+   /// BEGIN PLACEHOLDER
+   ////////////////////
+  forumId = '-JsbZ_jVQWJB7K8dG_sn'; // For testing purposes only
   $scope.isLoggedIn = true;
+  /////////////////////
+   /// END PLACEHOLDER
+   ////////////////////
+
+  // Set Forum object to $scope.forum with two way binding
+  $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "forum");
+
+  // Create an array for each question status
+  $scope.questionActive = $ForumsFactory.getQuestions(forumId, 'active');
+  $scope.questionsPending = $ForumsFactory.getQuestions(forumId, 'pending');
+  $scope.questionsAnswered = $ForumsFactory.getQuestions(forumId, 'answered');
+
 
 
 
@@ -84,15 +26,16 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
     $scope.removeActiveQuestion();
-    $scope.getNextActiveQuestion();
+    // $scope.getNextActiveQuestion();
   };
 
   // If there is an active question, move it to answered questions array
   // and set active question to null
   $scope.removeActiveQuestion = function() {
-    if (!!$scope.activeQuestion) {
-      $scope.answeredQuestions.push($scope.activeQuestion);
-      $scope.activeQuestion = null;
+    if (!!$scope.questionActive) {
+      console.log($scope.questionActive);
+      $scope.questionsAnswered.$add($scope.questionActive[0]);
+      // $scope.questionActive.$remove(0);
     }
   };
 
