@@ -104,13 +104,11 @@ app.directive('ngAnsweredQuestion', function() {
     '<div class="rank-container active-rank">{{question.rank}}</div>' +
     '<div class="down arrow-container active-arrow" ng-click="downVote()"></div>' +
     '</div>  ' +
-    ' <div class="left-content">' +
+    '<div class="left-content">' +
     '<div class="question-text-container">' +
-     ' <p>{{question.text}}</p>' +
+     '<p>{{question.text}}</p>' +
       '</div>' +
       '<p class="question-name">{{question.name}}</p>' +
-     '</div>',   
+    '</div>',   
   };
 });
-
-
