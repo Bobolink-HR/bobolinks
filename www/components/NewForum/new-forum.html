@@ -1,7 +1,7 @@
 <ion-view view-title="{{title}}">
   <ion-content>
     <!-- Forum creation input form -->
-    <form name="forumForm">
+    <form name="forumForm" novalidate>
       <div class="list">
 
         <!-- Forum Title -->
@@ -52,7 +52,7 @@
       </div>
 
       <!-- Valid Form Submit -->
-      <button type="button" class="button button-positive button-full" ng-click="addForum(newForum)" ng-disabled="forumForm.$invalid">SUBMIT</button>
+      <button type="button" class="button button-positive button-full" ng-click="addForum(newForum); resetForm(); forumForm.$setPristine()" ng-disabled="forumForm.$invalid">SUBMIT</button>
     </form>
 
   </ion-content>
