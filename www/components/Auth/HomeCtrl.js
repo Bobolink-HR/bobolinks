@@ -1,5 +1,5 @@
-app.controller('AuthCtrl', ['$scope', '$location', '$window', function($scope, $location, $window) {
-  $scope.title = "Login";
+app.controller('HomeCtrl', ['$scope', '$location', '$window', function($scope, $location, $window) {
+  $scope.title = "Home";
 
   //redirects the user to the specified url
   $scope.moveUrl = function(url) {
@@ -11,5 +11,5 @@ app.controller('AuthCtrl', ['$scope', '$location', '$window', function($scope, $
     if(!element.url) { return; }
     element.url.text = '';
   }
-  
+
 }]);
