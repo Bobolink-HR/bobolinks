@@ -18,10 +18,16 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return forumArray.$add(forum); // Returns a promise
   }
 
+  //Remove a forum
+  function removeForum(forumID) {
+
+  }
+
   return {
     getForums: getForums,
     getForum: getForum,
-    saveForum: saveForum
+    saveForum: saveForum,
+    removeForum: removeForum
   };
 }
 

@@ -11,7 +11,7 @@
     <ion-list class="list card" ng-show="active" ng-hide="complete">
       <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end)">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
@@ -26,7 +26,7 @@
     <ion-list class="list card" ng-show="complete" ng-hide="active">
       <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end)">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}

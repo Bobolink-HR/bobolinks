@@ -24,7 +24,6 @@
   background-color: #EFF9EE;
 }
 
-
 .left-content {
   min-height: 100px;
   width: auto;
@@ -160,7 +159,29 @@
 }
 
 
-/* Moderator Forums css below */
+/* Moderator Forums */
 .active-button {
   background-color: #D6E9F8;
+}
+
+
+/* New Forum */
+.item {
+  width: 96%;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+
+.item .ng-invalid.ng-dirty {
+  border-bottom: none;
+  border-bottom: 2px solid red;
+  /*box-shadow: 0px 0px 6px 4px #f00;*/
+  /*border:2px solid #f00;*/
+}
+
+.ion-close {
+  position: absolute;
+  right: 0;
 }
