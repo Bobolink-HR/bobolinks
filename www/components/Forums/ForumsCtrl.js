@@ -3,11 +3,12 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', function($scope, Forums
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();
 
+  // Toggles between active and complete view
   $scope.switchView = function(boolean){
     $scope.active = boolean;
-    console.log($scope.active);
   };
   
+  // Determines whether a forum is active or complete
   $scope.completed = function(endDate){
     if (typeof endDate === "string"){
       // convert string to date object
@@ -15,7 +16,14 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', function($scope, Forums
       // if negative, date has passed
       return endDate.diff(moment()) < 0 ? true : false;
     }
-  }
+  };
+
+  // Sets status property of forum to delete
+  $scope.remove = function(forum){
+    ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
+      $scope.forum.status = 'delete'; 
+    });
+  };
 }]);
 
 /*
