@@ -18,11 +18,18 @@ app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, Foru
     // Save the forum to Firebase
     ForumsFactory.saveForum(newForum).then(function(ref) {
       var id = ref.key();
-      // $scope.forum = ForumsFactory.getForum(id);
       console.log("added a new forum with id " + id);
+
     }).catch(function(err) {
       console.error(err);
     });
-  }
+  };
+
+  // Clear forum input, cannot access forumForm here
+  $scope.resetForm = function() {
+    $scope.newForum = {};
+    // $scope.forumForm.$setPristine();
+  };
+  
 }]);
 
