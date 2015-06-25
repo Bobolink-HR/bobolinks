@@ -8,10 +8,11 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending').$bindTo($scope, "pending");
   // $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "test");
 
-  // $scope.questionActive = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'active');
+  $scope.questionActive = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'active');
+  console.log($scope.questionActive);
   $scope.questionsPending = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'pending');
  
-  // $scope.questionsAnswered = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'answered');
+  $scope.questionsAnswered = $ForumsFactory.getQuestions('-JsbZ_jVQWJB7K8dG_sn', 'answered');
 
   // console.log()
   // $scope.test.$loaded(function(data) {
@@ -156,9 +157,6 @@ app.directive('ngPendingQuestion', function() {
 app.directive('ngAnsweredQuestion', function() {
   return {
     restrict: 'E',
-    scope: {
-      question: '='
-    },
     template: '<div class="right-content">' +
     '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
     '<div class="rank-container active-rank">{{question.rank}}</div>' +

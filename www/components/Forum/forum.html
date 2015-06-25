@@ -1,18 +1,18 @@
 <ion-view view-title ="{{test.title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="ForumCtrl">
-    <div id="active-qustion" ng-show="!!questionActive" ng-click="nextQuestion()">
+    <div id="active-qustion" ng-show="!!questionActive[0]" ng-click="nextQuestion()">
       <div class="subheader">Active</div>
       <div class="question active-background">
         <div class="right-content">
           <div class="up arrow-container active-arrow"></div>
-          <div class="rank-container active-rank">{{activeQuestion.rank}}</div>
+          <div class="rank-container active-rank">{{questionActive[0].rank}}</div>
           <div class="down arrow-container active-arrow"></div>
         </div>  
         <div class="left-content">
           <div class="question-text-container">
-            <p>{{activeQuestion.text}}</p>
+            <p>{{questionActive[0].text}}</p>
           </div>
-          <p class="question-name">{{activeQuestion.name}}</p>
+          <p class="question-name">{{questionActive[0].name}}</p>
         </div>
       </div>
     </div>
@@ -25,8 +25,8 @@
     </div> 
 
     <div id="answered-questions" ng-show="!!questionsAnswered[0]">
-      <div class="subheader">Answered ({{answeredQuestions.length}})</div>
-      <div class="question answered-question" ng-repeat="question in forum.questions.answered | orderBy: '-rank'">
+      <div class="subheader">Answered ({{questionsAnswered.length}})</div>
+      <div class="question answered-question" ng-repeat="question in questionsAnswered">
         <ng-answered-question question="question"></ng-question>
       </div>
     </div> 
