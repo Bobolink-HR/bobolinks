@@ -42,18 +42,16 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // Set the active question to the pending question with the highest rank
   // if there are any pending questions
   $scope.getNextActiveQuestion = function() {
-    if ($scope.pendingQuestions.length > 0) {
-      var nextQuestion = $scope.pendingQuestions.shift();
-      var temp;
+    if ($scope.questionsPending.length > 0) {
+      var nextQuestion = $scope.Questions[0];
 
-      for (var i = 0; i < $scope.pendingQuestions.length; i++) {
-        if ($scope.pendingQuestions[i].rank > nextQuestion.rank) {
-          temp = $scope.pendingQuestions[i];
-          $scope.pendingQuestions[i] = nextQuestion;
-          nextQuestion = temp;
+      for (var i = 1; i < $scope.questionsPending.length; i++) {
+        if ($scope.questionsPending[i].rank > nextQuestion.rank) {
+          nextQuestion = $scope.questionsPending[i];
         }
       }
-      $scope.activeQuestion = nextQuestion;
+
+      $scope.activeQuestion.$add(nextQuestion);
     }
   };
 
@@ -78,18 +76,14 @@ app.directive('ngPendingQuestion', function() {
    link: function($scope, element, attribute) {
       $scope.upVote = function() {
         $scope.question.rank++;
-        // Find the index of question in questionsPending array and save that index
-        // By saving the index, we update the data in Firebase
-        var pendingQuestionIndex = $scope.questionsPending.$indexFor($scope.question.id);
-        $scope.questionsPending.$save(pendingQuestionIndex);
+        // Save the change to Firebase
+        $scope.questionsPending.$save($scope.question);
       };
 
       $scope.downVote = function() {
         $scope.question.rank--;
-        // Find the index of question in questionsPending array and save that index
-        // By saving the index, we update the data in Firebase
-        var pendingQuestionIndex = $scope.questionsPending.$indexFor($scope.question.id);
-        $scope.questionsPending.$save(pendingQuestionIndex);
+        // Save the change to Firebase
+        $scope.questionsPending.$save($scope.question);
       };
     }
    
