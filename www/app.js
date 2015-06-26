@@ -61,7 +61,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   // This is a placeholder view for testing the forum
   .state('app.forum', {
-    url: "/forum/:forumid",
+    url: "/forum/:forumKey",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
@@ -71,7 +71,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     resolve: {
       forumData: function($stateParams, $location, ForumsFactory) {
         // Pull forum from Firebase database
-        var forum = ForumsFactory.getForum($stateParams.forumid);
+        var forum = ForumsFactory.getForum($stateParams.forumKey);
+        console.log("AAAA");
 
 
         forum.$loaded(function() {
@@ -105,12 +106,17 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  .state('app.addQuestion', {
-    url: "/add_question",
+  .state('app.newQuestion', {
+    url: "/new_question?forumKey",
     views: {
       'menuContent': {
-        templateUrl: "components/Forum/addQuestion.html",
-        controller: 'AddQuestionCtrl'
+        templateUrl: "components/NewQuestion/newQuestion.html",
+        controller: 'NewQuestionCtrl'
+      }
+    },
+    resolve: {
+      test: function($stateParams) {
+        console.log($stateParams);
       }
     }
   });
