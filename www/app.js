@@ -120,11 +120,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/NewQuestion/newQuestion.html",
         controller: 'NewQuestionCtrl'
       }
-    },
-    resolve: {
-      test: function($stateParams) {
-        console.log($stateParams);
-      }
     }
   });
 

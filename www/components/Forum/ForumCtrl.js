@@ -22,15 +22,16 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
-    $scope.removeActiveQuestion();
-    $scope.getNextActiveQuestion();
+    if ($scope.isModerator) {
+      $scope.removeActiveQuestion();
+      $scope.getNextActiveQuestion(); 
+    }
   };
 
   // If there is an active question, move it to answered questions array
   // and set active question to null
   $scope.removeActiveQuestion = function() {
     if (!!$scope.questionActive) {
-      console.log($scope.questionActive);
       $scope.questionsAnswered.$add($scope.questionActive[0]);
       $scope.questionActive.$remove(0);
     }
