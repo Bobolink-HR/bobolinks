@@ -1,4 +1,4 @@
-app.controller('NewQuestionCtrl', ['$scope', 'ForumsFactory', '$stateParams', function($scope, ForumsFactory, $stateParams) {
+app.controller('NewQuestionCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateParams', function($scope, $rootScope, ForumsFactory, $stateParams) {
   
   $scope.title = 'Add Question';
 
@@ -7,13 +7,15 @@ app.controller('NewQuestionCtrl', ['$scope', 'ForumsFactory', '$stateParams', fu
   $scope.newQuestion.rank = 0;
 
   $scope.submitQuestion = function() {
-    // Set name equal to input or 'Anonymous' if no name was inputted
-    $scope.newQuestion.name = $scope.newQuestion.name || 'Anonymous';
-    ForumsFactory.addQuestion($stateParams.forumKey, $scope.newQuestion);
 
-    // Go back to the forum view
-    // $state.go('app.forum', {forumKey: $stateParams.forumKey});
-    $rootScope.goBack();
+    //if text has been inputted in the question input
+    if ($scope.newQuestion.text !== undefined) {
+      // Set name equal to input or 'Anonymous' if no name was inputted
+      $scope.newQuestion.name = $scope.newQuestion.name || 'Anonymous';
+      ForumsFactory.addQuestion($stateParams.forumKey, $scope.newQuestion);
+      // Go back to the forum view
+      $rootScope.goBack();
+    }
   };
 
 }]);

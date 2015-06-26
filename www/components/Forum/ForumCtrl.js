@@ -1,11 +1,18 @@
-app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', function($scope, $stateParams, $ForumsFactory, $firebase) {
+app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', 'Auth', function($scope, $stateParams, $ForumsFactory, $firebase, Auth) {
 
+  $scope.user = Auth.getAuth().uid;
   $scope.forumKey = $stateParams.forumKey;
 
+  
+
+
+
   // Set Forum object to $scope.forum with two way binding
-  $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "forum");
-
-
+  $ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
+  .then(function() {
+    $scope.isModerator = $scope.forum.creatorID === $scope.user;
+  });
+ 
   // Create an array for each question status
   $scope.questionActive = $ForumsFactory.getQuestions($scope.forumKey, 'active');
   $scope.questionsPending = $ForumsFactory.getQuestions($scope.forumKey, 'pending');
