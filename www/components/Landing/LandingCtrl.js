@@ -1,7 +1,7 @@
 /****
 This is just representing test data currently to illustrate how to use ForumsFactory
 *****/
-app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'ForumsFactory', function($scope, $firebaseObject, FirebaseRef, ForumsFactory) {
+app.controller('LandingCtrl', ["$scope", "$firebaseObject", 'FirebaseRef', 'ForumsFactory', function($scope, $firebaseObject, FirebaseRef, ForumsFactory, $rootScope) {
 
   console.log("ForumsFactory:", ForumsFactory);
 

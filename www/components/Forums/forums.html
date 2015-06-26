@@ -7,32 +7,33 @@
       <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
     </div>
 
+    <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
-    <ion-list class="list card" ng-show="active" ng-hide="complete">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end)">
+    <ion-list class="list" ng-show="active" ng-hide="complete">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === user" ng-click="goToForum(forum.$id)" ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
         </div>
         <div class="item item-divider">
-          {{forum.date}}
+          {{start}} - {{end}}
         </div>
       </ion-item>
     </ion-list>
 
     <!-- Complete Forums List -->
-    <ion-list class="list card" ng-show="complete" ng-hide="active">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end)">
+    <ion-list class="list" ng-show="complete" ng-hide="active">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === user" ng-click="goToForum(forum.$id)" ng-init="ended = timeAgo(forum.endsAt, forum)">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
         </div>
         <div class="item item-divider">
-          {{forum.date}}
+          {{ended}}
         </div>
       </ion-item>
     </ion-list>

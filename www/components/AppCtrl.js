@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+app.controller('AppCtrl', function($scope, $ionicModal, $timeout, Auth) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -6,6 +6,10 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  $scope.logout = function() {
+    console.log("logout called from APpCtrl");
+    Auth.logout();
+  };
 
   // Form data for the login modal
   $scope.loginData = {};
