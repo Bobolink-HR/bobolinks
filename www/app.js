@@ -80,7 +80,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       forumData: function($stateParams, $location, ForumsFactory) {
         // Pull forum from Firebase database
         var forum = ForumsFactory.getForum($stateParams.forumKey);
-        console.log("AAAA");
 
 
         forum.$loaded(function() {

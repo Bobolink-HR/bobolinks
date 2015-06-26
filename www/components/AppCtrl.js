@@ -7,7 +7,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, Auth) {
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   $scope.logout = function() {
-    console.log("logout called from APpCtrl");
+    console.log("logout called from AppCtrl");
     Auth.logout();
   };
 
