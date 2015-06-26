@@ -14,7 +14,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   function setUserData(userID, profile) {
     FirebaseRef.child('Users').child(userID).set(profile);
   }
-
+  
   function waitForAuth() {
     return auth.$waitForAuth;
   }

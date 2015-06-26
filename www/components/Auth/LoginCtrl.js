@@ -1,5 +1,10 @@
-app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
+app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $window, $ionicHistory) {
     //console.log('Login Controller Initialized');
+
+    $ionicHistory.nextViewOptions({
+      disableAnimate: false,
+      disableBack: true
+    }); //This disables the back button after signing in
 
     var ref = new Firebase("https://bobolinks.firebaseio.com/");
     var auth = $firebaseAuth(ref);
@@ -39,26 +44,31 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
     $scope.signIn = function (user) {
 
         if (user && user.email && user.pwdForLogin) {
-            $ionicLoading.show({
-                template: 'Signing In...'
-            });
-            auth.$authWithPassword({
+            // $ionicLoading.show({
+            //     template: 'Signing In...'
+            // });
+            $rootScope.show('Signing In...')
+            Auth.auth.$authWithPassword({
                 email: user.email,
                 password: user.pwdForLogin
             }).then(function (authData) {
                 console.log("Logged in as:" + authData.uid);
-                ref.child("Profiles").child(authData.uid).once('value', function (snapshot) {
-                    var val = snapshot.val();
-                    // To Update AngularJS $scope either use $apply or $timeout
-                    $scope.$apply(function () {
-                        $rootScope.displayName = val;
-                    });
-                });
-                $ionicLoading.hide();
-                $state.go('app.landing');
+                // ref.child("Profiles").child(authData.uid).once('value', function (snapshot) {
+                //     var val = snapshot.val();
+                //     // To Update AngularJS $scope either use $apply or $timeout
+                //     $scope.$apply(function () {
+                //         $rootScope.displayName = val;
+                //     });
+                // });
+                // $ionicLoading.hide();
+                $rootScope.hide();
+                // $state.go('app.landing'); // Changed this to $window.location.replace to remove back button
+                $window.location.replace('/#/app/forums');
             }).catch(function (error) {
-                alert("Authentication failed:" + error.message);
-                $ionicLoading.hide();
+                $rootScope.showAlert("Authentication failed", error.message);
+                //alert("Authentication failed:" + error.message);
+                $rootScope.hide();
+                //$ionicLoading.hide();
             });
         } else
             alert("Please enter email and password both");
