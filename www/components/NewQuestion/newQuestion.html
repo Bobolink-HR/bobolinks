@@ -1,0 +1,19 @@
+<ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
+  <ion-content ng-controller="NewQuestionCtrl">
+
+    <form>
+      <p class="forum-question-form-label">Name</p>
+      <label class="item item-input">
+        <input ng-model="newQuestion.name" class="forum-question-input" placeholder="Name (default is Anonymous)"></textarea>
+      </label>
+
+      <p class="forum-question-form-label">Question (required)</p>
+      <label class="item item-input">
+        <textarea ng-model="newQuestion.text" class="forum-question-textarea" placeholder="Enter your question here"></textarea>
+      </label>
+
+      <button ng-click="submitQuestion()" type="button" class="button button-positive button-full">Submit Question</button>
+    </form>
+
+  </ion-content>
+</ion-view>
