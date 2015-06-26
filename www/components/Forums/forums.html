@@ -9,8 +9,8 @@
 
     <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
-    <ion-list class="list card" ng-show="active" ng-hide="complete">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end) && forum.status!=='delete'">
+    <ion-list class="list card" ng-show="active" ng-hide="complete" on-hold="console.log('held')">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end) && forum.status!=='delete' && forum.creatorID === user">
         <div class="item item-divider">
           {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
@@ -25,7 +25,7 @@
 
     <!-- Complete Forums List -->
     <ion-list class="list card" ng-show="complete" ng-hide="active">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end) && forum.status!=='delete'">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end) && forum.status!=='delete' && forum.creatorID === user">
         <div class="item item-divider">
           {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
