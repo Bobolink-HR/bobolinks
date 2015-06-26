@@ -47,8 +47,8 @@
 }
 
 .up {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   margin-top: 8px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
@@ -56,12 +56,12 @@
 }
 
 .down {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #A3CE9C;
-  
+
 }
 
 .rank-container {
@@ -154,4 +154,15 @@
 .ion-close {
   position: absolute;
   right: 0;
+}
+
+.login-background {
+  background-image: url('/img/bobolink.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.translucent {
+  /*background-color: rgba(255, 255, 255, .7);*/
+  opacity: .8;
 }
