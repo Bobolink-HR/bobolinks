@@ -1,4 +1,4 @@
-app.controller('NewQuestionCtrl', ['$scope', 'ForumsFactory', '$stateParams', '$state', function($scope, ForumsFactory, $stateParams, $state) {
+app.controller('NewQuestionCtrl', ['$scope', 'ForumsFactory', '$stateParams', function($scope, ForumsFactory, $stateParams) {
   
   $scope.title = 'Add Question';
 
@@ -12,7 +12,8 @@ app.controller('NewQuestionCtrl', ['$scope', 'ForumsFactory', '$stateParams', '$
     ForumsFactory.addQuestion($stateParams.forumKey, $scope.newQuestion);
 
     // Go back to the forum view
-    $state.go('app.forum', {forumKey: $stateParams.forumKey});
+    // $state.go('app.forum', {forumKey: $stateParams.forumKey});
+    $rootScope.goBack();
   };
 
 }]);
