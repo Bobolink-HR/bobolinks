@@ -7,11 +7,12 @@
       <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
     </div>
 
+    <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
     <ion-list class="list card" ng-show="active" ng-hide="complete">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end)">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="!completed(forum.end) && forum.status!=='delete'">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
@@ -24,9 +25,9 @@
 
     <!-- Complete Forums List -->
     <ion-list class="list card" ng-show="complete" ng-hide="active">
-      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end)">
+      <ion-item ng-repeat="forum in forums | filter:-forum.endDate" class="card" ng-if="completed(forum.end) && forum.status!=='delete'">
         <div class="item item-divider">
-          {{forum.title}}
+          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
@@ -39,7 +40,7 @@
   </ion-content>
 
   <!-- Footer create new forum navigation -->
-  <ion-footer-bar class="bar-positive">
-    <button ui-sref="app.new-forum" class="title button button-clear button-block">CREATE NEW FORUM</button>
+  <ion-footer-bar ui-sref="app.new-forum" class="bar-positive">
+    <h1 class="title">CREATE NEW FORUM</h1>
   </ion-footer-bar>
 </ion-view>

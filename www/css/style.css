@@ -110,56 +110,48 @@
   margin-top: 50px;
 }
 
+
 /*Add question to forum view*/
 
-#forum-question-form {
-  width: 100%;
-  height: 300px;
-  margin-top: 20px;
+.forum-question-input {
+  border: none;
 }
 
-#forum-question-input {
-  border: 1px solid grey;
-  width: 90%;
-  margin-left: 5%;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  background-color: #f7f7f7;
-}
-
-.field-description {
-  margin-left: 5%;
-  width: 90%;
-  margin-bottom: 0px;
+.forum-question-form-label {
+  margin: 0px;
+  margin-left: 5px;
+  margin-top: 15px;
   font-weight: bold;
 }
-#question-field {
-  border: 1px solid grey;
-  width: 90%;
-  margin-left: 5%;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  background-color: #f7f7f7;
+
+.forum-question-textarea {
   height: 70px;
 }
 
-#forum-question-submit {
-  background-color: rgb(76, 157, 224);
-  color: white;
-  border: none;
-  width: 90%;
-  margin-left: 5%;
-  height: 40px;
-  border-radius: 5px;
-  font-size: 16px;
+
+/* Moderator Forums */
+.active-button {
+  background-color: #D6E9F8;
 }
 
 
-/* Moderator Forums css below */
-.active-button {
-  background-color: #D6E9F8;
+/* New Forum */
+.item {
+  width: 96%;
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+
+.item .ng-invalid.ng-dirty {
+  border-bottom: none;
+  border-bottom: 2px solid red;
+  /*box-shadow: 0px 0px 6px 4px #f00;*/
+  /*border:2px solid #f00;*/
+}
+
+.ion-close {
+  position: absolute;
+  right: 0;
 }
