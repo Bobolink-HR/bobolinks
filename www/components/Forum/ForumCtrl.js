@@ -64,9 +64,9 @@ app.directive('ngPendingQuestion', function() {
   return {
     restrict: 'E',
     template: '<div class="right-content">' +
-  '<div class="up arrow-container" ng-click="upVote()"></div>' +
-  '<div class="rank-container">{{question.rank}}</div>' +
-  '<div class="down arrow-container" ng-click="downVote()"></div>' +
+  '<div class="up arrow-container" ng-show="!isModerator" ng-click="upVote()"></div>' +
+  '<div class="rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
+  '<div class="down arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +
     '<div class="question-text-container">' +
