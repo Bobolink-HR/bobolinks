@@ -9,6 +9,17 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', func
     $scope.active = boolean;
   };
   
+  // Shows active start/end times relative to current date
+  $scope.convertTime = function(dateString){
+    return moment(dateString).calendar();
+  };
+
+  // Shows time since completed forum
+  $scope.timeAgo = function(dateString, forum){
+    console.log(forum);
+    return moment(dateString).fromNow();
+  }
+
   // Determines whether a forum is active or complete
   $scope.completed = function(endDate){
     if (typeof endDate === "string"){
@@ -28,7 +39,8 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', func
 
   $scope.goToForum = function(forumId){
     $window.location.href = 'http://localhost:8100/#/app/forum/' + forumId;
-  }
+  };
+
 }]);
 
 /*

@@ -130,19 +130,34 @@
 
 
 /* Moderator Forums */
+
 .active-button {
   background-color: #D6E9F8;
 }
 
-
-/* New Forum */
-.item {
-  width: 96%;
-  border-left: none;
-  border-right: none;
-  border-top: 1px solid #CCC;
-  border-bottom: 1px solid #CCC;
+.list {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
 }
+
+.card, .item.item-input.item-floating-label {
+  position: relative;
+  width: 96%;
+  margin: 10px auto;
+}
+
+.item.item-divider, .item.item-text-wrap{
+  width: 110%;
+  margin-left: -17px;
+}
+
+.ion-close {
+  position: absolute;
+  right: 10px;
+}
+
+/* New Forum */ 
 
 .item .ng-invalid.ng-dirty {
   border-bottom: none;
@@ -151,10 +166,7 @@
   /*border:2px solid #f00;*/
 }
 
-.ion-close {
-  position: absolute;
-  right: 0;
-}
+/* Login */
 
 .login-background {
   background-image: url('/img/bobolink.jpg');
