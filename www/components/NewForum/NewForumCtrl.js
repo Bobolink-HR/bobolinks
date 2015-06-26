@@ -1,10 +1,11 @@
-app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope) {
+app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth) {
+
   $scope.title = 'Create New Forum';
 
   $scope.newForum = {};
 
   $scope.addForum = function(newForum) {
-    $scope.newForum.creatorID = "simplelogin:1"; //Update this to be the actual user ID
+    $scope.newForum.creatorID = Auth.getAuth().uid; //Update this to be the actual user ID
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
 
     // Convert start to the user input date and time as a string
