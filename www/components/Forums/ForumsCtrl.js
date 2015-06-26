@@ -1,4 +1,4 @@
-app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', function($scope, ForumsFactory, Auth) {
+app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', function($scope, ForumsFactory, Auth, $window) {
   $scope.title = "Example Moderator Forums View";
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();
@@ -25,6 +25,10 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', function($scope
       $scope.forum.status = 'delete'; 
     });
   };
+
+  $scope.goToForum = function(forumId){
+    $window.location.href = 'http://localhost:8100/#/app/forum/' + forumId;
+  }
 }]);
 
 /*
