@@ -1,23 +1,15 @@
 app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', function($scope, $stateParams, $ForumsFactory, $firebase) {
 
-  var forumId = $stateParams.forumid;
-
-   /////////////////////
-   /// BEGIN PLACEHOLDER
-   ////////////////////
-  forumId = '-JsbZ_jVQWJB7K8dG_sn'; // For testing purposes only
-  /////////////////////
-   /// END PLACEHOLDER
-   ////////////////////
+  $scope.forumKey = $stateParams.forumKey;
 
   // Set Forum object to $scope.forum with two way binding
   $ForumsFactory.getForum('-JsbZ_jVQWJB7K8dG_sn').$bindTo($scope, "forum");
 
 
   // Create an array for each question status
-  $scope.questionActive = $ForumsFactory.getQuestions(forumId, 'active');
-  $scope.questionsPending = $ForumsFactory.getQuestions(forumId, 'pending');
-  $scope.questionsAnswered = $ForumsFactory.getQuestions(forumId, 'answered');
+  $scope.questionActive = $ForumsFactory.getQuestions($scope.forumKey, 'active');
+  $scope.questionsPending = $ForumsFactory.getQuestions($scope.forumKey, 'pending');
+  $scope.questionsAnswered = $ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
 
 
@@ -54,7 +46,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
 
       // Remove the next active question from questions pending
       // and add it to questionActive
-      // $scope.questionsPending.$remove(nextQuestion);
+      $scope.questionsPending.$remove(nextQuestion);
       $scope.questionActive.$add(nextQuestion);
     }
   };
