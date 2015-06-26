@@ -3,7 +3,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 /////////////////////////////////////////////////////////////////////////////
 //    APP INITIALIZATION
 /////////////////////////////////////////////////////////////////////////////
-.run(function($ionicPlatform, $rootScope, $firebase, $window, Auth, $ionicPopup, $ionicViewService, $ionicLoading) {
+.run(function($ionicPlatform, $rootScope, $firebase, $window, Auth, $ionicPopup, $ionicViewService, $ionicLoading, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -16,7 +16,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   });
 
-  rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth);
+  rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth, $state);
 })
 
 /////////////////////////////////////////////////////////////////////////////
@@ -54,6 +54,12 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 
   .state('app.landing', {
     url: "/landing",
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        console.log("currentAuth in abstract state called");
+        return Auth.requireAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/Landing/landing.html",
@@ -127,7 +133,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app/home');
 });
 
-var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth) {
+var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth, $state) {
   //console.log("rootScopeInit called!");
 
   ///////////////////////////////////////////////////////
