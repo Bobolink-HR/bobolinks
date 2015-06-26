@@ -1,22 +1,24 @@
 <ion-view cache-view=false hide-back-button=true hide-nav-bar=true view-title="Login">
-  <ion-content class="padding">
-    <div class="list">
-    </div>
-    <div class="list card padding">
+  <ion-content class="padding login-background">
+
+    <div class="list card padding translucent">
+      <label class="item item-input item-divider item-positive">
+        Bobolinks Login
+      </label>
       <label class="item item-input">
         <span class="input-label">Email</span>
         <input type="text" ng-model="user.email">
       </label>
-      <label class="item item-input">
+      <label class="item item-input translucent">
         <span class="input-label">Password</span>
         <input type="password" ng-model="user.pwdForLogin">
       </label>
       <button ng-click="signIn(user)" class="button button-block button-positive activated">
         Sign In
       </button>
-  </div>
+    </div>
   <div class="list" style="text-align:center">
-      <button ng-click="modal.show()" class="button button-small button-outline icon-left ion-person-add button-positive">
+      <button ng-click="modal.show()" class="button button-small icon-left ion-person-add button-positive">
         Create New Account
       </button>
     </div>
