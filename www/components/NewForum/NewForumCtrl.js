@@ -1,4 +1,4 @@
-app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, ForumsFactory) {
+app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope) {
   $scope.title = 'Create New Forum';
 
   $scope.newForum = {};
@@ -8,18 +8,19 @@ app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, Foru
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
 
     // Convert start to the user input date and time as a string
-    $scope.newForum.start = newForum.startDate.toString().slice(0,16).concat( newForum.start.toString().slice(16,33) );
-    delete $scope.newForum.startDate;
+    $scope.newForum.startsAt = newForum.startDate.toString().slice(0,16).concat( newForum.start.toString().slice(16,33) );
+    //delete $scope.newForum.startDate;
 
     // Convert end to the user input date and time as a string
-    $scope.newForum.end = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
-    delete $scope.newForum.endDate;
+    $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
+    //delete $scope.newForum.endDate;
 
     // Save the forum to Firebase
-    ForumsFactory.saveForum(newForum).then(function(ref) {
+    ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
       console.log("added a new forum with id " + id);
-
+      $scope.resetForm();
+      $rootScope.goBack();
     }).catch(function(err) {
       console.error(err);
     });
@@ -30,6 +31,5 @@ app.controller('NewForumCtrl', ['$scope', 'ForumsFactory', function($scope, Foru
     $scope.newForum = {};
     // $scope.forumForm.$setPristine();
   };
-  
-}]);
 
+});

@@ -258,6 +258,22 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
     else {
       return $rootScope.user.uid;
     }
-  }
+  };
+
+  ///////////////////////////////////////////////////////
+  // Navigation helpers
+  ///////////////////////////////////////////////////////
+
+  $rootScope.goBack = function (location) { //goBack function takes an optional location argument, otherwise default is app.forums
+    var backView = $ionicViewService.getBackView();
+    if (backView) {
+      backView.go();
+    }
+    else {
+      $state.go(location || 'app.forums', {
+        reload: false, inherit: false, notify: false
+      });
+    }
+  };
 
 };
