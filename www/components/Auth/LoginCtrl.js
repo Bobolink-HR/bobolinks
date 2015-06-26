@@ -1,7 +1,7 @@
 app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
     //console.log('Login Controller Initialized');
 
-    var ref = new Firebase("https://bobolinks.firebaseio.com/"); 
+    var ref = new Firebase("https://bobolinks.firebaseio.com/");
     var auth = $firebaseAuth(ref);
 
     $ionicModal.fromTemplateUrl('components/auth/register.html', {
@@ -22,7 +22,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
                 password: user.password
             }).then(function (userData) {
                 alert("User created successfully!");
-                ref.child("Users").child(userData.uid).set({
+                ref.child("Profiles").child(userData.uid).set({
                     email: user.email,
                     displayName: user.displayname
                 });
@@ -47,7 +47,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
                 password: user.pwdForLogin
             }).then(function (authData) {
                 console.log("Logged in as:" + authData.uid);
-                ref.child("Users").child(authData.uid).once('value', function (snapshot) {
+                ref.child("Profiles").child(authData.uid).once('value', function (snapshot) {
                     var val = snapshot.val();
                     // To Update AngularJS $scope either use $apply or $timeout
                     $scope.$apply(function () {
