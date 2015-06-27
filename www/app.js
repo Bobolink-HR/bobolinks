@@ -80,6 +80,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.forums', {
     url: "/forums",
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.$waitForAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/Forums/forums.html",
@@ -89,6 +94,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.new-forum', {
     url: "/new-forum",
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.$waitForAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/NewForum/new-forum.html",
@@ -105,23 +115,23 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  // TEST STATE -- NEEDS TO BE DELETED
-  .state('app.landing', {
-    url: "/landing",
-    resolve: {
-      "currentAuth": ["Auth", function(Auth) {
-        console.log("AAA");
-        console.log("currentAuth in abstract state called");
-        return Auth.requireAuth();
-      }]
-    },
-    views: {
-      'menuContent': {
-        templateUrl: "components/Landing/landing.html",
-        controller: 'LandingCtrl'
-      }
-    }
-  })
+  // // TEST STATE -- NEEDS TO BE DELETED
+  // .state('app.landing', {
+  //   url: "/landing",
+  //   resolve: {
+  //     "currentAuth": ["Auth", function(Auth) {
+  //       console.log("AAA");
+  //       console.log("currentAuth in abstract state called");
+  //       return Auth.requireAuth();
+  //     }]
+  //   },
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: "components/Landing/landing.html",
+  //       controller: 'LandingCtrl'
+  //     }
+  //   }
+  // })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
@@ -135,7 +145,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   ///////////////////////////////////////////////////////
 
   Auth.auth.$onAuth(function(authData) {
-      console.log("AuthData:", authData);
       if(authData) {
         //** LOGGED IN SUCCESFFULLY
         console.log("Logged in via $onAuth function in $rootScope.");
@@ -153,8 +162,12 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
       }
       else {
         //** LOGGED OUT
-        console.log("Logged out (app.js)");
-        $window.location.replace('/#/app/login');
+        //will not redirect user from home to login
+        if(window.location.hash === '#/app/home') {
+          $window.location.replace('/#/app/home');
+        } else {
+          $window.location.replace('/#/app/login');
+        }
       }
     });
 
