@@ -53,6 +53,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     resolve: {
     }
   })
+  
   .state('app.forum', {
     url: "/forum/:forumKey",
     views: {
