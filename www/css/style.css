@@ -41,7 +41,12 @@
   height: 100px;
 }
 
-.arrow-container {
+.up-arrow-container {
+  position: relative;
+  left: 10px;
+}
+
+.down-arrow-container {
   position: relative;
   left: 10px;
 }
@@ -55,13 +60,29 @@
   border-bottom: 20px solid #A3CE9C;
 }
 
+.up-clicked {
+  width: 0;
+  height: 0;
+  margin-top: 8px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #6FA166;
+}
+
 .down {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #A3CE9C;
+}
 
+.down-clicked {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #6FA166;
 }
 
 .rank-container {
