@@ -81,11 +81,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.forums', {
     url: "/forums",
-    resolve: {
-      "currentAuth": ["Auth", function(Auth) {
-        return Auth.$waitForAuth();
-      }]
-    },
+    // resolve: {
+    //   "currentAuth": ["Auth", function(Auth) {
+    //     return Auth.$waitForAuth();
+    //   }]
+    // },
     views: {
       'menuContent': {
         templateUrl: "components/Forums/forums.html",
@@ -95,11 +95,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.new-forum', {
     url: "/new-forum",
-    resolve: {
-      "currentAuth": ["Auth", function(Auth) {
-        return Auth.$waitForAuth();
-      }]
-    },
+    // resolve: {
+    //   "currentAuth": ["Auth", function(Auth) {
+    //     return Auth.$waitForAuth();
+    //   }]
+    // },
     views: {
       'menuContent': {
         templateUrl: "components/NewForum/new-forum.html",
