@@ -2,6 +2,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
 
   $scope.user = null;
   $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+  console.log($scope.user);
   $scope.forumKey = $stateParams.forumKey;
 
   
