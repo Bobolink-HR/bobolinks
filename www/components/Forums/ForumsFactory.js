@@ -17,6 +17,25 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return $firebaseArray(forumRef.child(forumId + '/questions/' + status));
   }
 
+  function generateForumId() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i=0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    var forum = getForum(text);
+
+    return forum.$loaded(function() {
+      if (forum.title === undefined) {
+        return text;
+      } else {
+        return generateForumId();
+      }
+    });
+  }
+
+
   //Save a forum
   function saveForum(forum) { // Pass this the forum object to be saved to the database
     return forumArray.$add(forum); // Returns a promise
@@ -29,6 +48,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return questionArray.$add(question); // Returns a promise when the question is added
   }
 
+
   //TODO: Edit a question
 
   return {
@@ -36,7 +56,8 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getForum: getForum,
     saveForum: saveForum,
     getQuestions: getQuestions,
-    addQuestion: addQuestion
+    addQuestion: addQuestion,
+    generateForumId: generateForumId
   };
 }
 

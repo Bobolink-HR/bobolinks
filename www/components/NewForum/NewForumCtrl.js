@@ -1,8 +1,31 @@
 app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth) {
 
+
+  // $scope.newKey =  
+
+  // $scope.newKey = ForumsFactory.generateForumId();
+
+
+
+
+
+  // console.log($scope.newKey);
+
+  // $scope.newKey.$loaded(function(data) {
+  //   // $scope.newKey = $$state.value
+  //   console.log(data);
+  // })
+
+
+  // console.log($scope.newKey);
+
   $scope.title = 'Create New Forum';
 
   $scope.newForum = {};
+
+  ForumsFactory.generateForumId().then(function(data) {
+    $scope.newForum.uid = data;
+   });
 
   $scope.addForum = function(newForum) {
     $scope.newForum.creatorID = Auth.getAuth().uid; //Update this to be the actual user ID
@@ -18,6 +41,7 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
 
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
+      console.log(ref);
       var id = ref.key();
       console.log("added a new forum with id " + id);
       $scope.resetForm();
