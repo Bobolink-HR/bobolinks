@@ -5,35 +5,35 @@
       <div class="list">
 
         <!-- Forum Title -->
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Title</span>
-          <input placeholder="Title" type="text" ng-model="newForum.title" required>
+          <input placeholder="Name your forum..." type="text" ng-model="newForum.title" required>
         </label>
 
         <!-- Forum Description -->
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Description</span>
-          <textarea placeholder="Description" ng-model="newForum.description" required></textarea>
+          <textarea placeholder="Provide a description..." ng-model="newForum.description" required></textarea>
         </label>
 
         <!--  Start Date and Time -->
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Start Date</span>
-          <input type="date" ng-model="newForum.startDate" required>
+          <input type="date" ng-model="newForum.startDate" ng-change="defaultEndDate()" required>
         </label>
 
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Start Time</span>
           <input type="time" ng-model="newForum.start" placeholder="HH:mm:ss" required>
         </label>
 
         <!--  End Date and Time -->
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">End Date</span>
           <input type="date" ng-model="newForum.endDate" required>
         </label>
 
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">End Time</span>
           <input type="time" ng-model="newForum.end" placeholder="HH:mm:ss" required>
         </label>
