@@ -49,21 +49,10 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Auth/login.html",
         controller: 'LoginCtrl'
       }
-    }
-  })
-
-  .state('app.landing', {
-    url: "/landing",
-    resolve: {
-      "currentAuth": ["Auth", function(Auth) {
-        console.log("currentAuth in abstract state called");
-        return Auth.requireAuth();
-      }]
     },
-    views: {
-      'menuContent': {
-        templateUrl: "components/Landing/landing.html",
-        controller: 'LandingCtrl'
+    resolve: {
+      checkAuth: function(Auth) {
+        
       }
     }
   })
@@ -80,14 +69,12 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         // Pull forum from Firebase database
         var forum = ForumsFactory.getForum($stateParams.forumKey);
 
-
         forum.$loaded(function() {
           // If forum title is undefined (aka forum doesn't exist), redirect to home
           if (forum.title === undefined) {
             $location.path('/home');
           }
         });
-
       },
       simpleObj:  function(){
         return {value: 'simple!'};
@@ -120,7 +107,24 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         controller: 'NewQuestionCtrl'
       }
     }
-  });
+  })
+  // TEST STATE -- NEEDS TO BE DELETED
+  .state('app.landing', {
+    url: "/landing",
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        console.log("AAA");
+        console.log("currentAuth in abstract state called");
+        return Auth.requireAuth();
+      }]
+    },
+    views: {
+      'menuContent': {
+        templateUrl: "components/Landing/landing.html",
+        controller: 'LandingCtrl'
+      }
+    }
+  })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
