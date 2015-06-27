@@ -28,7 +28,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function logout() {
-    console.log("Attemping Logout")
+    console.log("Attemping Logout");
     return auth.$unauth();
   }
 

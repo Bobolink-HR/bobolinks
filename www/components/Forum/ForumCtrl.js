@@ -1,11 +1,10 @@
 app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', 'Auth', function($scope, $stateParams, $ForumsFactory, $firebase, Auth) {
 
-  $scope.user = Auth.getAuth().uid;
+  $scope.user = null;
+  $scope.user = Auth.getAuth() && Auth.getAuth().uid;
   $scope.forumKey = $stateParams.forumKey;
 
   
-
-
 
   // Set Forum object to $scope.forum with two way binding
   $ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
