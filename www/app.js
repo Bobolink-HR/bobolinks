@@ -51,9 +51,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     },
     resolve: {
-      checkAuth: function(Auth) {
-        
-      }
     }
   })
   .state('app.forum', {
