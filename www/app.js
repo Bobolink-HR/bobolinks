@@ -243,7 +243,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
   $rootScope.displayName = function() {
     if(!$rootScope.profile) {
-      return "";
+      return '';
     }
     else {
       return $rootScope.profile.displayName;
