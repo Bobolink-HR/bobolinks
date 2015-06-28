@@ -4,17 +4,22 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
 
   $scope.newForum = {};
 
+  // By default set end date to same as start date
+  $scope.defaultEndDate = function() {
+    $scope.newForum.endDate = $scope.newForum.startDate;
+  };
+
   $scope.addForum = function(newForum) {
     $scope.newForum.creatorID = Auth.getAuth().uid; //Update this to be the actual user ID
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
 
     // Convert start to the user input date and time as a string
-    $scope.newForum.startsAt = newForum.startDate.toString().slice(0,16).concat( newForum.start.toString().slice(16,33) );
-    //delete $scope.newForum.startDate;
+    $scope.newForum.startsAt = newForum.startDate.toString().slice(0,16).concat( newForum.startsAt.toString().slice(16,33) );
+    // delete $scope.newForum.startDate;
 
     // Convert end to the user input date and time as a string
-    $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
-    //delete $scope.newForum.endDate;
+    $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.endsAt.toString().slice(16,33) );
+    // delete $scope.newForum.endDate;
 
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {

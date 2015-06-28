@@ -1,4 +1,4 @@
-app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', function($scope, ForumsFactory, Auth, $window) {
+app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$rootScope', function($scope, ForumsFactory, Auth, $window, $rootScope) {
   $scope.title = "Example Moderator Forums View";
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();
@@ -30,11 +30,16 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', func
     }
   };
 
-  // Sets status property of forum to delete
+  // Sets status property of forum to delete on confirmation
+  // BUG WITH CONFIRMATION
   $scope.remove = function(forum){
-    ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
-      $scope.forum.status = 'delete'; 
-    });
+    $rootScope.showConfirm('Remove this forum?', null, $scope).then(function(res){
+      if (res) {
+        ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
+          $scope.forum.status = 'delete'; 
+        });
+      }
+    })
   };
 
   $scope.goToForum = function(forumId){
