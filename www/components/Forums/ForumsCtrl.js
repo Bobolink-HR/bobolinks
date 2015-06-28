@@ -16,7 +16,6 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', func
 
   // Shows time since completed forum
   $scope.timeAgo = function(dateString, forum){
-    console.log(forum);
     return moment(dateString).fromNow();
   }
 

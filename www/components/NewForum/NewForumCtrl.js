@@ -23,9 +23,7 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
 
   $scope.newForum = {};
 
-  ForumsFactory.generateForumId().then(function(data) {
-    $scope.newForum.uid = data;
-   });
+
 
   $scope.addForum = function(newForum) {
     $scope.newForum.creatorID = Auth.getAuth().uid; //Update this to be the actual user ID
@@ -39,11 +37,23 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
     $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
     //delete $scope.newForum.endDate;
 
+    console.log($scope.newForum);
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
-      console.log(ref);
       var id = ref.key();
       console.log("added a new forum with id " + id);
+      var addedForum = ForumsFactory.getForum(ref.key());
+      addedForum.$loaded(function() {
+        ForumsFactory.generateForumId().then(function(data) {
+          addedForum.$id = data;
+          console.log(addedForum);
+          addedForum.$save().then(function(ref) {
+            console.log("SUCCESSFULLY SAVED");
+            console.log(ref.key());
+          });
+        });
+      });
+
       $scope.resetForm();
       $rootScope.goBack();
     }).catch(function(err) {
