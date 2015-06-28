@@ -31,18 +31,13 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
   };
 
   // Sets status property of forum to delete on confirmation
+  // BUG WITH CONFIRMATION
   $scope.remove = function(forum){
     $rootScope.showConfirm('Remove this forum?', null, $scope).then(function(res){
       if (res) {
         ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
           $scope.forum.status = 'delete'; 
         });
-        hidemodal();
-        $rootScope.goBack();
-      } else {
-        hidemodal();
-        $rootScope.goBack();
-        return;
       }
     })
   };
