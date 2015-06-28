@@ -2,10 +2,8 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
 
   $scope.user = null;
   $scope.user = Auth.getAuth() && Auth.getAuth().uid;
-  console.log($scope.user);
   $scope.forumKey = $stateParams.forumKey;
 
-  
 
   // Set Forum object to $scope.forum with two way binding
   $ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
@@ -65,9 +63,9 @@ app.directive('ngPendingQuestion', function() {
   return {
     restrict: 'E',
     template: '<div class="right-content">' +
-  '<div class="up arrow-container" ng-show="!isModerator" ng-click="upVote()"></div>' +
+  '<div class="up up-arrow-container" ng-show="!isModerator" ng-click="upVote($event)"></div>' +
   '<div class="rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
-  '<div class="down arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
+  '<div class="down down-arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +
     '<div class="question-text-container">' +
@@ -76,14 +74,28 @@ app.directive('ngPendingQuestion', function() {
     '<p class="question-name">{{question.name}}</p>' +
   '</div>',
    link: function($scope, element, attribute) {
-      $scope.upVote = function() {
-        $scope.question.rank++;
+      $scope.upVote = function(event) {
+        $(event.target).toggleClass('up-clicked up');
+
+        if ($(event.target).hasClass('up-clicked')) {
+          $scope.question.rank++;
+        } else {
+          $scope.question.rank--;
+        }
+
         // Save the change to Firebase
         $scope.questionsPending.$save($scope.question);
       };
 
       $scope.downVote = function() {
-        $scope.question.rank--;
+        $(event.target).toggleClass('down-clicked down');
+
+        if ($(event.target).hasClass('down-clicked')) {
+          $scope.question.rank--;
+        } else {
+          $scope.question.rank++;
+        }
+
         // Save the change to Firebase
         $scope.questionsPending.$save($scope.question);
       };

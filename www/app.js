@@ -4,7 +4,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 //    APP INITIALIZATION
 /////////////////////////////////////////////////////////////////////////////
 .run(function($ionicPlatform, $rootScope, $firebase, $window, Auth, $ionicPopup, $ionicViewService, $ionicLoading, $state) {
-  $ionicPlatform.ready(function() {
+  $ionicPlatform.ready(function(){
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -49,8 +49,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         templateUrl: "components/Auth/login.html",
         controller: 'LoginCtrl'
       }
-    },
-    resolve: {
     }
   })
   
@@ -81,11 +79,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.forums', {
     url: "/forums",
-    // resolve: {
-    //   "currentAuth": ["Auth", function(Auth) {
-    //     return Auth.$waitForAuth();
-    //   }]
-    // },
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.requireAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/Forums/forums.html",
@@ -95,11 +93,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.new-forum', {
     url: "/new-forum",
-    // resolve: {
-    //   "currentAuth": ["Auth", function(Auth) {
-    //     return Auth.$waitForAuth();
-    //   }]
-    // },
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.requireAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/NewForum/new-forum.html",
@@ -109,6 +107,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.newQuestion', {
     url: "/new_question?forumKey",
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.requireAuth();
+      }]
+    },
     views: {
       'menuContent': {
         templateUrl: "components/NewQuestion/newQuestion.html",
@@ -116,24 +119,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  // // TEST STATE -- NEEDS TO BE DELETED
-  // .state('app.landing', {
-  //   url: "/landing",
-  //   resolve: {
-  //     "currentAuth": ["Auth", function(Auth) {
-  //       console.log("AAA");
-  //       console.log("currentAuth in abstract state called");
-  //       return Auth.requireAuth();
-  //     }]
-  //   },
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: "components/Landing/landing.html",
-  //       controller: 'LandingCtrl'
-  //     }
-  //   }
-  // })
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
@@ -146,8 +131,8 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   ///////////////////////////////////////////////////////
 
   Auth.auth.$onAuth(function(authData) {
-      if(authData) {
-        //** LOGGED IN SUCCESFFULLY
+      if (authData) {
+        //**  LOGGED IN SUCCESFFULLY
         console.log("Logged in via $onAuth function in $rootScope.");
 
         $rootScope.user = Auth.getAuth(); //Sets User object in rootScope
@@ -160,8 +145,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
         Auth.setUserData(authData.uid, authData);
 
-      }
-      else {
+      } else {
         //** LOGGED OUT
         //will not redirect user from home to login
         if(window.location.hash === '#/app/home') {
@@ -172,11 +156,11 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
       }
     });
 
-  $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+  $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireAuth promise is rejected
     // and redirect the user back to the home page
-    if (error === "AUTH_REQUIRED") {
-      $state.go("app.login");
+    if (error === 'AUTH_REQUIRED') {
+      $state.go('app.login');
     }
   });
 
@@ -253,8 +237,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   $rootScope.displayName = function() {
     if(!$rootScope.profile) {
       return '';
-    }
-    else {
+    } else {
       return $rootScope.profile.displayName;
     }
   };
@@ -262,8 +245,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   $rootScope.userID = function() {
     if(!$rootScope.user) {
       return null;
-    }
-    else {
+    } else {
       return $rootScope.user.uid;
     }
   };
@@ -276,8 +258,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
     var backView = $ionicViewService.getBackView();
     if (backView) {
       backView.go();
-    }
-    else {
+    } else {
       $state.go(location || 'app.forums', {
         reload: false, inherit: false, notify: false
       });

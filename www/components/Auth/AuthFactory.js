@@ -3,7 +3,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   var auth = $firebaseAuth(FirebaseRef);
 
   function getUserProfile(userID) {
-    var profileRef = FirebaseRef.child('Profiles').child( userID );
+    var profileRef = FirebaseRef.child('Profiles').child(userID);
     return $firebaseObject(profileRef);
   }
 
@@ -28,7 +28,6 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function logout() {
-    console.log("Attemping Logout");
     return auth.$unauth();
   }
 
