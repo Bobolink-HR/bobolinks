@@ -14,11 +14,11 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
     $scope.newForum.createdAt = JSON.stringify(new Date().toString());
 
     // Convert start to the user input date and time as a string
-    $scope.newForum.startsAt = newForum.startDate.toString().slice(0,16).concat( newForum.start.toString().slice(16,33) );
+    $scope.newForum.startsAt = newForum.startDate.toString().slice(0,16).concat( newForum.startsAt.toString().slice(16,33) );
     // delete $scope.newForum.startDate;
 
     // Convert end to the user input date and time as a string
-    $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.end.toString().slice(16,33) );
+    $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.endsAt.toString().slice(16,33) );
     // delete $scope.newForum.endDate;
 
     // Save the forum to Firebase
