@@ -1,4 +1,4 @@
-app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', 'Auth', function($scope, $stateParams, $ForumsFactory, $firebase, Auth) {
+app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
 
   // Initially user is set to null
   $scope.user = null;
@@ -8,10 +8,15 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   // If Auth.getAuth is not undefined, set user to current user id
   // We need the current user id to check if the user is the moderator
   $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+
+  // If user is not logged in, hide the side nav bar
+  $ionicSideMenuDelegate.canDragContent(!!$scope.user);
+
+
   $scope.forumKey = $stateParams.forumKey;
 
   // Set Forum object to $scope.forum with two way binding
-  $ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
+  ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
   .then(function() {
 
     // Assign the title to the top nav bar
@@ -27,11 +32,11 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   });
 
   // Create an array for each question status
-  $scope.questionActive = $ForumsFactory.getQuestions($scope.forumKey, 'active');
-  $scope.questionsPending = $ForumsFactory.getQuestions($scope.forumKey, 'pending');
-  $scope.questionsAnswered = $ForumsFactory.getQuestions($scope.forumKey, 'answered');
+  $scope.questionActive = ForumsFactory.getQuestions($scope.forumKey, 'active');
+  $scope.questionsPending = ForumsFactory.getQuestions($scope.forumKey, 'pending');
+  $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
-  // $scope.allForums = $ForumsFactory.getForums();
+  // $scope.allForums = ForumsFactory.getForums();
   // $scope.allForums.$loaded(function(data) {
   //   console.log(data);
   //   $scope.allForums.abc123 = {word: "test"};
@@ -86,7 +91,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
     }
   };
 
-}]);
+});
 
 // Custom directive for pending questions
 app.directive('ngPendingQuestion', function() {
