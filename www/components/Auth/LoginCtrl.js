@@ -1,5 +1,4 @@
-app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $window, $ionicHistory, $ionicSideMenuDelegate) {
-
+app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $ionicHistory, $ionicSideMenuDelegate) {
   // Hide side bar from user because user must not be logged in
   $ionicSideMenuDelegate.canDragContent(false);
 
@@ -16,11 +15,13 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
   }).then(function (modal) {
       $scope.modal = modal;
   });
-  
+
+  //if user is logged in already, redirect them to app.forums
   Auth.requireAuth().then(function() {
     $state.go('app.forums');
   });
 
+  //create user
   $scope.createUser = function (user) {
     console.log("Create User Function called");
     if (user && user.email && user.password && user.displayname) {
@@ -48,6 +49,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
     }
   }
 
+  //sign in user with email and password
   $scope.signIn = function (user) {
     if (user && user.email && user.pwdForLogin) {
       $rootScope.show('Signing In...')
@@ -58,7 +60,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
         console.log("Logged in as:" + authData.uid);
         $ionicSideMenuDelegate.canDragContent(true);
         $rootScope.hide();
-        $window.location.replace('/#/app/forums');
+        $state.go('app.forums');
       }).catch(function (error) {
         $rootScope.showAlert("Authentication failed", error.message);
         $rootScope.hide();

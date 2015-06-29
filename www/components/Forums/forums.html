@@ -1,6 +1,8 @@
-<ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
+<ion-view> <!--hide-nav-bar=true-->
+  <ion-nav-title>
+    {{forumTitle()}}'s Forums
+  </ion-nav-title>
   <ion-content>
-
     <!-- Navigation -->
     <div class="button-bar" ng-init="tog=1">
       <a class="button" ng-class="{'active-button':tog==1}" ng-model="active" ng-click="tog=1; switchView(true)">Active</a>
