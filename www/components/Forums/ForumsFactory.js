@@ -57,8 +57,8 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getForum: getForum,
     saveForum: saveForum,
     getQuestions: getQuestions,
-    addQuestion: addQuestion,
-    generateForumId: generateForumId
+    addQuestion: addQuestion
+    // ,generateForumId: generateForumId
   };
 }
 
