@@ -1,4 +1,4 @@
-app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$rootScope', function($scope, ForumsFactory, Auth, $window, $rootScope) {
+app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $window, $rootScope, $state) {
   $scope.title = "Example Moderator Forums View";
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();
@@ -39,10 +39,4 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
       }
     });
   };
-
-  $scope.goToForum = function(forumId){
-    console.log("Go To Forum ID being passed:", forumID);
-    $window.location.href = 'http://localhost:8100/#/app/forum/' + forumId;
-  };
-
-}]);
+});
