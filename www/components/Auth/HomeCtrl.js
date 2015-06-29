@@ -1,5 +1,7 @@
-app.controller('HomeCtrl', ['$scope', '$location', '$window', function($scope, $location, $window) {
+app.controller('HomeCtrl', ['$scope', '$location', '$window', 'Auth', function($scope, $location, $window, Auth) {
   $scope.title = "Home";
+
+  $scope.loggedIn = !!Auth.getAuth();
 
   //redirects the user to the specified url
   $scope.moveUrl = function(forumCode) {
