@@ -7,7 +7,7 @@
           <label class="item item-input">
             <textarea ng-click="clearContents(this)"placeholder="Enter your URL shortcode here" ng-model="url.text" ></textarea>
           </label>
-          <button type="button" class="button button-positive button-full" ng-click="moveUrl(url.text)">Submit URL</button>
+          <button type="button" class="button button-positive button-full" ui-sref= "app.forum({forumKey: url.text})">Submit URL</button>
         </div>
       </form>
 

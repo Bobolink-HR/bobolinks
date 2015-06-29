@@ -2,11 +2,11 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   var forumRef = FirebaseRef.child('Forums');
   var forumArray = $firebaseArray(forumRef);
-  var forumObject = $firebaseObject(forumRef);
+  //var forumObject = $firebaseObject(forumRef);
 
   //Get a list of Forums
   function getForums() {
-    return forumObject; // Returns a $firebaseArray collection of all forums
+    return forumArray; // Returns a $firebaseArray collection of all forums
   }
 
   //Get a forum
@@ -18,23 +18,23 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return $firebaseArray(forumRef.child(forumId + '/questions/' + status));
   }
 
-  function generateForumId() {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i=0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    var forum = getForum(text);
-
-    return forum.$loaded(function() {
-      if (forum.title === undefined) {
-        return text;
-      } else {
-        return generateForumId();
-      }
-    });
-  }
+  // function generateForumId() {
+  //   var text = "";
+  //   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //
+  //   for (var i=0; i < 5; i++) {
+  //     text += possible.charAt(Math.floor(Math.random() * possible.length));
+  //   }
+  //   var forum = getForum(text);
+  //
+  //   return forum.$loaded(function() {
+  //     if (forum.title === undefined) {
+  //       return text;
+  //     } else {
+  //       return generateForumId();
+  //     }
+  //   });
+  // }
 
 
   //Save a forum
