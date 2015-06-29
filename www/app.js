@@ -115,7 +115,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app/home');
 });
 
-
 var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state) {
 
   ///////////////////////////////////////////////////////
