@@ -101,7 +101,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
   // Updates the activeQuestionStatus that is shown when there is no active question
   $scope.updateActiveQuestionContainerText = function() {
-    console.log($scope.questionsPending.length);
     if ($scope.questionsPending.length > 0) {
       return "Tap for next question";
     } else {

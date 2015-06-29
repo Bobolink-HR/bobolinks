@@ -11,7 +11,7 @@
     <ion-list class="list" ng-show="active" ng-hide="complete">
       <ion-item ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()" ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
         <div class="item item-divider">
-          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
+          {{forum.title}}<i class="icon ion-close" ng-click="remove($event, forum)"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
