@@ -39,15 +39,10 @@
         </label>
 
         <!-- Private/Public Forum -->
-        <li class="item item-toggle">
-           Private
-           <label class="toggle toggle-assertive">
-             <input type="checkbox" ng-model="newForum.private">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
-        </li>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Password</span>
+          <input placeholder="OPTIONAL. Send to attendees" type="text" ng-model="newForum.password">
+        </label>
 
       </div>
 
