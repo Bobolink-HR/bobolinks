@@ -30,7 +30,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
       });
 
       auth.$createUser({
-        email: user.email,
+        email: user.email.toLowerCase(),
         password: user.password
       }).then(function (userData) {
         alert("User created successfully!");
