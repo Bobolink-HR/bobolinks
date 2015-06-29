@@ -22,7 +22,10 @@
       </div>
 
       <div id="pending-questions" ng-show="!!questionsPending[0]">
-        <div class="subheader" ng-click="togglePendingQuestions()">Pending ({{questionsPending.length}})</div>
+        <div class="subheader pending-subheader" ng-click="togglePendingQuestions()">
+        Pending ({{questionsPending.length}})
+        <img class="pending-arrow rotated" src="../../img/arrow.png">
+        </div>
         <div class="pending-questions-container">
           <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
             <ng-pending-question question="question"></ng-question>
@@ -32,7 +35,10 @@
       </div> 
 
       <div id="answered-questions" ng-show="!!questionsAnswered[0]">
-        <div class="subheader" ng-click="toggleAnsweredQuestions()">Answered ({{questionsAnswered.length}})</div>
+        <div class="subheader answered-subheader" ng-click="toggleAnsweredQuestions()">
+        Answered ({{questionsAnswered.length}})
+        <img class="answered-arrow rotated" src="../../img/arrow.png">
+        </div>
         <div class="answered-questions-container">
           <div class="question answered-question" ng-repeat="question in questionsAnswered">
             <ng-answered-question question="question"></ng-question>

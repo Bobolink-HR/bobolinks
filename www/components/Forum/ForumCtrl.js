@@ -112,17 +112,25 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $scope.togglePendingQuestions = function(event) {
     if ($('.pending-questions-container').is(':visible') ) {
       $('.pending-questions-container').slideUp();
+      
     } else {
       $('.pending-questions-container').slideDown();
     }
+
+    $('.pending-arrow').toggleClass('rotated');
+
+
   };
 
   $scope.toggleAnsweredQuestions = function(event) {
     if ($('.answered-questions-container').is(':visible') ) {
       $('.answered-questions-container').slideUp();
+
     } else {
       $('.answered-questions-container').slideDown();
     }
+
+    $('.answered-arrow').toggleClass('rotated');
   };
 });
 
@@ -132,7 +140,7 @@ app.directive('ngPendingQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
   '<div class="up up-arrow-container" ng-show="!isModerator" ng-click="upVote($event)"></div>' +
-  '<div class="pending-rank rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
+  '<div class="pending-rank rank-container">{{question.rank}}</div>' +
   '<div class="down down-arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +

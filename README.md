@@ -1,15 +1,7 @@
-# bobolink
+<!-- 
+Schema - refer to this google doc: https://docs.google.com/spreadsheets/d/1tE6KMQvAvV81XmzEPj4C0pp7wC3DxonYvbPeRMGoNKk/edit#gid=163240481
 
-- Clean up CSS
 
-- Shorten Forum Key [on hold]
 
-- Show Forum Key in Forums view
 
-- Grunt
-  - Consolidate + minify JS + CSS files
-
-- Testing
-  - Write some basic tests
-
-- Deploy
+-->
