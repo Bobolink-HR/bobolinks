@@ -10,25 +10,55 @@
     </div>
     <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
-    <ion-list class="list" ng-show="active" ng-hide="complete">
-      <ion-item ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()" ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
-        <div class="item item-divider">
-          {{forum.title}}<i class="icon ion-close" ng-click="remove($event, forum)"></i>
+    <div ng-show="active" ng-hide="complete">
+      <div ui-sref="app.forum({forumKey: '{{forum.$id}}'})"
+                ng-repeat="forum in forums | filter:-forum.endsAt"
+                ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"
+                ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
+
+        <div class="card">
+
+          <div class="item item-divider item-royal">
+            <div>
+              <span style="font-size: 133%; float:left;">{{forum.title}}</span>
+              <i class="icon ion-trash-a" style="float:right;margin-right:30px;font-size:133%;" ng-click="remove(forum)"></i>
+            </div>
+          </div>
+
+          <div class="item item-icon-left">
+           <i class="icon ion-earth"></i>
+           Forum Code
+           <span class="item-note">
+             {{forum.$id}}
+           </span>
+          </div>
+
+          <div class="item item-icon-left" ng-if="forum.password">
+           <i class="icon ion-key"></i>
+            Password
+           <span class="item-note">
+            {{forum.password}}
+           </span>
+          </div>
+
+          <div class="item item-text-wrap">
+            {{forum.description}}
+          </div>
+
+          <div class="item item-divider">
+            <!-- <i class="icon ion-clock"></i> {{start}} - {{end}} -->
+            <i class="icon ion-clock"></i> {{start}}
+          </div>
         </div>
-        <div class="item item-text-wrap">
-          {{forum.description}}
-        </div>
-        <div class="item item-divider">
-          {{start}} - {{end}}
-        </div>
-      </ion-item>
-    </ion-list>
+      </div>
+    </div>
 
     <!-- Complete Forums List -->
     <ion-list class="list" ng-show="complete" ng-hide="active">
       <ion-item ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === user" ng-init="ended = timeAgo(forum.endsAt, forum)">
         <div class="item item-divider">
-          {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
+          {{forum.title}}
+          <i class="icon ion-close" ng-click="remove(forum)" style="float:right;"></i>
         </div>
         <div class="item item-text-wrap">
           {{forum.description}}
