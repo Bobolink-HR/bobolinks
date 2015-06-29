@@ -115,7 +115,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app/home');
 });
 
-
 var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state) {
 
   ///////////////////////////////////////////////////////
@@ -125,15 +124,12 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   Auth.auth.$onAuth(function(authData) {
       if (authData) {
         //**  LOGGED IN SUCCESFFULLY
-        console.log("Logged in via $onAuth function in $rootScope.");
-
         $rootScope.user = Auth.getAuth(); //Sets User object in rootScope
         var lastLogin = moment().format();
 
         authData.lastLogin = lastLogin;
 
         $rootScope.profile = Auth.getUserProfile(authData.uid);
-        console.log('$rootScope.profile from $onAuth:', $rootScope.profile);
         $rootScope.user = authData;
 
         Auth.setUserData(authData.uid, authData);
@@ -182,7 +178,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
           text: '<b>Save</b>',
           type: 'button-positive',
           onTap: function(e) {
-            console.log($scope.data);
             if (!$scope.data) {
               e.preventDefault();
             } else {
@@ -220,7 +215,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
   $rootScope.notify = function(text, time) {
     time = time || 2000;
-    console.log("$rootScope.notifiy() called");
     $rootScope.show(text);
     window.setTimeout(function() {
       $rootScope.hide();
@@ -228,12 +222,9 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    console.log("rootScope display name called");
-    console.log("$rootScope.profile:", $rootScope.profile);
     if(!$rootScope.profile) {
       return '';
     } else {
-      console.log("$rootScope.profile.displayName:", $rootScope.profile.displayName);
       return $rootScope.profile.displayName;
     }
   };
