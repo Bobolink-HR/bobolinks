@@ -204,3 +204,17 @@
   /*background-color: rgba(255, 255, 255, .7);*/
   opacity: .8;
 }
+
+/* Forums */
+.item-display-info {
+  color: slateblue;
+}
+
+.forum-card-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.forum-card {
+  border: 2px outset slateblue;
+}
