@@ -23,20 +23,20 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
     // If the user is the moderator or there is not a password, the user has access
     // If both of these conditions fail, the main forum content is hiddent and the user
     // is asked to enter the forum password
-    $scope.forumAccess = $scope.isModerator || !$scope.forum.password;    
+    $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
   });
- 
+
   // Create an array for each question status
   $scope.questionActive = $ForumsFactory.getQuestions($scope.forumKey, 'active');
   $scope.questionsPending = $ForumsFactory.getQuestions($scope.forumKey, 'pending');
   $scope.questionsAnswered = $ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
-  $scope.allForums = $ForumsFactory.getForums();
-  $scope.allForums.$loaded(function(data) {
-    console.log(data);
-    $scope.allForums.abc123 = {word: "test"};
-    $scope.allForums.$save();
-  });
+  // $scope.allForums = $ForumsFactory.getForums();
+  // $scope.allForums.$loaded(function(data) {
+  //   console.log(data);
+  //   $scope.allForums.abc123 = {word: "test"};
+  //   $scope.allForums.$save();
+  // });
 
 
   // This function is called when active quesiotn is clicked
@@ -44,7 +44,7 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
   $scope.nextQuestion = function() {
     if ($scope.isModerator) {
       $scope.removeActiveQuestion();
-      $scope.getNextActiveQuestion(); 
+      $scope.getNextActiveQuestion();
     }
   };
 
@@ -130,7 +130,7 @@ app.directive('ngPendingQuestion', function() {
         $scope.questionsPending.$save($scope.question);
       };
     }
-   
+
   };
 });
 
@@ -148,6 +148,6 @@ app.directive('ngAnsweredQuestion', function() {
      '<p>{{question.text}}</p>' +
       '</div>' +
       '<p class="question-name">{{question.name}}</p>' +
-    '</div>',   
+    '</div>',
   };
 });
