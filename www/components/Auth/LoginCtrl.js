@@ -58,6 +58,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
         password: user.pwdForLogin
       }).then(function (authData) {
         console.log("Logged in as:" + authData.uid);
+        $ionicSideMenuDelegate.canDragContent(true);
         $rootScope.hide();
         $state.go('app.forums');
       }).catch(function (error) {

@@ -20,6 +20,11 @@
   top: 30px;
 }
 
+.active-question-container-text {
+  line-height: 95px;
+  text-align: center;
+}
+
 .answered-question {
   background-color: #EFF9EE;
 }
