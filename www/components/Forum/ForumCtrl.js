@@ -41,6 +41,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
+  // Testing for shorter forum keys
   // $scope.allForums = ForumsFactory.getForums();
   // $scope.allForums.$loaded(function(data) {
   //   console.log(data);
@@ -107,8 +108,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
       return "No remaining questions";
     }
   };
-  
-
 });
 
 // Custom directive for pending questions
@@ -128,25 +127,32 @@ app.directive('ngPendingQuestion', function() {
   '</div>',
    link: function($scope, element, attribute) {
       $scope.upVote = function(event) {
-        $(event.target).toggleClass('up-clicked up');
-
-        if ($(event.target).hasClass('up-clicked')) {
+        if (!$(event.target).parent().hasClass('upvoted')) {
+          if ($(event.target).parent().hasClass('downvoted')) {
+            $(event.target).parent().removeClass('downvoted');
+            $(event.target).parent().find('.down').removeClass('down-clicked');
+          } else {
+            $(event.target).parent().addClass('upvoted');
+            $(event.target).addClass('up-clicked');
+          }
           $scope.question.rank++;
-        } else {
-          $scope.question.rank--;
         }
+       
 
         // Save the change to Firebase
         $scope.questionsPending.$save($scope.question);
       };
 
       $scope.downVote = function() {
-        $(event.target).toggleClass('down-clicked down');
-
-        if ($(event.target).hasClass('down-clicked')) {
+        if (!$(event.target).parent().hasClass('downvoted')) {
+          if ($(event.target).parent().hasClass('upvoted')) {
+            $(event.target).parent().removeClass('upvoted');
+            $(event.target).parent().find('.up').removeClass('up-clicked');
+          } else {
+            $(event.target).parent().addClass('downvoted');
+            $(event.target).addClass('down-clicked');
+          }
           $scope.question.rank--;
-        } else {
-          $scope.question.rank++;
         }
 
         // Save the change to Firebase
