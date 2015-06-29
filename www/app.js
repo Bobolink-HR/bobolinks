@@ -107,11 +107,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
   .state('app.newQuestion', {
     url: "/new_question?forumKey?forum",
-    // resolve: {
-    //   "currentAuth": ["Auth", function(Auth) {
-    //     return Auth.requireAuth();
-    //   }]
-    // },
     views: {
       'menuContent': {
         templateUrl: "components/NewQuestion/newQuestion.html",
