@@ -31,6 +31,9 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
     $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
   });
 
+  // This text is shown in the active question container when there is no active question
+  $scope.activeQuestionStatus = "Hello";
+
   // Create an array for each question status
   $scope.questionActive = ForumsFactory.getQuestions($scope.forumKey, 'active');
   $scope.questionsPending = ForumsFactory.getQuestions($scope.forumKey, 'pending');
@@ -43,6 +46,8 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   //   $scope.allForums.$save();
   // });
 
+
+  
 
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
@@ -90,6 +95,16 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
       $scope.formData.password = "";
     }
   };
+
+  // Updates the activeQuestionStatus that is shown when there is no active question
+  $scope.updateActiveQuestionContainerText = function() {
+    if ($scope.questionsPending.length > 0) {
+      $scope.activeQuestionStatus = "Tap for next question";
+    } else {
+      $scope.activeQuestionStatus = "No remaining questions";
+    }
+  };
+  $scope.updateActiveQuestionContainerText();
 
 });
 

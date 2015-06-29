@@ -2,13 +2,6 @@
 
 - Clean up CSS
 
-- Top Menu
-  - Change < Home to  < Back
-  - Always show menu if user is logged in
-
-- Authentication
-  - Redirect user to forums view if they are logged in and try to access login
-
 - Shorten Forum Key
 
 - Show Forum Key in Forums view
