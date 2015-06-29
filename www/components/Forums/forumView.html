@@ -1,0 +1,52 @@
+<div class="card forum-card">
+
+  <div class="item item-divider item-royal">
+    <div>
+      <span style="font-size: 133%; float:left;" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">&nbsp;{{forum.title}}</span>
+      <i class="icon ion-trash-a" style="float:right;margin-right:20px;font-size:133%;" ng-click="remove(forum)"></i>
+      <i class="icon ion-edit" style="float:right;margin-right:10px;font-size:133%;" ng-click="edit(forum)"></i>
+      <i class="icon ion-share" style="float:right;margin-right:10px;font-size:133%;" ng-click="sendEmail(forum)"></i>
+    </div>
+  </div>
+
+  <div class="item item-icon-left" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">
+   <i class="icon ion-earth"></i>
+   Forum Code
+   <span class="item-note item-display-info" >
+     {{forum.$id}}
+   </span>
+  </div>
+
+  <div class="item item-icon-left" ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-if="forum.password">
+   <i class="icon ion-key"></i>
+    Password
+   <span class="item-note item-display-info" >
+    {{forum.password}}
+   </span>
+  </div>
+
+  <div class="item item-icon-left">
+    <!-- <i class="icon ion-clock"></i> {{start}} - {{end}} -->
+    <i class="icon ion-ios-calendar-outline"></i>
+     Start Time
+    <span class="item-note item-display-info" >
+     {{start}}
+    </span>
+  </div>
+
+  <div class="item item-icon-left">
+    <!-- <i class="icon ion-clock"></i> {{start}} - {{end}} -->
+    <i class="icon ion-ios-calendar"></i>
+     End Time
+    <span class="item-note item-display-info" >
+     {{end}}
+    </span>
+  </div>
+
+  <div class="item item-text-wrap" ng-if="forum.description">
+    <div class="padding-left padding-right">
+      <b>Description:</b> <span style="font-style: italic;">{{forum.description}}</i>
+    </div>
+  </div>
+
+</div>

@@ -244,3 +244,8 @@
   width: 100px;
   margin-top: 20px;
 }
+
+.faded {
+  /*background-color: rgba(0, 0, 0, .3);*/
+  opacity: .66;
+}
