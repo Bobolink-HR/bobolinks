@@ -1,27 +1,25 @@
 # bobolink
 
-- Landing Page CSS
+- Clean up CSS
 
-- Top Nav Bar
+- Top Menu
   - Change < Home to  < Back
+  - Always show menu if user is logged in
 
-- Create shorter, random forum key
+- Authentication
+  - Redirect user to forums view if they are logged in and try to access login
+
+- Shorten Forum Key
+
+- Show Forum Key in Forums view
 
 - Sign Up
   - remove initial start value
 
-- Home
-  - Hide moderator log in if user is logged in
-  
-- Fix menu
-  - Change header
-- New Forum 
-  - Clean up
-  - Discuss timing
--Forums
-  - Add confirmation box to delete forum
 - Grunt
   - Consolidate + minify JS + CSS files
-- Testing?
+
+- Testing
   - Write some basic tests
-- Deploy + test
+
+- Deploy
