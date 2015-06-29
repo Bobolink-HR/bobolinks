@@ -1,7 +1,7 @@
 app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth) {
 
 
-  // $scope.newKey =  
+  // $scope.newKey =
 
   // $scope.newKey = ForumsFactory.generateForumId();
 
@@ -46,17 +46,17 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
       console.log("added a new forum with id " + id);
-      var addedForum = ForumsFactory.getForum(ref.key());
-      addedForum.$loaded(function() {
-        ForumsFactory.generateForumId().then(function(data) {
-          addedForum.$id = data;
-          console.log(addedForum);
-          addedForum.$save().then(function(ref) {
-            console.log("SUCCESSFULLY SAVED");
-            console.log(ref.key());
-          });
-        });
-      });
+      // var addedForum = ForumsFactory.getForum(ref.key());
+      // addedForum.$loaded(function() {
+      //   ForumsFactory.generateForumId().then(function(data) {
+      //     addedForum.$id = data;
+      //     console.log(addedForum);
+      //     addedForum.$save().then(function(ref) {
+      //       console.log("SUCCESSFULLY SAVED");
+      //       console.log(ref.key());
+      //     });
+      //   });
+      // });
 
       $scope.resetForm();
       $rootScope.goBack();

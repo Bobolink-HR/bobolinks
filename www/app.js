@@ -51,7 +51,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  
+
   .state('app.forum', {
     url: "/forum/:forumKey",
     views: {
@@ -63,6 +63,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     resolve: {
       forumData: function($stateParams, $location, ForumsFactory) {
         // Pull forum from Firebase database
+        console.log("stateParams:", $stateParams);
         var forum = ForumsFactory.getForum($stateParams.forumKey);
 
         forum.$loaded(function() {

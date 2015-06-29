@@ -8,7 +8,7 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
   $scope.switchView = function(boolean){
     $scope.active = boolean;
   };
-  
+
   // Shows active start/end times relative to current date
   $scope.convertTime = function(dateString){
     return moment(dateString).calendar();
@@ -34,14 +34,15 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
   $scope.remove = function(forum){
     $rootScope.showConfirm('Remove this forum?', null, $scope).then(function(res){
       if (res) {
-        ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){ 
-          $scope.forum.status = 'delete'; 
+        ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){
+          $scope.forum.status = 'delete';
         });
       }
     });
   };
 
   $scope.goToForum = function(forumId){
+    console.log("Go To Forum ID being passed:", forumID);
     $window.location.href = 'http://localhost:8100/#/app/forum/' + forumId;
   };
 
