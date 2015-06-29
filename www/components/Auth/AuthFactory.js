@@ -3,6 +3,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   var auth = $firebaseAuth(FirebaseRef);
 
   function getUserProfile(userID) {
+    console.log("getUserProfile for userID:", userID);
     var profileRef = FirebaseRef.child('Profiles').child(userID);
     return $firebaseObject(profileRef);
   }
@@ -14,7 +15,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   function setUserData(userID, profile) {
     FirebaseRef.child('Users').child(userID).set(profile);
   }
-  
+
   function waitForAuth() {
     return auth.$waitForAuth;
   }

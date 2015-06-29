@@ -134,6 +134,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
         authData.lastLogin = lastLogin;
 
         $rootScope.profile = Auth.getUserProfile(authData.uid);
+        console.log('$rootScope.profile from $onAuth:', $rootScope.profile);
         $rootScope.user = authData;
 
         Auth.setUserData(authData.uid, authData);
@@ -228,9 +229,12 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
+    console.log("rootScope display name called");
+    console.log("$rootScope.profile:", $rootScope.profile);
     if(!$rootScope.profile) {
       return '';
     } else {
+      console.log("$rootScope.profile.displayName:", $rootScope.profile.displayName);
       return $rootScope.profile.displayName;
     }
   };
