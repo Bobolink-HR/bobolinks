@@ -249,16 +249,27 @@
   background-image: url('../img/bobolink.jpg');
   background-size: cover;
   background-position: center;
-  filter: alpha(opacity=40);  For IE8 and earlier 
+  filter: alpha(opacity=40);  /*For IE8 and earlier*/
 }
-
-
 
 .translucent {
   background-color: rgba(255, 255, 255, .8);
   opacity: .8;
 }
 
+/* Forums */
+.item-display-info {
+  color: slateblue;
+}
+
+.forum-card-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.forum-card {
+  border: 2px outset slateblue;
+}
 
 #enter-forum-form {
   margin-top: 200px;
@@ -272,7 +283,6 @@
 
 
 #bobolinks-logo {
-
   width: 100px;
 }
 
@@ -281,4 +291,9 @@
   margin-right: auto;
   width: 100px;
   margin-top: 20px;
+}
+
+.faded {
+  /*background-color: rgba(0, 0, 0, .3);*/
+  opacity: .66;
 }

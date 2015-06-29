@@ -5,71 +5,31 @@
   <ion-content>
     <!-- Navigation -->
     <div class="button-bar" ng-init="tog=1">
-      <a class="button" ng-class="{'active-button':tog==1}" ng-model="active" ng-click="tog=1; switchView(true)">Active</a>
-      <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
+      <a class="button" ng-class="{'button-royal':tog==1}" ng-model="active" ng-click="tog=1; switchView(true)">Active</a>
+      <a class="button" ng-class="{'button-royal':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Completed</a>
     </div>
     <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
     <div ng-show="active" ng-hide="complete">
-      <div ui-sref="app.forum({forumKey: '{{forum.$id}}'})"
+    <!-- <div ng-if="!complete"> -->
+      <div      class="forum-card-container"
                 ng-repeat="forum in forums | filter:-forum.endsAt"
                 ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"
                 ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
-
-        <div class="card">
-
-          <div class="item item-divider item-royal">
-            <div>
-              <span style="font-size: 133%; float:left;">{{forum.title}}</span>
-              <i class="icon ion-trash-a" style="float:right;margin-right:30px;font-size:133%;" ng-click="remove(forum)"></i>
-            </div>
-          </div>
-
-          <div class="item item-icon-left">
-           <i class="icon ion-earth"></i>
-           Forum Code
-           <span class="item-note">
-             {{forum.$id}}
-           </span>
-          </div>
-
-          <div class="item item-icon-left" ng-if="forum.password">
-           <i class="icon ion-key"></i>
-            Password
-           <span class="item-note">
-            {{forum.password}}
-           </span>
-          </div>
-
-          <div class="item item-text-wrap">
-            {{forum.description}}
-          </div>
-
-          <div class="item item-divider">
-            <!-- <i class="icon ion-clock"></i> {{start}} - {{end}} -->
-            <i class="icon ion-clock"></i> {{start}}
-          </div>
-        </div>
+        <forum-view forum=forum start=start end=end></forum-view>
       </div>
     </div>
 
     <!-- Complete Forums List -->
-    <ion-list class="list" ng-show="complete" ng-hide="active">
-      <ion-item ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === user" ng-init="ended = timeAgo(forum.endsAt, forum)">
-        <div class="item item-divider">
-          {{forum.title}}
-          <i class="icon ion-close" ng-click="remove(forum)" style="float:right;"></i>
-        </div>
-        <div class="item item-text-wrap">
-          {{forum.description}}
-        </div>
-        <div class="item item-divider">
-          {{ended}}
-        </div>
-      </ion-item>
-    </ion-list>
+    <div ng-show="complete" ng-hide="active">
+      <div      class="forum-card-container faded"
+                ng-repeat="forum in forums | filter:-forum.endsAt"
+                ng-if="completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"
+                ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
+        <forum-view forum=forum start=start end=end></forum-view>
+      </div>
+    </div>
   </ion-content>
-
   <!-- Footer create new forum navigation -->
   <ion-footer-bar ui-sref="app.new-forum" class="bar-positive">
     <h1 class="title">CREATE NEW FORUM</h1>
