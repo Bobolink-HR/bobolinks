@@ -12,16 +12,35 @@
 }
 
 .active-background {
-  background-color: #D6E9F8;
+  background-color: #5099A5;
+  color: white;
+}
+
+.active-subheader {
+  width: 100%;
+  height: 30px;
+  background-color: #5099A5;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  line-height: 30px;
+  border-bottom: 1px solid white;
 }
 
 .active-arrow {
   display: none;
 }
 
+.answered-rank, .pending-rank {
+  position: absolute;
+  top: 30px;
+  color: #2a2d33;
+}
+
 .active-rank {
   position: absolute;
   top: 30px;
+  color: white;
 }
 
 .active-question-container-text {
@@ -103,7 +122,6 @@
   line-height: 30px;
   font-size: 20px;
   font-weight: bold;
-  color: #2a2d33;
 }
 
 .question-text-container {

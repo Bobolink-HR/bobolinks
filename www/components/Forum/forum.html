@@ -3,13 +3,13 @@
 
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
-      <div id="active-qustion" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
-        <div class="subheader">Active</div>
+      <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
+        <!-- <div class="active-subheader">Active</div> -->
         <div class="question active-background">
           <p class="active-question-container-text" ng-show="!questionActive[0]">{{updateActiveQuestionContainerText()}}</p>
           <div class="right-content" ng-show="!!questionActive[0]">
             <div class="up arrow-container active-arrow"></div>
-            <div class="rank-container active-rank">{{questionActive[0].rank}}</div>
+            <div class="rank-container active-rank active-background">{{questionActive[0].rank}}</div>
             <div class="down arrow-container active-arrow"></div>
           </div>  
           <div class="left-content" ng-show="!!questionActive[0]">
@@ -22,16 +22,21 @@
       </div>
 
       <div id="pending-questions" ng-show="!!questionsPending[0]">
-        <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{questionsPending.length}})</div>
-        <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
-          <ng-pending-question question="question"></ng-question>
+        <div class="subheader" ng-click="togglePendingQuestions()">Pending ({{questionsPending.length}})</div>
+        <div class="pending-questions-container">
+          <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
+            <ng-pending-question question="question"></ng-question>
+          </div>
+          </ng-pending-question>
         </div>
       </div> 
 
       <div id="answered-questions" ng-show="!!questionsAnswered[0]">
-        <div class="subheader">Answered ({{questionsAnswered.length}})</div>
-        <div class="question answered-question" ng-repeat="question in questionsAnswered">
-          <ng-answered-question question="question"></ng-question>
+        <div class="subheader" ng-click="toggleAnsweredQuestions()">Answered ({{questionsAnswered.length}})</div>
+        <div class="answered-questions-container">
+          <div class="question answered-question" ng-repeat="question in questionsAnswered">
+            <ng-answered-question question="question"></ng-question>
+          </div>
         </div>
       </div> 
     </div>

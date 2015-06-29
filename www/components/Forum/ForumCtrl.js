@@ -108,6 +108,22 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
       return "No remaining questions";
     }
   };
+
+  $scope.togglePendingQuestions = function(event) {
+    if ($('.pending-questions-container').is(':visible') ) {
+      $('.pending-questions-container').slideUp();
+    } else {
+      $('.pending-questions-container').slideDown();
+    }
+  };
+
+  $scope.toggleAnsweredQuestions = function(event) {
+    if ($('.answered-questions-container').is(':visible') ) {
+      $('.answered-questions-container').slideUp();
+    } else {
+      $('.answered-questions-container').slideDown();
+    }
+  };
 });
 
 // Custom directive for pending questions
@@ -116,7 +132,7 @@ app.directive('ngPendingQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
   '<div class="up up-arrow-container" ng-show="!isModerator" ng-click="upVote($event)"></div>' +
-  '<div class="rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
+  '<div class="pending-rank rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
   '<div class="down down-arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +
@@ -169,7 +185,7 @@ app.directive('ngAnsweredQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
     '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
-    '<div class="rank-container active-rank">{{question.rank}}</div>' +
+    '<div class="rank-container answered-rank">{{question.rank}}</div>' +
     '<div class="down arrow-container active-arrow" ng-click="downVote()"></div>' +
     '</div>  ' +
     '<div class="left-content">' +
