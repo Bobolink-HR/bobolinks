@@ -2,7 +2,7 @@
 
 - Clean up CSS
 
-- Shorten Forum Key
+- Shorten Forum Key [on hold]
 
 - Show Forum Key in Forums view
 

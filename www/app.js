@@ -63,7 +63,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     resolve: {
       forumData: function($stateParams, $location, ForumsFactory) {
         // Pull forum from Firebase database
-        console.log("stateParams:", $stateParams);
         var forum = ForumsFactory.getForum($stateParams.forumKey);
 
         forum.$loaded(function() {
@@ -116,8 +115,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app/home');
 });
 
+
 var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state) {
-  //console.log("rootScopeInit called!");
 
   ///////////////////////////////////////////////////////
   // Event Listeners
