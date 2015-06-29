@@ -44,7 +44,7 @@ gulp.task('sass', function(done) {
 
 // Concat js files (could add ngmin and then uglify). Has a possibly unnecessary rename to min?
 gulp.task('scripts', function() {
-  return gulp.src(['./www/app.js', './www/components/**/*.js'])
+  return gulp.src(['./www/lib/ionic/js/ionic.bundle.js', './www/lib/firebase/firebase.js', './www/lib/angularfire/dist/angularfire.min.js', './www/lib/moment/moment.js', './www/app.js', './www/components/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(concat('main.js', {newLine: ';'}))
