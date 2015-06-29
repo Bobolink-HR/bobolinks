@@ -47,12 +47,12 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
     } else {
       alert("Please fill all details");
     }
-  }
+  };
 
   //sign in user with email and password
   $scope.signIn = function (user) {
     if (user && user.email && user.pwdForLogin) {
-      $rootScope.show('Signing In...')
+      $rootScope.show('Signing In...');
       Auth.auth.$authWithPassword({
         email: user.email,
         password: user.pwdForLogin
@@ -68,5 +68,5 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
     } else {
       alert("Please enter email and password both");
     }
-  }
-})
+  };
+});

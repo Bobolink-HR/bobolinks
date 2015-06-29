@@ -25,7 +25,7 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
   $scope.completed = function(endDate){
     if (typeof endDate === "string"){
       // convert string to date object
-      var endDate = moment(endDate);
+      endDate = moment(endDate);
       // if negative, date has passed
       return endDate.diff(moment()) < 0 ? true : false;
     }
