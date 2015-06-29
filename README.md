@@ -13,9 +13,6 @@
 
 - Show Forum Key in Forums view
 
-- Sign Up
-  - remove initial start value
-
 - Grunt
   - Consolidate + minify JS + CSS files
 
