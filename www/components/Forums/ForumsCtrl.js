@@ -16,9 +16,8 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
 
   // Shows time since completed forum
   $scope.timeAgo = function(dateString, forum){
-    console.log(forum);
     return moment(dateString).fromNow();
-  }
+  };
 
   // Determines whether a forum is active or complete
   $scope.completed = function(endDate){
@@ -39,7 +38,7 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
           $scope.forum.status = 'delete'; 
         });
       }
-    })
+    });
   };
 
   $scope.goToForum = function(forumId){
@@ -47,7 +46,3 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
   };
 
 }]);
-
-/*
-endDateExample: "Sun Jan 01 2017 15:00:00 GMT-0800"
-*/

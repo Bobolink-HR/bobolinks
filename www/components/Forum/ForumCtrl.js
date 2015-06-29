@@ -1,14 +1,33 @@
 app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', 'Auth', function($scope, $stateParams, $ForumsFactory, $firebase, Auth) {
 
+  // Initially user is set to null
   $scope.user = null;
+
+  $scope.formData = {};
+
+  // If Auth.getAuth is not undefined, set user to current user id
+  // We need the current user id to check if the user is the moderator
   $scope.user = Auth.getAuth() && Auth.getAuth().uid;
   $scope.forumKey = $stateParams.forumKey;
-
+  $scope.test = "Hello";
 
   // Set Forum object to $scope.forum with two way binding
   $ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
   .then(function() {
+
+    // Assign the title to the top nav bar
+    $scope.title = $scope.forum.title;
+
+    // If the forum's creator id equals the current user id, the user is the moderator
     $scope.isModerator = $scope.forum.creatorID === $scope.user;
+
+    // If the user is the moderator or there is not a password, the user has access
+    // If both of these conditions fail, the main forum content is hiddent and the user
+    // is asked to enter the forum password
+    $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
+
+
+    
   });
  
   // Create an array for each question status
@@ -55,6 +74,14 @@ app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$fireba
     }
   };
 
+  // Check submitted password.  If it is valid, show forum content, otherwise clear password entered
+  $scope.submitPassword = function() {
+    $scope.forumAccess = $scope.forum.password === $scope.formData.password;
+
+    if (!$scope.forumAccess) {
+      $scope.formData.password = "";
+    }
+  };
 
 }]);
 

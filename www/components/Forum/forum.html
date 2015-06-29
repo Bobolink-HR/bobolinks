@@ -1,38 +1,55 @@
-<ion-view view-title ="{{forum.title}}"> <!--hide-nav-bar=true-->
-  <ion-content ng-controller="ForumCtrl">
-    <div id="active-qustion" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
-      <div class="subheader">Active</div>
-      <div class="question active-background">
-        <div class="right-content">
-          <div class="up arrow-container active-arrow"></div>
-          <div class="rank-container active-rank">{{questionActive[0].rank}}</div>
-          <div class="down arrow-container active-arrow"></div>
-        </div>  
-        <div class="left-content">
-          <div class="question-text-container">
-            <p>{{questionActive[0].text}}</p>
+<ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
+  <ion-content>
+
+    <!-- Main forum content (shown if forumAccess is true) -->
+    <div id="main-forum-view" ng-show="forumAccess">
+      <div id="active-qustion" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
+        <div class="subheader">Active</div>
+        <div class="question active-background">
+          <div class="right-content">
+            <div class="up arrow-container active-arrow"></div>
+            <div class="rank-container active-rank">{{questionActive[0].rank}}</div>
+            <div class="down arrow-container active-arrow"></div>
+          </div>  
+          <div class="left-content">
+            <div class="question-text-container">
+              <p>{{questionActive[0].text}}</p>
+            </div>
+            <p class="question-name">{{questionActive[0].name}}</p>
           </div>
-          <p class="question-name">{{questionActive[0].name}}</p>
         </div>
       </div>
+
+      <div id="pending-questions" ng-show="!!questionsPending[0]">
+        <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{questionsPending.length}})</div>
+        <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
+          <ng-pending-question question="question"></ng-question>
+        </div>
+      </div> 
+
+      <div id="answered-questions" ng-show="!!questionsAnswered[0]">
+        <div class="subheader">Answered ({{questionsAnswered.length}})</div>
+        <div class="question answered-question" ng-repeat="question in questionsAnswered">
+          <ng-answered-question question="question"></ng-question>
+        </div>
+      </div> 
     </div>
 
-    <div id="pending-questions" ng-show="!!questionsPending[0]">
-      <div class="subheader" ng-click="getNextActiveQuestion()">Pending ({{questionsPending.length}})</div>
-      <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
-        <ng-pending-question question="question"></ng-question>
-      </div>
-    </div> 
+    <!-- Enter forum password forum (shown if forumAccess is false) -->
+    <div id="forum-password-view" ng-show="!forumAccess">
+      <form>
+        <p class="forum-question-form-label">Forum Password Required</p>
+        <label class="item item-input">
+          <input ng-model="formData.password" class="forum-question-input" placeholder="Enter forum password"></textarea>
+        </label>
 
-    <div id="answered-questions" ng-show="!!questionsAnswered[0]">
-      <div class="subheader">Answered ({{questionsAnswered.length}})</div>
-      <div class="question answered-question" ng-repeat="question in questionsAnswered">
-        <ng-answered-question question="question"></ng-question>
-      </div>
-    </div> 
-
+        <button ng-click="submitPassword()" type="button" class="button button-positive button-full">Enter Password</button>
+      </form>
+    </div>
   </ion-content>
-  <ion-footer-bar  ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="!isModerator" class="bar-positive">
+
+  <!-- Add question link (shown if forumAccess is true and user is not moderator) -->
+  <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator" class="bar-positive">
     <h1 class="title">Add Question</h1>
   </ion-footer-bar>
 </ion-view>

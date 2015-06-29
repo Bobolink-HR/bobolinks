@@ -1,8 +1,28 @@
 app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth) {
 
+
+  // $scope.newKey =  
+
+  // $scope.newKey = ForumsFactory.generateForumId();
+
+
+
+
+
+  // console.log($scope.newKey);
+
+  // $scope.newKey.$loaded(function(data) {
+  //   // $scope.newKey = $$state.value
+  //   console.log(data);
+  // })
+
+
+  // console.log($scope.newKey);
+
   $scope.title = 'Create New Forum';
 
   $scope.newForum = {};
+
 
   // By default set end date to same as start date
   $scope.defaultEndDate = function() {
@@ -21,10 +41,23 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth)
     $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.endsAt.toString().slice(16,33) );
     // delete $scope.newForum.endDate;
 
+    console.log($scope.newForum);
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
       console.log("added a new forum with id " + id);
+      var addedForum = ForumsFactory.getForum(ref.key());
+      addedForum.$loaded(function() {
+        ForumsFactory.generateForumId().then(function(data) {
+          addedForum.$id = data;
+          console.log(addedForum);
+          addedForum.$save().then(function(ref) {
+            console.log("SUCCESSFULLY SAVED");
+            console.log(ref.key());
+          });
+        });
+      });
+
       $scope.resetForm();
       $rootScope.goBack();
     }).catch(function(err) {
