@@ -1,5 +1,8 @@
 app.controller('ForumCtrl', ['$scope', '$stateParams', 'ForumsFactory', '$firebase', 'Auth', function($scope, $stateParams, $ForumsFactory, $firebase, Auth) {
 
+  // If user is not logged in, hide the side nav bar
+  $ionicSideMenuDelegate.canDragContent($scope.loggedIn);
+
   // Initially user is set to null
   $scope.user = null;
 

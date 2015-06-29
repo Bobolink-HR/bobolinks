@@ -1,5 +1,8 @@
 app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $window, $ionicHistory) {
 
+  // Hide side bar from user because user must not be logged in
+  $ionicSideMenuDelegate.canDragContent(false);
+
   $ionicHistory.nextViewOptions({
     disableAnimate: false,
     disableBack: true
