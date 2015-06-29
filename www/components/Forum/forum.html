@@ -6,7 +6,7 @@
       <div id="active-qustion" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
         <div class="subheader">Active</div>
         <div class="question active-background">
-          <p class="active-question-container-text" ng-show="!questionActive[0]">{{activeQuestionStatus}}</p>
+          <p class="active-question-container-text" ng-show="!questionActive[0]">{{updateActiveQuestionContainerText()}}</p>
           <div class="right-content" ng-show="!!questionActive[0]">
             <div class="up arrow-container active-arrow"></div>
             <div class="rank-container active-rank">{{questionActive[0].rank}}</div>
