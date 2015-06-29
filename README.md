@@ -1,13 +1,18 @@
 # bobolink
 
-- Fix landing page
-  - Remove Manage Forum
-  - Add Sign in /log in button at the bottom (hide if user is logged in)
-  - Remove top menu
-- Sign in/Sign up
-  - add back button
-  - add link to sign in on sign up page (and vise versa)
+- Landing Page CSS
+
+- Top Nav Bar
+  - Change < Home to  < Back
+
 - Create shorter, random forum key
+
+- Sign Up
+  - remove initial start value
+
+- Home
+  - Hide moderator log in if user is logged in
+  
 - Fix menu
   - Change header
 - New Forum 
