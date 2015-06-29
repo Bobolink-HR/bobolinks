@@ -75,7 +75,7 @@
   margin-top: 8px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-bottom: 20px solid #6FA166;
+  border-bottom: 20px solid rgb(229, 228, 228);
 }
 
 .down {
@@ -91,7 +91,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #6FA166;
+  border-top: 20px solid rgb(229, 228, 228);
 }
 
 .rank-container {
