@@ -1,7 +1,9 @@
 <ion-view cache-view=false hide-back-button=true hide-nav-bar="!loggedIn" view-title="Bobolink">
   <ion-content class="login-background">
     <!-- <h1 align="center">Join Forum</h1> -->
-
+    <div id="bobolinks-logo-div">
+      <img id="bobolinks-logo" src="../img/bobolinks-logo.png">
+    </div>
       <form id="enter-forum-form">
         <div class="list">
           <label class="item item-input">
@@ -10,8 +12,6 @@
           <button type="button" class="button button-positive button-full" ui-sref= "app.forum({forumKey: url.text})">Enter Forum</button>
         </div>
       </form>
-
-    <!-- <button ng-show="!loggedIn" type="button" class="button button-positive button-full" ui-sref="app.login">Moderator Login</h1> -->
   </ion-content>
 
   <ion-footer-bar class="bar-positive" ng-show="!loggedIn" ui-sref="app.login">

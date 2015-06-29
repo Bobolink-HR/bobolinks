@@ -193,19 +193,31 @@
 
 /* Login */
 
-.login-background {
+/*.login-background {
   background-image: url('../img/bobolink.jpg');
   background-size: cover;
   background-position: center;
-  background-image-opacity: 0.4;*/
   /*filter: alpha(opacity=40); /* For IE8 and earlier */*/
-}
+}*/
 
 .translucent {
   /*background-color: rgba(255, 255, 255, .7);*/
   opacity: .8;
 }
 
+
 #enter-forum-form {
+  margin-top: 20px;
+}
+
+#bobolinks-logo {
+
+  width: 100px;
+}
+
+#bobolinks-logo-div {
+  margin-left:auto;
+  margin-right: auto;
+  width: 100px;
   margin-top: 20px;
 }
