@@ -201,7 +201,7 @@
   background-image: url('../img/bobolink.jpg');
   background-size: cover;
   background-position: center;
-  filter: alpha(opacity=40);  For IE8 and earlier
+  filter: alpha(opacity=40);  /*For IE8 and earlier*/
 }
 
 .translucent {

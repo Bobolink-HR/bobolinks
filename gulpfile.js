@@ -13,8 +13,8 @@ var sh = require('shelljs');
 
 // Used by watch
 var paths = {
-  sass: ['./scss/**/*.scss', 'www/css/style.css'],
-  js: ['www/components/**/*.js']
+  sass: ['./scss/**/*.scss', './www/css/style.css'],
+  js: ['./www/components/**/*.js']
 };
 
 // Default task
@@ -24,33 +24,34 @@ gulp.task('default', ['clean'], function(){
 
 // Clean
 gulp.task('clean', function(cb) {
-  del(['dist/**/*', 'www/css/*.min.css'], cb);
+  del(['./dist/**/*', './www/css/*.min.css'], cb);
 });
 
 // Minify css
 gulp.task('sass', function(done) {
-  gulp.src(['./scss/ionic.app.scss', 'www/css/style.css'])
+  gulp.src(['./scss/ionic.app.scss', './www/css/style.css'])
     .pipe(sass({
       errLogToConsole: true
     }))
-    .pipe(gulp.dest('./www/css/'))
+    .pipe(gulp.dest('./dist/css'))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
+    .pipe(gulp.dest('./dist/css'))
     .on('end', done);
 });
 
 // Concat js files (could add ngmin and then uglify). Has a possibly unnecessary rename to min?
 gulp.task('scripts', function() {
-  return gulp.src('www/components/**/*.js')
+  return gulp.src('./www/components/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(concat('main.js', {newLine: ';'}))
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('./dist/js'))
+    // could add ngmin and uglify here
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('./dist/js'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
