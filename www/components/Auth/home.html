@@ -1,20 +1,24 @@
 <ion-view cache-view=false hide-back-button=true hide-nav-bar="!loggedIn" view-title="Bobolink">
+  <ion-header-bar class="bar-dark" title="Bobolinks">
+    <h1 class="title">Bobolinks</h1>
+  </ion-header-bar>
   <ion-content class="login-background">
     <!-- <h1 align="center">Join Forum</h1> -->
-    <div id="bobolinks-logo-div">
+
+   <!--  <div id="bobolinks-logo-div">
       <img id="bobolinks-logo" src="../img/bobolinks-logo.png">
-    </div>
+    </div> -->
       <form id="enter-forum-form">
         <div class="list">
-          <label class="item item-input">
-            <textarea ng-click="clearContents(this)"placeholder="Enter your URL shortcode here" ng-model="url.text" ></textarea>
+          <label class=" translucent item item-input">
+            <input id="forum-key-input" type="text" ng-click="clearContents(this)"placeholder="Enter forum key" ng-model="url.text" ></textarea>
           </label>
-          <button type="button" class="button button-positive button-full" ui-sref= "app.forum({forumKey: url.text})">Enter Forum</button>
+          <button type="button" class="button button-positive button-full" ui-sref= "app.forum({forumKey: url.text})">Join Forum</button>
         </div>
       </form>
   </ion-content>
 
-  <ion-footer-bar class="bar-positive" ng-show="!loggedIn" ui-sref="app.login">
+  <ion-footer-bar class="bar-dark" ng-show="!loggedIn" ui-sref="app.login">
     <h1 class="title">Moderator Login</h1>
   </ion-footer-bar>
 </ion-view>

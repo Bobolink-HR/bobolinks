@@ -41,6 +41,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
+  // Testing for shorter forum keys
   // $scope.allForums = ForumsFactory.getForums();
   // $scope.allForums.$loaded(function(data) {
   //   console.log(data);
@@ -107,8 +108,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
       return "No remaining questions";
     }
   };
-  
-
 });
 
 // Custom directive for pending questions
