@@ -2,7 +2,6 @@ app.controller('ForumsCtrl', ['$scope', 'ForumsFactory', 'Auth', '$window', '$ro
   $scope.title = "Example Moderator Forums View";
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();
-  $scope.user = Auth.getAuth().uid;
 
   // Toggles between active and complete view
   $scope.switchView = function(boolean){

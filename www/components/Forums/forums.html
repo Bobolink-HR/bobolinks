@@ -6,11 +6,10 @@
       <a class="button" ng-class="{'active-button':tog==1}" ng-model="active" ng-click="tog=1; switchView(true)">Active</a>
       <a class="button" ng-class="{'active-button':tog==2}" ng-model="complete" ng-click="tog=2; switchView(false)">Complete</a>
     </div>
-
     <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
     <ion-list class="list" ng-show="active" ng-hide="complete">
-      <ion-item ui-sref="app.forum({forumKey: '{{forum}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === user" ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
+      <ion-item ui-sref="app.forum({forumKey: '{{forum}}'})" ng-repeat="forum in forums | filter:-forum.endsAt" class="card" ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()" ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
         <div class="item item-divider">
           {{forum.title}}<i class="icon ion-close" ng-click="remove(forum)"></i>
         </div>
