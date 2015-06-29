@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $window, $ionicHistory) {
+app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $ionicHistory) {
 
   $ionicHistory.nextViewOptions({
     disableAnimate: false,
@@ -13,7 +13,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
   }).then(function (modal) {
       $scope.modal = modal;
   });
-  
+
   //if user is logged in already, redirect them to app.forums
   Auth.requireAuth().then(function() {
     $state.go('app.forums');
@@ -57,7 +57,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
       }).then(function (authData) {
         console.log("Logged in as:" + authData.uid);
         $rootScope.hide();
-        $window.location.replace('/#/app/forums');
+        $state.go('app.forums');
       }).catch(function (error) {
         $rootScope.showAlert("Authentication failed", error.message);
         $rootScope.hide();

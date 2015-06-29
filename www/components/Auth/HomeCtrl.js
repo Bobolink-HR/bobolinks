@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope', '$location', '$window', 'Auth', function($scope, $location, $window, Auth) {
+app.controller('HomeCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
   $scope.title = "Home";
 
   $scope.loggedIn = !!Auth.getAuth();

@@ -178,7 +178,7 @@
   right: 10px;
 }
 
-/* New Forum */ 
+/* New Forum */
 
 .item .ng-invalid.ng-dirty {
   border-bottom: none;
@@ -190,7 +190,7 @@
 /* Login */
 
 .login-background {
-  background-image: url('/img/bobolink.jpg');
+  background-image: url('../img/bobolink.jpg');
   background-size: cover;
   background-position: center;
 }

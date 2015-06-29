@@ -1,4 +1,4 @@
-app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $window, $rootScope, $state) {
+app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $state) {
   $scope.title = "Example Moderator Forums View";
   $scope.active = true;
   $scope.forums = ForumsFactory.getForums();

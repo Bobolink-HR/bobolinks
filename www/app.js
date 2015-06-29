@@ -3,20 +3,20 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 /////////////////////////////////////////////////////////////////////////////
 //    APP INITIALIZATION
 /////////////////////////////////////////////////////////////////////////////
-.run(function($ionicPlatform, $rootScope, $firebase, $window, Auth, $ionicPopup, $ionicViewService, $ionicLoading, $state) {
+.run(function($ionicPlatform, $rootScope, $firebase, Auth, $ionicPopup, $ionicViewService, $ionicLoading, $state) {
   $ionicPlatform.ready(function(){
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+    // if (window.cordova && window.cordova.plugins.Keyboard) {
+    //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    // }
+    // if (window.StatusBar) {
+    //   // org.apache.cordova.statusbar required
+    //   StatusBar.styleDefault();
+    // }
   });
 
-  rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth, $state);
+  rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state);
 })
 
 /////////////////////////////////////////////////////////////////////////////
@@ -76,11 +76,11 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   })
   .state('app.forums', {
-    url: "/forums",
-    resolve: {
-      "currentAuth": ["Auth", function(Auth) {
-        return Auth.requireAuth();
-      }]
+    url: "/forums"
+    ,resolve: {
+      // "currentAuth": ["Auth", function(Auth) {
+      //   return Auth.requireAuth();
+      // }]
     },
     views: {
       'menuContent': {
@@ -116,7 +116,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   $urlRouterProvider.otherwise('/app/home');
 });
 
-var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, $window, Auth, $state) {
+var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state) {
   //console.log("rootScopeInit called!");
 
   ///////////////////////////////////////////////////////
@@ -142,9 +142,9 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
         //** LOGGED OUT
         //will not redirect user from home to login
         if(window.location.hash === '#/app/home') {
-          $window.location.replace('/#/app/home');
+          $state.go('app.home');
         } else {
-          $window.location.replace('/#/app/login');
+          $state.go('app.login');
         }
       }
     });
