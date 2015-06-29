@@ -1,5 +1,5 @@
 app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, Auth, $window, $ionicHistory) {
-  
+
   $ionicHistory.nextViewOptions({
     disableAnimate: false,
     disableBack: true
@@ -13,10 +13,10 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
   }).then(function (modal) {
       $scope.modal = modal;
   });
-
-  if (window.localStorage.valueOf().length === 3) {
+  
+  Auth.requireAuth().then(function() {
     $state.go('app.forums');
-  }
+  });
 
   $scope.createUser = function (user) {
     console.log("Create User Function called");

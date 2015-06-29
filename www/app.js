@@ -72,9 +72,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
             $location.path('/home');
           }
         });
-      },
-      simpleObj:  function(){
-        return {value: 'simple!'};
       }
     }
   })
