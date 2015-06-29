@@ -14,10 +14,12 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
       $scope.modal = modal;
   });
   
+  //if user is logged in already, redirect them to app.forums
   Auth.requireAuth().then(function() {
     $state.go('app.forums');
   });
 
+  //create user
   $scope.createUser = function (user) {
     console.log("Create User Function called");
     if (user && user.email && user.password && user.displayname) {
@@ -45,6 +47,7 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
     }
   }
 
+  //sign in user with email and password
   $scope.signIn = function (user) {
     if (user && user.email && user.pwdForLogin) {
       $rootScope.show('Signing In...')
