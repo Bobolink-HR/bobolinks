@@ -41,17 +41,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
-  // Testing for shorter forum keys
-  // $scope.allForums = ForumsFactory.getForums();
-  // $scope.allForums.$loaded(function(data) {
-  //   console.log(data);
-  //   $scope.allForums.abc123 = {word: "test"};
-  //   $scope.allForums.$save();
-  // });
-
-
-  
-
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
@@ -108,6 +97,30 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
       return "No remaining questions";
     }
   };
+
+  $scope.togglePendingQuestions = function(event) {
+    if ($('.pending-questions-container').is(':visible') ) {
+      $('.pending-questions-container').slideUp();
+      
+    } else {
+      $('.pending-questions-container').slideDown();
+    }
+
+    $('.pending-arrow').toggleClass('rotated');
+
+
+  };
+
+  $scope.toggleAnsweredQuestions = function(event) {
+    if ($('.answered-questions-container').is(':visible') ) {
+      $('.answered-questions-container').slideUp();
+
+    } else {
+      $('.answered-questions-container').slideDown();
+    }
+
+    $('.answered-arrow').toggleClass('rotated');
+  };
 });
 
 // Custom directive for pending questions
@@ -116,7 +129,7 @@ app.directive('ngPendingQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
   '<div class="up up-arrow-container" ng-show="!isModerator" ng-click="upVote($event)"></div>' +
-  '<div class="rank-container" ng-class="{\'active-rank\': isModerator}">{{question.rank}}</div>' +
+  '<div class="pending-rank rank-container">{{question.rank}}</div>' +
   '<div class="down down-arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +
@@ -169,7 +182,7 @@ app.directive('ngAnsweredQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
     '<div class="up arrow-container active-arrow" ng-click="upVote()"></div>' +
-    '<div class="rank-container active-rank">{{question.rank}}</div>' +
+    '<div class="rank-container answered-rank">{{question.rank}}</div>' +
     '<div class="down arrow-container active-arrow" ng-click="downVote()"></div>' +
     '</div>  ' +
     '<div class="left-content">' +
