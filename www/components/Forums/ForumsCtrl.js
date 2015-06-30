@@ -31,9 +31,9 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
     }
   };
 
-  $scope.email = function(forum) {
-    alert("SEND AN EMAIL");
-  };
+  // $scope.email = function(forum) {
+  //   alert("SEND AN EMAIL");
+  // };
 
   // Sets status property of forum to delete on confirmation
   // BUG WITH CONFIRMATION
