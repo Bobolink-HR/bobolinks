@@ -10,7 +10,7 @@
             <div class="up arrow-container active-arrow"></div>
             <div class="rank-container active-rank active-background">{{questionActive[0].rank}}</div>
             <div class="down arrow-container active-arrow"></div>
-          </div>  
+          </div>
           <div class="left-content" ng-show="!!questionActive[0]">
             <div class="question-text-container">
               <p>{{questionActive[0].text}}</p>
@@ -23,7 +23,7 @@
       <div id="pending-questions" ng-show="!!questionsPending[0]">
         <div class="subheader pending-subheader" ng-click="togglePendingQuestions()">
         Pending ({{questionsPending.length}})
-        <img class="pending-arrow rotated" src="../../img/arrow.png">
+        <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
         </div>
         <div class="pending-questions-container">
           <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
@@ -31,19 +31,19 @@
           </div>
           </ng-pending-question>
         </div>
-      </div> 
+      </div>
 
       <div id="answered-questions" ng-show="!!questionsAnswered[0]">
         <div class="subheader answered-subheader" ng-click="toggleAnsweredQuestions()">
         Answered ({{questionsAnswered.length}})
-        <img class="answered-arrow rotated" src="../../img/arrow.png">
+        <img class="answered-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
         </div>
         <div class="answered-questions-container">
           <div class="question answered-question" ng-repeat="question in questionsAnswered">
             <ng-answered-question question="question"></ng-question>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
 
     <!-- Enter forum password forum (shown if forumAccess is false) -->
