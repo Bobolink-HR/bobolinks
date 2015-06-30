@@ -4,7 +4,6 @@
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
       <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
-        <!-- <div class="active-subheader">Active</div> -->
         <div class="question active-background">
           <p class="active-question-container-text" ng-show="!questionActive[0]">{{updateActiveQuestionContainerText()}}</p>
           <div class="right-content" ng-show="!!questionActive[0]">
