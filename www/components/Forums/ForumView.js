@@ -7,7 +7,7 @@ app.directive('forumView', function() {
       end: '=',
       remove: '=',
       edit: '=',
-      sendEmail: '='
+      email: '='
     },
     templateUrl: 'components/Forums/forumView.html'
   };
