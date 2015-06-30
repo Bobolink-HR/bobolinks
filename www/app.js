@@ -74,6 +74,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+
   .state('app.forums', {
     url: "/forums"
     ,resolve: {
@@ -88,12 +89,14 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+
   .state('app.new-forum', {
     url: "/new-forum",
     resolve: {
       "currentAuth": ["Auth", function(Auth) {
         return Auth.requireAuth();
-      }]
+      }],
+      forum: function() { return undefined; }
     },
     views: {
       'menuContent': {
@@ -102,6 +105,35 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+
+  .state('app.edit-forum', {
+    url: "/edit-forum/:forumKey",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewForum/new-forum.html",
+        controller: 'NewForumCtrl'
+      }
+    },
+    resolve: {
+      "currentAuth": ["Auth", function(Auth) {
+        return Auth.requireAuth();
+      }],
+      forum: function($stateParams, $location, ForumsFactory) {
+        // Pull forum from Firebase database
+        var forum = ForumsFactory.getForum($stateParams.forumKey);
+
+        forum.$loaded(function() {
+          // If forum title is undefined (aka forum doesn't exist), redirect to home
+          if (forum.title === undefined) {
+            $location.path('/home');
+          }
+        });
+
+        return forum;
+      }
+    }
+  })
+
   .state('app.newQuestion', {
     url: "/new_question?forumKey?forum",
     views: {

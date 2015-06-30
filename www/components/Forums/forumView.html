@@ -1,12 +1,13 @@
 <div class="card forum-card">
 
-  <div class="item item-divider item-royal">
-    <div>
-      <span style="font-size: 133%; float:left;" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">&nbsp;{{forum.title}}</span>
-      <i class="icon ion-trash-a" style="float:right;margin-right:20px;font-size:133%;" ng-click="remove(forum)"></i>
-      <i class="icon ion-edit" style="float:right;margin-right:10px;font-size:133%;" ng-click="edit(forum)"></i>
-      <i class="icon ion-share" style="float:right;margin-right:10px;font-size:133%;" ng-click="sendEmail(forum)"></i>
-    </div>
+  <div class="item item-royal" style="border:0px;border-radius:0px;">
+      <span style="font-size:135%;" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">{{forum.title}}</span>
+      <!-- <div style="float:right; padding-right: -5px; display:inline;"> -->
+      <span style="float:right;">
+        <i class="icon ion-share" style="margin:0 0 0 5px;font-size:150%;" ng-click="sendEmail(forum)"></i>
+        <i class="icon ion-edit" style="margin:0 5px 0 5px; font-size:150%;" ui-sref="app.edit-forum({forumKey: '{{forum.$id}}'})"></i>
+        <i class="icon ion-trash-a" style="font-size:150%;" ng-click="remove(forum)"></i>
+      </span>
   </div>
 
   <div class="item item-icon-left" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">
