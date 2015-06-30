@@ -1,4 +1,4 @@
-<ion-view> <!--hide-nav-bar=true-->
+<ion-view cache-view="false"> <!--hide-nav-bar=true-->
   <ion-nav-title>
     {{forumTitle()}}'s Forums
   </ion-nav-title>
@@ -16,7 +16,7 @@
                 ng-repeat="forum in forums | filter:-forum.endsAt"
                 ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"
                 ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
-        <forum-view forum=forum start=start end=end></forum-view>
+        <forum-view forum=forum start=start end=end remove=remove edit=edit sendEmail=sendEmail></forum-view>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
                 ng-repeat="forum in forums | filter:-forum.endsAt"
                 ng-if="completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"
                 ng-init="start = convertTime(forum.startsAt); end = convertTime(forum.endsAt)">
-        <forum-view forum=forum start=start end=end></forum-view>
+        <forum-view forum=forum start=start end=end remove=remove edit=edit sendEmail=sendEmail></forum-view>
       </div>
     </div>
   </ion-content>

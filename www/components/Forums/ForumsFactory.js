@@ -42,6 +42,11 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return forumArray.$add(forum); // Returns a promise
   }
 
+  function editForum(forum) { // Pass this the forum object to be saved to the database
+    return forum.$save();
+    //return forumArray.$save(forum); // Returns a promise
+  }
+
   //Add a question
   function addQuestion(forumID, question) { // Pass the forum ID and the question to add to it
     var questionRef = forumRef.child(forumID).child('questions/pending');
@@ -56,6 +61,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getForums: getForums,
     getForum: getForum,
     saveForum: saveForum,
+    editForum: editForum,
     getQuestions: getQuestions,
     addQuestion: addQuestion
     // ,generateForumId: generateForumId

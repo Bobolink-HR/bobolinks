@@ -4,7 +4,10 @@ app.directive('forumView', function() {
     scope: {
       forum: '=',
       start: '=',
-      end: '='
+      end: '=',
+      remove: '=',
+      edit: '=',
+      sendEmail: '='
     },
     templateUrl: 'components/Forums/forumView.html'
   };
