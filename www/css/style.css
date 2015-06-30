@@ -47,6 +47,12 @@
   color: white;
 }
 
+.moderator-pending-rank {
+  position: absolute;
+  top: 30px;
+  color: #2a2d33;
+}
+
 .active-question-container-text {
   line-height: 95px;
   text-align: center;
