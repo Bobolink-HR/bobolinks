@@ -47,6 +47,12 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     //return forumArray.$save(forum); // Returns a promise
   }
 
+  function markComplete(forum) {
+    console.dir(forum);
+    forum.status='delete';
+    forumArray.$save(forum);
+  }
+
   //Add a question
   function addQuestion(forumID, question) { // Pass the forum ID and the question to add to it
     var questionRef = forumRef.child(forumID).child('questions/pending');
@@ -63,7 +69,8 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     saveForum: saveForum,
     editForum: editForum,
     getQuestions: getQuestions,
-    addQuestion: addQuestion
+    addQuestion: addQuestion,
+    markComplete: markComplete
     // ,generateForumId: generateForumId
   };
 }

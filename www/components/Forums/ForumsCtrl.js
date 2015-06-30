@@ -31,19 +31,13 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
     }
   };
 
-  $scope.email = function(forum) {
-    alert("SEND AN EMAIL");
-  };
-
   // Sets status property of forum to delete on confirmation
   // BUG WITH CONFIRMATION
   $scope.remove = function(forum){
     // event.stopPropagation();
     $rootScope.showConfirm('Remove this forum?', null, $scope).then(function(res){
       if (res) {
-        ForumsFactory.getForum(forum.$id).$bindTo($scope, "forum").then(function(){
-          $scope.forum.status = 'delete';
-        });
+        ForumsFactory.markComplete(forum);
       }
     });
   };
