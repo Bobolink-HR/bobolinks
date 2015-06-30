@@ -129,7 +129,7 @@ app.directive('ngPendingQuestion', function() {
     restrict: 'E',
     template: '<div class="right-content">' +
   '<div class="up up-arrow-container" ng-show="!isModerator" ng-click="upVote($event)"></div>' +
-  '<div class="pending-rank rank-container">{{question.rank}}</div>' +
+  '<div class="pending-rank rank-container" ng-class="{\'moderator-pending-rank\': isModerator}">{{question.rank}}</div>' +
   '<div class="down down-arrow-container" ng-show="!isModerator" ng-click="downVote()"></div>' +
   '</div>  ' +
  ' <div class="left-content">' +
