@@ -46,16 +46,19 @@
       </div>
     </div>
 
-    <!-- <div id="add-poll-form" ng-show="isModerator">
-      <form>
-        <input ng-model="newPoll" placeholder="Create a new poll here"</input>
-        <button ng-click="createPoll(newPoll)">Submit</button>
-      </form>
-    </div>
-    
     <div id="poll-list">
-      <p>{{polls}}</p>
-    </div> -->
+      
+      <div class="poll-list-container">
+        <div class="poll" ng-repeat="poll in polls">
+          <p>{{poll.text}}</p>
+          <form class="poll-response-form" ng-show="!isModerator">
+            <button ng-click="upVote()">UP VOTE</button>
+            <button ng-click="downVote()">DOWN VOTE</button>
+          </form>
+          <hr>
+        </div>
+      </div>
+    </div>
 
     <!-- Enter forum password forum (shown if forumAccess is false) -->
     <div id="forum-password-view" ng-show="!forumAccess">
