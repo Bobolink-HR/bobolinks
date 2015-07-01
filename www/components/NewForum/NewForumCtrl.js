@@ -68,23 +68,9 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth,
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
-      console.log("added a new forum with id " + id);
-      // var addedForum = ForumsFactory.getForum(ref.key());
-      // addedForum.$loaded(function() {
-      //   ForumsFactory.generateForumId().then(function(data) {
-      //     addedForum.$id = data;
-      //     console.log(addedForum);
-      //     addedForum.$save().then(function(ref) {
-      //       console.log("SUCCESSFULLY SAVED");
-      //       console.log(ref.key());
-      //     });
-      //   });
-      // });
-
-      $scope.resetForm();
-      $rootScope.goBack();
-    }).catch(function(err) {
-      console.error(err);
+      console.log("Saved forum");
+    }, function(err) {
+      console.log("Error saving: ", err);
     });
   };
 

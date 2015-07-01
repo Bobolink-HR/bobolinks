@@ -26,7 +26,7 @@
         <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
         </div>
         <div class="pending-questions-container">
-          <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
+          <div class="question"  ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="question in questionsPending | orderBy: '-rank'">
             <ng-pending-question question="question"></ng-question>
           </div>
           </ng-pending-question>
