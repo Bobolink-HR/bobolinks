@@ -164,8 +164,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     url: "/new_poll?forumKey?forum",
     views: {
       'menuContent': {
-        templateUrl: "components/NewPoll/newPoll.html",
-        controller: 'NewPollCtrl'
+        templateUrl: "components/RespondToPoll/respondToPoll.html",
+        controller: 'RespondToPollCtrl'
       }
     }
   })
