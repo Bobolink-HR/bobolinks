@@ -124,6 +124,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
   $scope.createPoll = function(newPoll) {
     console.log('newPoll: ', newPoll);
+    ForumsFactory.addPoll($scope.forumKey, newPoll);
   };
 });
 

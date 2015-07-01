@@ -66,6 +66,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   //Add a poll
   function addPoll(forumID, poll) {
+    console.log('inside addPoll in forumsFactory');
     var pollRef = forumRef.child(forumID).child('polls');
     var pollArray = $firebaseArray(pollRef);
     return pollArray.$add(poll);
