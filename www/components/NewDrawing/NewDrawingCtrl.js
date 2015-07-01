@@ -1,6 +1,6 @@
 app.controller('NewDrawingCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateParams', function($scope, $rootScope, ForumsFactory, $stateParams) {
   
-  $scope.title = 'Add Poll';
+  $scope.title = 'Draw';
 
   // Create empty newPoll object on $scope and set starting rank to 0
   $scope.newPoll = {};
@@ -14,6 +14,10 @@ app.controller('NewDrawingCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$sta
       // Go back to the forum view
       $rootScope.goBack();
     }
+  };
+
+  $scope.saveImage = function() {
+
   };
 
 }]);

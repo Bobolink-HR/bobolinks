@@ -1,6 +1,12 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewPollCtrl">
-
+    <canvas id="simple_sketch" width="800" height="300"></canvas>
+    <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
+    <script type="text/javascript">
+      $(function() {
+        $('#simple_sketch').sketch();
+      });
+    </script>
     <form>
       <p class="forum-poll-form-label">Poll Question</p>
       <label class="item item-input">
