@@ -1,7 +1,7 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewDrawingCtrl">
     <canvas id="simple_sketch" width="800" height="300"></canvas>
-    <button type="button" class="save-image-button button button-positive button-full">Save Drawing</button>
+    <button ng-click="saveDrawing($event)" type="button" class="button button-positive button-full">Save Drawing</button>
     <script type="text/javascript">
       $(function() {
         $('#simple_sketch').sketch();
@@ -10,9 +10,10 @@
           console.log(canvas);
           var myImage = canvas.toDataURL();
           console.log(myImage);
+          return myImage;
         };
         $('.save-image-button').on('click', function(e) {
-          imageToDataUrl();
+          $scope.imageToDataUrl = imageToDataUrl();
         });
       });
     </script>

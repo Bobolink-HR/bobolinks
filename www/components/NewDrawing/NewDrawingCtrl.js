@@ -16,8 +16,10 @@ app.controller('NewDrawingCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$sta
     }
   };
 
-  $scope.saveDrawing = function(data) {
+  $scope.saveDrawing = function(data, $scope) {
     console.log("Saving drawing", data);
+    console.log("$stateParams", $stateParams);
+    console.log($('#simple_sketch').get(0).toDataURL());
   };
 
 }]);

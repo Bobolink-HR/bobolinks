@@ -163,8 +163,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-  .state('app.newDrawing', {
-    url: "/new_drawing?forumKey?forum",
+  .state('app.forum.drawing', {
+    url: "/app/forum/:bobolinkId/:drawingId",
     views: {
       'menuContent': {
         templateUrl: 'components/NewDrawing/newDrawing.html',
