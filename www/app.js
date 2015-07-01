@@ -159,6 +159,16 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+
+  .state('app.respondToPoll', {
+    url: "/new_poll?forumKey?forum",
+    views: {
+      'menuContent': {
+        templateUrl: "components/NewPoll/newPoll.html",
+        controller: 'NewPollCtrl'
+      }
+    }
+  })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
