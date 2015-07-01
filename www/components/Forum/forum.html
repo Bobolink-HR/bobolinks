@@ -69,8 +69,13 @@
   </ion-content>
 
   <!-- Add poll link (shown if forumAccess is true and user is moderator) -->
-  <ion-footer-bar ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">
-    <h1 class="title">Add Poll</h1>
+  <ion-footer-bar>
+    <div class="buttons">
+      <button ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">Add Poll</button>
+    </div>
+    <div class="buttons">
+      <button ui-sref="app.newDrawing()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
+    </div>
   </ion-footer-bar>
 
   <!-- Add question link (shown if forumAccess is true and user is not moderator) -->

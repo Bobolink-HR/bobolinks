@@ -154,13 +154,21 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-
   .state('app.respondToPoll', {
     url: "/respondToPoll?forumKey?forum",
     views: {
       'menuContent': {
         templateUrl: "components/RespondToPoll/respondToPoll.html",
         controller: 'RespondToPollCtrl'
+      }
+    }
+  })
+  .state('app.newDrawing', {
+    url: "/new_drawing?forumKey?forum",
+    views: {
+      'menuContent': {
+        templateUrl: 'components/NewDrawing/newDrawing.html',
+        controller: 'NewDrawingCtrl'
       }
     }
   })
