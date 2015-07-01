@@ -3,7 +3,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   // Set isDrawing to false;
   $scope.user = null;
   $scope.isDrawing = false;
-  $scope.pollAvailable = false;
 
   $scope.formData = {};
 
@@ -47,8 +46,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
 
-  $scope.polls = ForumsFactory.getPolls($scope.forumKey);
-
 
   /*
   * DRAWING FUNCTIONALITY
@@ -74,7 +71,13 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
     });
   };
 
-
+  $scope.pollAvailable = function() {
+    if($scope.polls[0]){
+      return true;
+    } else {
+      return false;
+    }
+  }
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
