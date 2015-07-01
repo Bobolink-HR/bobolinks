@@ -1,5 +1,4 @@
 app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
-  console.log("Inside ForumCtrl");
   // Initially user is set to null
   $scope.user = null;
   $scope.pollAvailable = true;
@@ -15,13 +14,11 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
 
   $scope.forumKey = $stateParams.bobolinkId;
-  console.log("BobolinkID: ", $scope.forumKey);
 
   // Set Forum object to $scope.forum with two way binding
   ForumsFactory.getForum($scope.forumKey)
   .$bindTo($scope, "forum")
   .then(function() {
-    console.log("Inside ForumsFactory.getForum");
     // Assign the title to the top nav bar
     $scope.title = $scope.forum.title;
 
@@ -129,7 +126,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   };
 
   $scope.createPoll = function(newPoll) {
-    console.log('newPoll: ', newPoll);
     ForumsFactory.addPoll($scope.forumKey, newPoll);
   };
 });
