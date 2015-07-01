@@ -17,6 +17,10 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
     }
   };
 
+  $scope.endPoll = function() {
+    ForumsFactory.endPoll($stateParams.forumKey);
+  }
+
 }]);
 
 

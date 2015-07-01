@@ -82,6 +82,17 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     })
   }
 
+  //End current poll
+  function endPoll(forumID) {
+    var pollRef = forumRef.child(forumID).child('polls');
+    var pollArray = $firebaseArray(pollRef);
+    pollArray.$loaded(function(data) {
+      if(pollArray.length > 0) {
+        pollArray.$remove(0);
+      } 
+    })
+  }
+
 
   //TODO: Edit a question
 
@@ -94,6 +105,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     addQuestion: addQuestion,
     getPolls: getPolls,
     addPoll: addPoll,
+    endPoll: endPoll,
     markComplete: markComplete
     // ,generateForumId: generateForumId
   };
