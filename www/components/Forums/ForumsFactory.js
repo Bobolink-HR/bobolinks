@@ -3,6 +3,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   var forumRef = FirebaseRef.child('Forums');
   var forumArray = $firebaseArray(forumRef);
   var forumObject = $firebaseObject(forumRef);
+  var answered = false;
 
   //Get a list of Forums
   function getForums() {
@@ -93,7 +94,6 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     })
   }
 
-
   //TODO: Edit a question
 
   return {
@@ -106,6 +106,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getPolls: getPolls,
     addPoll: addPoll,
     endPoll: endPoll,
+    answered: answered,
     markComplete: markComplete
     // ,generateForumId: generateForumId
   };
