@@ -1,5 +1,5 @@
 app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
-
+  console.log("Inside ForumCtrl");
   // Initially user is set to null
   $scope.user = null;
 
@@ -13,12 +13,14 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $ionicSideMenuDelegate.canDragContent(!!$scope.user);
 
 
-  $scope.forumKey = $stateParams.forumKey;
+  $scope.forumKey = $stateParams.bobolinkId;
+  console.log("BobolinkID: ", $scope.forumKey);
 
   // Set Forum object to $scope.forum with two way binding
-  ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
+  ForumsFactory.getForum($scope.forumKey)
+  .$bindTo($scope, "forum")
   .then(function() {
-
+    console.log("Inside ForumsFactory.getForum");
     // Assign the title to the top nav bar
     $scope.title = $scope.forum.title;
 

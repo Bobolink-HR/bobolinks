@@ -1,8 +1,8 @@
 function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   var forumRef = FirebaseRef.child('Forums');
-  var forumArray = $firebaseArray(forumRef);
-  //var forumObject = $firebaseObject(forumRef);
+  // var forumArray = $firebaseArray(forumRef);
+  var forumObject = $firebaseObject(forumRef);
 
   //Get a list of Forums
   function getForums() {
@@ -43,7 +43,9 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   //Save a forum
   function saveForum(forum) { // Pass this the forum object to be saved to the database
-    return forumArray.$add(forum); // Returns a promise
+    var forumObj = {};
+    forumObject[forum.bobolinkId] = forum;
+    return forumObject.$save();
   }
 
   function editForum(forum) { // Pass this the forum object to be saved to the database

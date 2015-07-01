@@ -53,7 +53,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
 
   .state('app.forum', {
-    url: "/forum/:forumKey",
+    url: "/forum/:bobolinkId",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
@@ -63,10 +63,14 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     resolve: {
       forumData: function($stateParams, $location, ForumsFactory) {
         // Pull forum from Firebase database
-        var forum = ForumsFactory.getForum($stateParams.forumKey);
-
+        console.log("Inside forumData of resolve of app.forum");
+        console.log("bobolinkId: ", $stateParams.bobolinkId);
+        var forum = ForumsFactory.getForum($stateParams.bobolinkId);
+        console.log("forum: ", forum);
         forum.$loaded(function() {
+          console.log("Inside forum.$loaded");
           // If forum title is undefined (aka forum doesn't exist), redirect to home
+          console.log("forum.title === ", forum.title);
           if (forum.title === undefined) {
             $location.path('/home');
           }
