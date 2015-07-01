@@ -1,14 +1,7 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewPollCtrl">
-
-    <form>
-      <p class="forum-poll-form-label">Poll Question</p>
-      <label class="item item-input">
-        <textarea ng-model="newPoll.text" class="forum-poll-textarea" placeholder="Enter your poll here"></textarea>
-      </label>
-
-      <button ng-click="submitPoll()" type="button" class="button button-positive button-full">Submit Poll</button>
-    </form>
+    <h1>RESPOND TO POLL</h1>
+    <p>{{poll[0].text}}</p>
 
   </ion-content>
 </ion-view>
