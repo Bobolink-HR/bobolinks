@@ -2,6 +2,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   console.log("Inside ForumCtrl");
   // Initially user is set to null
   $scope.user = null;
+  $scope.pollAvailable = false;
 
   $scope.formData = {};
 
