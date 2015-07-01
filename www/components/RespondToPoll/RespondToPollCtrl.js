@@ -2,6 +2,7 @@ app.controller('RespondToPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$
   $scope.poll = ForumsFactory.getPolls($stateParams.forumKey);
 
   $scope.respond = function() {
+    $rootScope.goBack();
     ForumsFactory.answered = true;
   };
 
