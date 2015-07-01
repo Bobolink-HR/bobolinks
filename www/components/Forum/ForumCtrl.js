@@ -121,6 +121,10 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
     $('.answered-arrow').toggleClass('rotated');
   };
+
+  $scope.createPoll = function(newPoll) {
+    console.log('newPoll: ', newPoll);
+  };
 });
 
 // Custom directive for pending questions
