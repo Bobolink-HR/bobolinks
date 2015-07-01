@@ -46,6 +46,13 @@
       </div>
     </div>
 
+    <div id="add-poll-form" ng-show="isModerator">
+      <form>
+        <input ng-model="newPoll" placeholder="Create a new poll here"</input>
+        <button ng-click="createPoll()">Submit</button>
+      </form>
+    </div>
+
     <!-- Enter forum password forum (shown if forumAccess is false) -->
     <div id="forum-password-view" ng-show="!forumAccess">
       <form>
