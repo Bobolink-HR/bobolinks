@@ -10,12 +10,16 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   //Get a forum
-  function getForum(forumId) { // Pass a string representing the forumID
-    return $firebaseObject(forumRef.child(forumId)); // Returns a $firebaseObject of all items
+  function getForum(forumID) { // Pass a string representing the forumID
+    return $firebaseObject(forumRef.child(forumID)); // Returns a $firebaseObject of all items
   }
 
-  function getQuestions(forumId, status) {
-    return $firebaseArray(forumRef.child(forumId + '/questions/' + status));
+  function getQuestions(forumID, status) {
+    return $firebaseArray(forumRef.child(forumID + '/questions/' + status));
+  }
+
+  function getPolls(forumID) {
+    return $firebaseArray(forumRef.child(forumID + '/polls/'));
   }
 
   // function generateForumId() {
@@ -60,6 +64,13 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return questionArray.$add(question); // Returns a promise when the question is added
   }
 
+  //Add a poll
+  function addPoll(forumID, poll) {
+    var pollRef = forumRef.child(forumID).child('polls');
+    var pollArray = $firebaseArray(pollRef);
+    return pollArray.$add(poll);
+  }
+
 
   //TODO: Edit a question
 
@@ -70,6 +81,8 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     editForum: editForum,
     getQuestions: getQuestions,
     addQuestion: addQuestion,
+    getPolls: getPolls,
+    addPoll: addPoll,
     markComplete: markComplete
     // ,generateForumId: generateForumId
   };
