@@ -52,6 +52,10 @@
         <button ng-click="createPoll(newPoll)">Submit</button>
       </form>
     </div>
+    
+    <div id="poll-list">
+      <p>{{polls}}</p>
+    </div>
 
     <!-- Enter forum password forum (shown if forumAccess is false) -->
     <div id="forum-password-view" ng-show="!forumAccess">

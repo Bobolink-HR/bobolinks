@@ -41,6 +41,9 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
+
+  $scope.polls = ForumsFactory.getPolls($scope.forumKey);
+
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
