@@ -5,6 +5,7 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
   // Create empty newPoll object on $scope and set starting rank to 0
   $scope.newPoll = {};
   $scope.newPoll.rank = 0;
+  $scope.newPoll.active = true;
 
   $scope.submitPoll = function() {
 
