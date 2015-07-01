@@ -1,7 +1,7 @@
 function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   var forumRef = FirebaseRef.child('Forums');
-  // var forumArray = $firebaseArray(forumRef);
+  var forumArray = $firebaseArray(forumRef);
   var forumObject = $firebaseObject(forumRef);
 
   //Get a list of Forums

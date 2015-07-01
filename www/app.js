@@ -67,6 +67,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
         console.log("bobolinkId: ", $stateParams.bobolinkId);
         var forum = ForumsFactory.getForum($stateParams.bobolinkId);
         console.log("forum: ", forum);
+        // Not suppose to use $loaded in production
+        // https://calendee.com/2014/09/18/use-loaded-with-firebase-and-angularfire/
         forum.$loaded(function() {
           console.log("Inside forum.$loaded");
           // If forum title is undefined (aka forum doesn't exist), redirect to home
