@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div id="add-poll-form" ng-show="isModerator">
+    <!-- <div id="add-poll-form" ng-show="isModerator">
       <form>
         <input ng-model="newPoll" placeholder="Create a new poll here"</input>
         <button ng-click="createPoll(newPoll)">Submit</button>
@@ -55,7 +55,7 @@
     
     <div id="poll-list">
       <p>{{polls}}</p>
-    </div>
+    </div> -->
 
     <!-- Enter forum password forum (shown if forumAccess is false) -->
     <div id="forum-password-view" ng-show="!forumAccess">
@@ -69,6 +69,11 @@
       </form>
     </div>
   </ion-content>
+
+  <!-- Add poll link (shown if forumAccess is true and user is moderator) -->
+  <ion-footer-bar ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">
+    <h1 class="title">Add Poll</h1>
+  </ion-footer-bar>
 
   <!-- Add question link (shown if forumAccess is true and user is not moderator) -->
   <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator" class="bar-positive">
