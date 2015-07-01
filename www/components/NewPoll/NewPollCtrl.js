@@ -10,8 +10,6 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
 
     //if text has been inputted in the Poll input
     if ($scope.newPoll.text !== undefined) {
-      // Set name equal to input or 'Anonymous' if no name was inputted
-      $scope.newPoll.name = $scope.newPoll.name || 'Anonymous';
       ForumsFactory.addPoll($stateParams.forumKey, $scope.newPoll);
       // Go back to the forum view
       $rootScope.goBack();
