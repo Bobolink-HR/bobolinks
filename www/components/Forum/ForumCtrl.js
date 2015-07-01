@@ -226,11 +226,16 @@ app.directive('ngPoll', function() {
         //   }
         //   $scope.question.rank++;
         // }
-      
-        $scope.poll.rank++;
-        console.log('upVote');
-        // Save the change to Firebase
-        $scope.polls.$save($scope.poll);
+        if($scope.class !== 'upVoted') {
+          if($scope.class === 'downVoted') {
+            $scope.class = 'neutral';
+          } else {
+            $scope.class = 'upVoted';
+          }
+          $scope.poll.rank++;
+          // Save the change to Firebase
+          $scope.polls.$save($scope.poll);
+        }
 
       };
 
@@ -245,12 +250,16 @@ app.directive('ngPoll', function() {
         //   }
         //   $scope.question.rank--;
         // }
-
-
-        $scope.poll.rank--;
-        console.log('downVote');
-        // Save the change to Firebase
-        $scope.polls.$save($scope.poll);
+        if($scope.class !== 'downVoted') {
+          if($scope.class === 'upVoted') {
+            $scope.class = 'neutral';
+          } else {
+            $scope.class = 'downVoted';
+          }
+          $scope.poll.rank--;
+          // Save the change to Firebase
+          $scope.polls.$save($scope.poll);
+        }
       };
     }
   };
