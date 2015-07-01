@@ -201,3 +201,57 @@ app.directive('ngAnsweredQuestion', function() {
     '</div>',
   };
 });
+
+// Custom directive for pending questions
+app.directive('ngPoll', function() {
+  return {
+    restrict: 'E',
+    template:
+     '<p>{{poll.text}}</p>' + 
+     '<p>SCORE: {{poll.rank}}' +
+      '<form class="poll-response-form" ng-show="!isModerator">' + 
+        '<button ng-click="upVote()">UP VOTE</button>' + 
+        '<button ng-click="downVote()">DOWN VOTE</button>' +
+      '</form>' +
+      '<hr>',
+   link: function($scope, element, attribute) {
+      $scope.upVote = function() {
+        // if (!$(event.target).parent().hasClass('upvoted')) {
+        //   if ($(event.target).parent().hasClass('downvoted')) {
+        //     $(event.target).parent().removeClass('downvoted');
+        //     $(event.target).parent().find('.down').removeClass('down-clicked');
+        //   } else {
+        //     $(event.target).parent().addClass('upvoted');
+        //     $(event.target).addClass('up-clicked');
+        //   }
+        //   $scope.question.rank++;
+        // }
+      
+        $scope.poll.rank++;
+        console.log('upVote');
+        // Save the change to Firebase
+        $scope.polls.$save($scope.poll);
+
+      };
+
+      $scope.downVote = function() {
+        // if (!$(event.target).parent().hasClass('downvoted')) {
+        //   if ($(event.target).parent().hasClass('upvoted')) {
+        //     $(event.target).parent().removeClass('upvoted');
+        //     $(event.target).parent().find('.up').removeClass('up-clicked');
+        //   } else {
+        //     $(event.target).parent().addClass('downvoted');
+        //     $(event.target).addClass('down-clicked');
+        //   }
+        //   $scope.question.rank--;
+        // }
+
+
+        $scope.poll.rank--;
+        console.log('downVote');
+        // Save the change to Firebase
+        $scope.polls.$save($scope.poll);
+      };
+    }
+  };
+});

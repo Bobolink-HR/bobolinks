@@ -50,12 +50,7 @@
       
       <div class="poll-list-container">
         <div class="poll" ng-repeat="poll in polls">
-          <p>{{poll.text}}</p>
-          <form class="poll-response-form" ng-show="!isModerator">
-            <button ng-click="upVote()">UP VOTE</button>
-            <button ng-click="downVote()">DOWN VOTE</button>
-          </form>
-          <hr>
+          <ng-poll poll="poll"></ng-poll>
         </div>
       </div>
     </div>
