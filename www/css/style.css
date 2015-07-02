@@ -69,10 +69,6 @@
   padding: 5px;
 }
 
-.question-name {
-  margin: 0px;
-}
-
 .right-content {
   float: right;
   width: 60px;
@@ -167,6 +163,23 @@
 .question-text-container {
   min-height: 70px;
   overflow: auto;
+}
+
+.question-user-picture{
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+  float: left;
+}
+
+.question-name {
+  margin: 0px;
+  font-weight: bold;
+}
+
+.question-githubID {
+  margin: 0px;
+  font-style: italic;
 }
 
 .subheader {
