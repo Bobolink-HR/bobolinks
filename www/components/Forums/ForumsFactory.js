@@ -88,22 +88,33 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   //Add a response to a poll's responses array
   function addResponse(response, forumID) {
-    var responseArray = $firebaseArray(forumRef.child(forumID + '/polls/responses/'));
-    responseArray.$loaded(function(data) {
-      responseArray.$add(response);
+    var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
+    polls.$loaded(function(data) {
+      polls[0].responses = polls[0].responses || [];
+      polls[0].responses.push(response);
+      polls.$save(0);
     })
   }
 
   //Returns true if the current user has already responded to the poll
-  function userHasResponded(username, forumID) {
-    var polls = $firebaseArray(forumRef.child(forumID + '/polls/responses'));
+  function awaitingResponse(username, forumID) {
+    console.log('awaitingresponse');
+    var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
     polls.$loaded(function(responses) {
-      for (var i = 0; i < responses.length; i++) {
-        if (responses[i].username === username) {
-          return true;
+      if(polls.length < 1) {
+        
+        return false;
+      }
+      if (!polls[0].responses) {
+                return true;
+      }
+      for (var i = 0; i < polls[0].responses.length; i++) {
+        if (polls[0].responses[i].username === username) {
+          
+          return false;
         }
       }
-      return false;
+            return true;
     });
   }
 
@@ -130,7 +141,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getPolls: getPolls,
     addPoll: addPoll,
     addResponse: addResponse,
-    userHasResponded: userHasResponded,
+    awaitingResponse: awaitingResponse,
     endPoll: endPoll,
     pollAvailable: pollAvailable,
     markComplete: markComplete

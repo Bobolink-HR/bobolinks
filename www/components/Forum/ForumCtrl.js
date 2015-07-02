@@ -36,9 +36,6 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     // If both of these conditions fail, the main forum content is hiddent and the user
     // is asked to enter the forum password
     $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
-
-    $scope.userHasResponded = $scope.user &&
-      ForumsFactory.userHasResponded($rootScope.user.github.username, $stateParams.forumKey);
   });
 
 
