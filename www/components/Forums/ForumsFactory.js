@@ -94,6 +94,21 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     })
   }
 
+  //Returns true if the current user has already responded to the poll
+  function userHasResponded(username, forumID) {
+    var polls = $firebaseArray(forumRef.child(forumID + '/polls/responses'));
+    polls.$loaded(function(responses) {
+      for (var i = 0; i < responses.length; i++) {
+        if (responses[i].username === username) {
+          console.log('user has responded');
+          return true;
+        }
+      }
+      console.log('user has not responded');
+      return false;
+    });
+  }
+
   //End current poll
   function endPoll(forumID) {
     var pollRef = forumRef.child(forumID).child('polls');
@@ -117,6 +132,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getPolls: getPolls,
     addPoll: addPoll,
     addResponse: addResponse,
+    userHasResponded: userHasResponded,
     endPoll: endPoll,
     pollAvailable: pollAvailable,
     markComplete: markComplete

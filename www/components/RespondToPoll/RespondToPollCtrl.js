@@ -13,10 +13,4 @@ app.controller('RespondToPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$
       $rootScope.goBack();
     }
   };
-
-
 }]);
-
-
-
-
