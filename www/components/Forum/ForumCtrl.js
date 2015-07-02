@@ -23,12 +23,6 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     //Set user if the user logs in and allows the add question buttion to appear
     $scope.user = Auth.getAuth() && Auth.getAuth().uid;
 
-    Auth.getGitHubProfile($scope.userID()).$loaded().then(function(data){
-      console.log(data.github.cachedUserProfile.avatar_url);
-    });
-
-    console.log($rootScope.user.github.displayName);
-
     // Assign the title to the top nav bar
     $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
     $scope.showDrawing = false;
@@ -187,7 +181,9 @@ app.directive('ngPendingQuestion', function() {
     '<div class="question-text-container">' +
      ' <p>{{question.text}}</p>' +
     '</div>' +
+    '<img class="question-user-picture" src = "{{question.picture}}">' +
     '<p class="question-name">{{question.name}}</p>' +
+    '<p class="question-githubID">{{question.githubID}}</p>' +
   '</div>',
    link: function($scope, element, attribute) {
       $scope.upVote = function(event) {
@@ -240,7 +236,9 @@ app.directive('ngAnsweredQuestion', function() {
     '<div class="question-text-container">' +
      '<p>{{question.text}}</p>' +
       '</div>' +
-      '<p class="question-name">{{question.name}}</p>' +
+     '<img class="question-user-picture" src = "{{question.picture}}">' +
+     '<p class="question-name">{{question.name}}</p>' +
+     '<p class="question-githubID">{{question.githubID}}</p>' +
     '</div>',
   };
 });
