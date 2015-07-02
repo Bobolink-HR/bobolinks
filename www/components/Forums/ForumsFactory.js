@@ -23,7 +23,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   function pollAvailable(forumID) {
-    return false;
+    return true;
   }
 
   // function generateForumId() {
@@ -86,6 +86,11 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     })
   }
 
+  //Add a response to a poll's responses array
+  function addResponse(response, username, forumID) {
+    console.log(arguments);
+  }
+
   //End current poll
   function endPoll(forumID) {
     var pollRef = forumRef.child(forumID).child('polls');
@@ -108,6 +113,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     addQuestion: addQuestion,
     getPolls: getPolls,
     addPoll: addPoll,
+    addResponse: addResponse,
     endPoll: endPoll,
     pollAvailable: pollAvailable,
     markComplete: markComplete
