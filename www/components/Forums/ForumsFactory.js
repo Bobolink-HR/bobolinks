@@ -87,8 +87,11 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   //Add a response to a poll's responses array
-  function addResponse(response, username, forumID) {
-    console.log(arguments);
+  function addResponse(response, forumID) {
+    var responseArray = $firebaseArray(forumRef.child(forumID + '/polls/responses/'));
+    responseArray.$loaded(function(data) {
+      responseArray.$add(response);
+    })
   }
 
   //End current poll

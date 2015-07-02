@@ -8,7 +8,8 @@ app.controller('RespondToPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$
 
   $scope.respond = function() {
     if($scope.response !== 0) {
-      ForumsFactory.addResponse($scope.response, $rootScope.user.github.username, $stateParams.forumKey);
+      var response = {value: $scope.response, username: $rootScope.user.github.username}
+      ForumsFactory.addResponse(response, $stateParams.forumKey);
       $rootScope.goBack();
     }
   };
