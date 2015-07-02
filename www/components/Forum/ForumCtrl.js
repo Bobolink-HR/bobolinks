@@ -45,7 +45,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
-
+  $scope.polls = ForumsFactory.getPolls($scope.forumKey);
 
   /*
   * DRAWING FUNCTIONALITY
