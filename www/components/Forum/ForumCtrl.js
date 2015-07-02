@@ -161,6 +161,11 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
     $('.answered-arrow').toggleClass('rotated');
   };
+
+  $scope.gitHubLogin = function(){
+    Auth.getGitHubAuth();
+  };
+  
 });
 
 // Custom directive for pending questions
