@@ -22,7 +22,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   .$bindTo($scope, "forum")
   .then(function() {
     // Assign the title to the top nav bar
-    $scope.forumKey = $scope.forum.bobolinkId;
+    $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
     $scope.showDrawing = false;
     $scope.title = $scope.forum.title;
     $scope.drawing = $scope.forum.drawing;
