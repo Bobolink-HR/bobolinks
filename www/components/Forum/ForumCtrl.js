@@ -68,18 +68,43 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     }
 
     $('.pending-arrow').toggleClass('rotated');
-
-
   };
+
   $scope.showCanvas = function() {
     $scope.isDrawing = !$scope.isDrawing;
+    $('#main-forum-sketch .tools').empty();
+    $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-color='" + this + "' style='width: 10px; background: " + this + ";'></span> ");
+    });
+    $.each([3, 5, 10, 15], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-size='" + this + "' style='background: #ccc'>" + this + "</span> ");
+    });
+    $('.sketch_tool').on('click', function(e) {
+      console.log(e.target);
+      $this = $(e.target);
+      $canvas = $("#simple_sketch");
+      sketch = $canvas.data('sketch');
+      ['color', 'size', 'tool'].forEach(function(el) {
+        if ($this.attr("data-" + el)) {
+          console.log("Setting key in sketch", el, $this.attr("data-" + el));
+          sketch.set(el, $this.attr("data-" + el));
+        }
+        if (($this).attr('data-download')) {
+          console.log("Downloading");
+          sketch.download($(this).attr('data-download'));
+        }
+      });
+    });
   };
+
   $scope.saveDrawing = function() {
     var forum = ForumsFactory.getForum($stateParams.forumKey);
     forum.$loaded().then(function() {
       forum.drawing = $('#simple_sketch').get(0).toDataURL();
+      console.log($('#simple_sketch').get(0).toDataURL());
       forum.$save();
       $scope.drawing = forum.drawing;
+      console.log($scope.drawing);
     });
   };
 
@@ -90,7 +115,7 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
       return false;
     }
   }
-  // This function is called when active quesiotn is clicked
+  // This function is called when active question is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
     if ($scope.isModerator) {

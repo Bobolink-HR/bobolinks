@@ -1,19 +1,25 @@
 <ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
   <ion-content>
-    <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
-      <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
-      <canvas id="simple_sketch" width="800" height="300"></canvas>
-    </div>
+    
 
 
     <!-- Drawing Dropdown Bar -->
-    <div id="drawing-dropdown" ng-show="drawing && !isModerator">
+    <div id="drawing-dropdown" ng-show="isDrawing || drawing">
       <div class="subheader pending-subheader" ng-click="toggleShowDrawing()">
         Drawing
         <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
       </div>
       <div class="drawing-container">
-        <img src="{{drawing}}"/>
+        <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
+          <div class="tools">
+            <a href="#colors_sketch" data-download="png" style="float: right; width: 100px;">Download</a>
+          </div>
+          <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
+          <canvas id="simple_sketch" width="800" height="300"></canvas>
+        </div>
+        <div ng-show="!isModerator">
+          <img ng-model="forum.drawing" ng-src="{{forum.drawing}}"/>
+        </div>
       </div>
     </div>
 
