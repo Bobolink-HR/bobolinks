@@ -6,9 +6,9 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
   $scope.newPoll = {};
   $scope.newPoll.rank = 0;
   $scope.newPoll.active = true;
+  $scope.currentPoll = ForumsFactory.getPolls($stateParams.forumKey);
 
   $scope.submitPoll = function() {
-
     //if text has been inputted in the Poll input
     if ($scope.newPoll.text !== undefined) {
       ForumsFactory.addPoll($stateParams.forumKey, $scope.newPoll);

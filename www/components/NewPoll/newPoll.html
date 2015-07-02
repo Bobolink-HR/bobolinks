@@ -24,6 +24,7 @@
   <!-- If there is an active poll, show the current poll -->
   <div ng-show="pollAvailable()">
     <h1>There is an active poll!</h1>
+    <div>{{currentPoll}}</div>
     <button ng-click="endPoll()">End current poll</button>
   </div>
 
