@@ -20,6 +20,9 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   ForumsFactory.getForum($scope.forumKey)
   .$bindTo($scope, "forum")
   .then(function() {
+    //Set user if the user logs in and allows the add question buttion to appear
+    $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+
     // Assign the title to the top nav bar
     $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
     $scope.showDrawing = false;
@@ -158,6 +161,11 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
     $('.answered-arrow').toggleClass('rotated');
   };
+
+  $scope.gitHubLogin = function(){
+    Auth.getGitHubAuth();
+  };
+  
 });
 
 // Custom directive for pending questions

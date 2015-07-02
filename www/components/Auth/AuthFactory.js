@@ -39,7 +39,22 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
     return auth.$unauth();
   }
 
-  return {
+  function getGitHubAuth(){
+    FirebaseRef.authWithOAuthRedirect("github", function(error) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+      }
+    });
+  }
+
+  function getGitHubProfile(userID){
+    var profileRef = FirebaseRef.child('Users').child(userID);
+    console.log('in getGitHubName');
+    return $firebaseObject(profileRef);
+  }
+
+    return {
     auth: auth,
     getUserProfile: getUserProfile,
     setUserProfile: setUserProfile,
@@ -47,7 +62,9 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
     waitForAuth: waitForAuth,
     requireAuth: requireAuth,
     getAuth: getAuth,
-    logout: logout
+    logout: logout,
+    getGitHubAuth: getGitHubAuth,
+    getGitHubProfile: getGitHubProfile
   };
 
 }
