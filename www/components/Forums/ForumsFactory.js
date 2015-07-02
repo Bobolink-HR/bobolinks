@@ -22,6 +22,10 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     return $firebaseArray(forumRef.child(forumID + '/polls/'));
   }
 
+  function pollAvailable(forumID) {
+    return false;
+  }
+
   // function generateForumId() {
   //   var text = "";
   //   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -105,6 +109,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     getPolls: getPolls,
     addPoll: addPoll,
     endPoll: endPoll,
+    pollAvailable: pollAvailable,
     markComplete: markComplete
     // ,generateForumId: generateForumId
   };
