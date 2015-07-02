@@ -17,6 +17,11 @@
           <canvas id="simple_sketch" width="800" height="300"></canvas>
         </div>
         <div ng-show="!isModerator">
+          <div class="tools">
+            <span class="sketch_tool" data-download="png" style='float: right; width: 100px;'>
+              <a href="{{forum.drawing}}" download="{{forumKey}}_drawing.jpg">Download</a>
+            </span>
+          </div>
           <img ng-model="forum.drawing" ng-src="{{forum.drawing}}"/>
         </div>
       </div>

@@ -83,9 +83,9 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-download='png' style='float: right; width: 100px;'>Download</span>");
     $('.sketch_tool').on('click', function(e) {
       console.log(e.target);
-      $this = $(e.target);
-      $canvas = $("#simple_sketch");
-      sketch = $canvas.data('sketch');
+      var $this = $(e.target);
+      var $canvas = $("#simple_sketch");
+      var sketch = $canvas.data('sketch');
       ['color', 'size', 'tool'].forEach(function(el) {
         if ($this.attr("data-" + el)) {
           console.log("Setting key in sketch", el, $this.attr("data-" + el));
@@ -94,9 +94,17 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
       });
       if (($this).attr('data-download')) {
         console.log("Downloading");
+        var $canvas = $("#simple_sketch");
+        var sketch = $canvas.data('sketch');
         sketch.download($(this).attr('data-download'));
       }
     });
+  };
+
+  $scope.downloadDrawing = function() {
+    var url = $scope.forum.drawing;
+    url = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(url);
   };
 
   $scope.saveDrawing = function() {

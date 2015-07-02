@@ -1,5 +1,6 @@
 var app = angular.module('starter', ['ionic', 'firebase'])
 
+
 /////////////////////////////////////////////////////////////////////////////
 //    APP INITIALIZATION
 /////////////////////////////////////////////////////////////////////////////
@@ -18,11 +19,17 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 
   rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state);
 })
-
+.config(['$compileProvider', function($compileProvider) {
+  // Set $compileProvider so that angular doesn't mark data:image links as unsafe
+  // and we can download our drawing.
+  console.log($compileProvider);
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+}])
 /////////////////////////////////////////////////////////////////////////////
 //    ROUTING
 /////////////////////////////////////////////////////////////////////////////
 .config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
 
   .state('app', {
