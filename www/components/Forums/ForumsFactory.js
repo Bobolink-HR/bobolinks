@@ -100,11 +100,9 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     polls.$loaded(function(responses) {
       for (var i = 0; i < responses.length; i++) {
         if (responses[i].username === username) {
-          console.log('user has responded');
           return true;
         }
       }
-      console.log('user has not responded');
       return false;
     });
   }
