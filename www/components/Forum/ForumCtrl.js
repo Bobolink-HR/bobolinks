@@ -59,8 +59,17 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     var myImage = canvas.toDataURL();
     return myImage;
   };
-  $scope.toggleShowDrawing = function() {
-    $scope.showDrawing = !$scope.showDrawing;
+  $scope.toggleShowDrawing = function(event) {
+    if ($('.drawing-container').is(':visible') ) {
+      $('.drawing-container').slideUp();
+      
+    } else {
+      $('.drawing-container').slideDown();
+    }
+
+    $('.pending-arrow').toggleClass('rotated');
+
+
   };
   $scope.showCanvas = function() {
     $scope.isDrawing = !$scope.isDrawing;

@@ -4,11 +4,25 @@
       <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
       <canvas id="simple_sketch" width="800" height="300"></canvas>
     </div>
-    <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button>
-    <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
+
+
+    <!-- Drawing Dropdown Bar -->
+    <div id="drawing-dropdown" ng-show="drawing && !isModerator">
+      <div class="subheader pending-subheader" ng-click="toggleShowDrawing()">
+        Drawing
+        <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
+      </div>
+      <div class="drawing-container">
+        <img src="{{drawing}}"/>
+      </div>
+    </div>
+
+
+    <!-- <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button> -->
+    <!-- <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
     <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
       <img src="{{drawing}}"/>
-    </div>
+    </div> -->
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
       <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
