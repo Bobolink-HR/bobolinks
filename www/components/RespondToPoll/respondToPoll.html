@@ -1,14 +1,10 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewPollCtrl">
-
-    <form>
-      <p class="forum-poll-form-label">Poll Question</p>
-      <label class="item item-input">
-        <textarea ng-model="newPoll.text" class="forum-poll-textarea" placeholder="Enter your poll here"></textarea>
-      </label>
-
-      <button ng-click="submitPoll()" type="button" class="button button-positive button-full">Submit Poll</button>
-    </form>
-
+    <h3>{{poll[0].text}}</h3>
+    <ion-radio ng-click="setResponse(1)">{{poll[0].option1}}</ion-radio>
+    <ion-radio ng-click="setResponse(2)">{{poll[0].option2}}</ion-radio>
+    <ion-radio ng-click="setResponse(3)">{{poll[0].option3}}</ion-radio>
+    <ion-radio ng-click="setResponse(4)">{{poll[0].option4}}</ion-radio>
+    <button ng-click="respond()">Respond</button>
   </ion-content>
 </ion-view>

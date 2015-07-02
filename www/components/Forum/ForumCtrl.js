@@ -3,7 +3,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   // Set isDrawing to false;
   $scope.user = null;
   $scope.isDrawing = false;
-  $scope.pollAvailable = false;
 
   $scope.formData = {};
 
@@ -46,9 +45,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
 
-
   $scope.polls = ForumsFactory.getPolls($scope.forumKey);
-
 
   /*
   * DRAWING FUNCTIONALITY
@@ -74,7 +71,13 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
     });
   };
 
-
+  $scope.pollAvailable = function() {
+    if($scope.polls[0] && $scope.polls[0].active){
+      return true;
+    } else {
+      return false;
+    }
+  }
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
@@ -155,10 +158,6 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
     $('.answered-arrow').toggleClass('rotated');
   };
-
-  $scope.createPoll = function(newPoll) {
-    ForumsFactory.addPoll($scope.forumKey, newPoll);
-  };
 });
 
 // Custom directive for pending questions
@@ -232,65 +231,3 @@ app.directive('ngAnsweredQuestion', function() {
   };
 });
 
-// Custom directive for pending questions
-app.directive('ngPoll', function() {
-  return {
-    restrict: 'E',
-    template:
-     '<p>{{poll.text}}</p>' + 
-     '<p>SCORE: {{poll.rank}}' +
-      '<form class="poll-response-form" ng-show="!isModerator">' + 
-        '<button ng-click="upVote()">UP VOTE</button>' + 
-        '<button ng-click="downVote()">DOWN VOTE</button>' +
-      '</form>' +
-      '<hr>',
-   link: function($scope, element, attribute) {
-      $scope.upVote = function() {
-        // if (!$(event.target).parent().hasClass('upvoted')) {
-        //   if ($(event.target).parent().hasClass('downvoted')) {
-        //     $(event.target).parent().removeClass('downvoted');
-        //     $(event.target).parent().find('.down').removeClass('down-clicked');
-        //   } else {
-        //     $(event.target).parent().addClass('upvoted');
-        //     $(event.target).addClass('up-clicked');
-        //   }
-        //   $scope.question.rank++;
-        // }
-        if($scope.class !== 'upVoted') {
-          if($scope.class === 'downVoted') {
-            $scope.class = 'neutral';
-          } else {
-            $scope.class = 'upVoted';
-          }
-          $scope.poll.rank++;
-          // Save the change to Firebase
-          $scope.polls.$save($scope.poll);
-        }
-
-      };
-
-      $scope.downVote = function() {
-        // if (!$(event.target).parent().hasClass('downvoted')) {
-        //   if ($(event.target).parent().hasClass('upvoted')) {
-        //     $(event.target).parent().removeClass('upvoted');
-        //     $(event.target).parent().find('.up').removeClass('up-clicked');
-        //   } else {
-        //     $(event.target).parent().addClass('downvoted');
-        //     $(event.target).addClass('down-clicked');
-        //   }
-        //   $scope.question.rank--;
-        // }
-        if($scope.class !== 'downVoted') {
-          if($scope.class === 'upVoted') {
-            $scope.class = 'neutral';
-          } else {
-            $scope.class = 'downVoted';
-          }
-          $scope.poll.rank--;
-          // Save the change to Firebase
-          $scope.polls.$save($scope.poll);
-        }
-      };
-    }
-  };
-});
