@@ -119,11 +119,7 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
   };
 
   $scope.pollAvailable = function() {
-    if($scope.polls[0] && $scope.polls[0].active){
-      return true;
-    } else {
-      return false;
-    }
+    return ForumsFactory.pollAvailable($stateParams.forumKey);
   }
   // This function is called when active question is clicked
   // It clears out the active question and assigns a new active question if possible

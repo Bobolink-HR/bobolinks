@@ -21,8 +21,8 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
     ForumsFactory.endPoll($stateParams.forumKey);
   }
 
+  $scope.pollAvailable = function() {
+    return ForumsFactory.pollAvailable($stateParams.forumKey);
+  }
+
 }]);
-
-
-
-
