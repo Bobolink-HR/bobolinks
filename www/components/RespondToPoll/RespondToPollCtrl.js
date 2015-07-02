@@ -3,7 +3,6 @@ app.controller('RespondToPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$
 
   $scope.respond = function() {
     $rootScope.goBack();
-    ForumsFactory.answered = true;
   };
 
 
