@@ -1,6 +1,14 @@
 <ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
   <ion-content>
-
+    <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
+      <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
+      <canvas id="simple_sketch" width="800" height="300"></canvas>
+    </div>
+    <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button>
+    <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
+    <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
+      <img src="{{drawing}}"/>
+    </div>
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
       <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">
@@ -69,8 +77,13 @@
   </ion-content>
 
   <!-- Add poll link (shown if forumAccess is true and user is moderator) -->
-  <ion-footer-bar ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">
-    <h1 class="title">Add Poll</h1>
+  <ion-footer-bar>
+    <div class="buttons">
+      <button ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">Add Poll</button>
+    </div>
+    <div class="buttons">
+      <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
+    </div>
   </ion-footer-bar>
 
   <!-- Add question link (shown if forumAccess is true and user is not moderator) -->

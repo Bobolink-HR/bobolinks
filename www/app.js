@@ -53,29 +53,21 @@ var app = angular.module('starter', ['ionic', 'firebase'])
   })
 
   .state('app.forum', {
-    url: "/forum/:bobolinkId",
+    url: "/forum/:forumKey",
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
     },
+    data: { 
+    },
     resolve: {
-      forumData: function($stateParams, $location, ForumsFactory) {
-        // Pull forum from Firebase database
-        var forum = ForumsFactory.getForum($stateParams.bobolinkId);
-        // Not suppose to use $loaded in production
-        // https://calendee.com/2014/09/18/use-loaded-with-firebase-and-angularfire/
-        forum.$loaded(function() {
-          // If forum title is undefined (aka forum doesn't exist), redirect to home
-          if (forum.title === undefined) {
-            $location.path('/home');
-          }
-        });
-      }
+      forumKey: ['$stateParams', function($stateParams) {
+        return $stateParams.forumKey;
+      }]
     }
   })
-
   .state('app.forums', {
     url: "/forums"
     ,resolve: {
@@ -134,7 +126,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-
   .state('app.newQuestion', {
     url: "/new_question?forumKey?forum",
     views: {
@@ -154,7 +145,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
-
   .state('app.respondToPoll', {
     url: "/respondToPoll?forumKey?forum",
     views: {
@@ -164,6 +154,7 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     }
   })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });

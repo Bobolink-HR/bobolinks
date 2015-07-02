@@ -1,7 +1,7 @@
 <div class="card forum-card">
 
   <div class="item item-royal" style="border:0px;border-radius:0px;">
-      <span style="font-size:135%;" ui-sref="app.forum({bobolinkId: '{{forum.$id}}'})">{{forum.title}}</span>
+      <span style="font-size:135%;" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">{{forum.title}}</span>
       <!-- <div style="float:right; padding-right: -5px; display:inline;"> -->
       <span style="float:right;">
         <i class="icon ion-share" style="margin:0 0 0 5px;font-size:150%;" ng-click="email(forum)"></i>
@@ -10,7 +10,7 @@
       </span>
   </div>
 
-  <div class="item item-icon-left" ui-sref="app.forum({bobolinkId: '{{forum.$id}}'})">
+  <div class="item item-icon-left" ui-sref="app.forum({forumKey: '{{forum.$id}}'})">
    <i class="icon ion-earth"></i>
    Forum Code
    <span class="item-note item-display-info" >
@@ -18,7 +18,7 @@
    </span>
   </div>
 
-  <div class="item item-icon-left" ui-sref="app.forum({bobolinkId: '{{forum.$id}}'})" ng-if="forum.password">
+  <div class="item item-icon-left" ui-sref="app.forum({forumKey: '{{forum.$id}}'})" ng-if="forum.password">
    <i class="icon ion-key"></i>
     Password
    <span class="item-note item-display-info" >

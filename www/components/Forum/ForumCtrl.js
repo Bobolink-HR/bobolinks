@@ -1,7 +1,9 @@
 app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
   // Initially user is set to null
+  // Set isDrawing to false;
   $scope.user = null;
-  $scope.pollAvailable = true;
+  $scope.isDrawing = false;
+  $scope.pollAvailable = false;
 
   $scope.formData = {};
 
@@ -13,14 +15,17 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $ionicSideMenuDelegate.canDragContent(!!$scope.user);
 
 
-  $scope.forumKey = $stateParams.bobolinkId;
+  $scope.forumKey = $stateParams.forumKey;
 
   // Set Forum object to $scope.forum with two way binding
   ForumsFactory.getForum($scope.forumKey)
   .$bindTo($scope, "forum")
   .then(function() {
     // Assign the title to the top nav bar
+    $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
+    $scope.showDrawing = false;
     $scope.title = $scope.forum.title;
+    $scope.drawing = $scope.forum.drawing;
 
     // If the forum's creator id equals the current user id, the user is the moderator
     $scope.isModerator = $scope.forum.creatorID === $scope.user;
@@ -43,6 +48,32 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
 
   $scope.polls = ForumsFactory.getPolls($scope.forumKey);
+
+
+  /*
+  * DRAWING FUNCTIONALITY
+  */ 
+  $('#simple_sketch').sketch();
+  var imageToDataUrl = function() {
+    var canvas = document.getElementById("simple_sketch");
+    var myImage = canvas.toDataURL();
+    return myImage;
+  };
+  $scope.toggleShowDrawing = function() {
+    $scope.showDrawing = !$scope.showDrawing;
+  };
+  $scope.showCanvas = function() {
+    $scope.isDrawing = !$scope.isDrawing;
+  };
+  $scope.saveDrawing = function() {
+    var forum = ForumsFactory.getForum($stateParams.forumKey);
+    forum.$loaded().then(function() {
+      forum.drawing = $('#simple_sketch').get(0).toDataURL();
+      forum.$save();
+      $scope.drawing = forum.drawing;
+    });
+  };
+
 
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible

@@ -44,7 +44,7 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   //Save a forum
   function saveForum(forum) { // Pass this the forum object to be saved to the database
     var forumObj = {};
-    forumObject[forum.bobolinkId] = forum;
+    forumObject[forum.forumKey] = forum;
     return forumObject.$save();
   }
 

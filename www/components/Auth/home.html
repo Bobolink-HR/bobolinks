@@ -8,7 +8,7 @@
           <label class=" translucent item item-input">
             <input id="forum-key-input" type="text" ng-click="clearContents(this)"placeholder="Enter forum key" ng-model="url.text" ></textarea>
           </label>
-          <button type="button" class="button button-positive button-full" ui-sref= "app.forum({bobolinkId: url.text})">Join Forum</button>
+          <button type="button" class="button button-positive button-full" ui-sref= "app.forum({forumKey: url.text})">Join Forum</button>
         </div>
       </form>
   </ion-content>
