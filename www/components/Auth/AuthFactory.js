@@ -49,7 +49,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function getGitHubProfile(userID){
-    var profileRef = FirebaseRef.child('Users').child(userID);
+    var profileRef = FirebaseRef.child('Users').child(userID);//+'/github/cachedUserProfile/avatar_url'
     console.log('in getGitHubName');
     return $firebaseObject(profileRef);
   }

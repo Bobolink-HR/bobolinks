@@ -1,4 +1,4 @@
-app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
+app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
   // Initially user is set to null
   // Set isDrawing to false;
   $scope.user = null;
@@ -22,6 +22,12 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   .then(function() {
     //Set user if the user logs in and allows the add question buttion to appear
     $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+
+    Auth.getGitHubProfile($scope.userID()).$loaded().then(function(data){
+      console.log(data.github.cachedUserProfile.avatar_url);
+    });
+
+    console.log($rootScope.user.github.displayName);
 
     // Assign the title to the top nav bar
     $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
@@ -165,7 +171,7 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $scope.gitHubLogin = function(){
     Auth.getGitHubAuth();
   };
-  
+
 });
 
 // Custom directive for pending questions
