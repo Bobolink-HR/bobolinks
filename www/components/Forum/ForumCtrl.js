@@ -74,11 +74,13 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     $scope.isDrawing = !$scope.isDrawing;
     $('#main-forum-sketch .tools').empty();
     $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-color='" + this + "' style='width: 10px; background: " + this + ";'></span> ");
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='marker' data-color='" + this + "' style='width: 10px; background: " + this + ";'></span> ");
     });
     $.each([3, 5, 10, 15], function() {
       $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-size='" + this + "' style='background: #ccc'>" + this + "</span> ");
     });
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='eraser'>Erase Drawing</span>");
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-download='png' style='float: right; width: 100px;'>Download</span>");
     $('.sketch_tool').on('click', function(e) {
       console.log(e.target);
       $this = $(e.target);
@@ -89,11 +91,11 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
           console.log("Setting key in sketch", el, $this.attr("data-" + el));
           sketch.set(el, $this.attr("data-" + el));
         }
-        if (($this).attr('data-download')) {
-          console.log("Downloading");
-          sketch.download($(this).attr('data-download'));
-        }
       });
+      if (($this).attr('data-download')) {
+        console.log("Downloading");
+        sketch.download($(this).attr('data-download'));
+      }
     });
   };
 
