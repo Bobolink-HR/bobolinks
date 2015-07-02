@@ -1,11 +1,10 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewPollCtrl">
-    <h1>RESPOND TO POLL</h1>
-    <p>{{poll[0].text}}</p>
-    <p>{{poll[0].option1}}</p>
-    <p>{{poll[0].option2}}</p>
-    <p>{{poll[0].option3}}</p>
-    <p>{{poll[0].option4}}</p>
+    <h3>{{poll[0].text}}</h3>
+    <ion-radio ng-click="setResponse(1)">{{poll[0].option1}}</ion-radio>
+    <ion-radio ng-click="setResponse(2)">{{poll[0].option2}}</ion-radio>
+    <ion-radio ng-click="setResponse(3)">{{poll[0].option3}}</ion-radio>
+    <ion-radio ng-click="setResponse(4)">{{poll[0].option4}}</ion-radio>
     <button ng-click="respond()">Respond</button>
   </ion-content>
 </ion-view>
