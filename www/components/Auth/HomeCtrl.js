@@ -9,6 +9,7 @@ app.controller('HomeCtrl', function($state, $scope, $location, Auth, $ionicSideM
   $scope.joinForum = function(forumKey) {
     if (!Auth.getAuth()) {
       Auth.getGitHubAuth(function(authData) {
+        $rootScope.forum.title = forumKey;
         $state.go('app.forum', {forumKey: forumKey});
       });;
     }
