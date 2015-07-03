@@ -15,6 +15,7 @@ app.controller('NewQuestionCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$st
       $scope.newQuestion.name = $rootScope.user.github.displayName;
       $scope.newQuestion.picture = $rootScope.user.github.cachedUserProfile.avatar_url;
       $scope.newQuestion.githubID = $rootScope.user.github.username;
+      $scope.newQuestion.userUrl = $rootScope.user.github.cachedUserProfile.html_url;
       ForumsFactory.addQuestion($stateParams.forumKey, $scope.newQuestion);
       // Go back to the forum view
       $rootScope.goBack();

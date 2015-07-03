@@ -24,9 +24,6 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     $scope.user = Auth.getAuth() && Auth.getAuth().uid;
 
     // Assign the title to the top nav bar
-
-    $scope.user = Auth.getAuth() && Auth.getAuth().uid;
-    
     $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
     $scope.showDrawing = false;
     $scope.title = $scope.forum.title;
@@ -229,7 +226,7 @@ app.directive('ngPendingQuestion', function() {
     '</div>' +
     '<img class="question-user-picture" src = "{{question.picture}}">' +
     '<p class="question-name">{{question.name}}</p>' +
-    '<p class="question-githubID">{{question.githubID}}</p>' +
+    '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
   '</div>',
    link: function($scope, element, attribute) {
       $scope.upVote = function(event) {
@@ -284,7 +281,7 @@ app.directive('ngAnsweredQuestion', function() {
       '</div>' +
      '<img class="question-user-picture" src = "{{question.picture}}">' +
      '<p class="question-name">{{question.name}}</p>' +
-     '<p class="question-githubID">{{question.githubID}}</p>' +
+     '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
     '</div>',
   };
 });
