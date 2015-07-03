@@ -224,7 +224,7 @@ app.directive('ngPendingQuestion', function() {
     '<div class="question-text-container">' +
      ' <p>{{question.text}}</p>' +
     '</div>' +
-    '<img class="question-user-picture" src = "{{question.picture}}">' +
+    '<img class="question-user-picture" ng-src="{{question.picture}}">' +
     '<p class="question-name">{{question.name}}</p>' +
     '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
   '</div>',
@@ -279,7 +279,7 @@ app.directive('ngAnsweredQuestion', function() {
     '<div class="question-text-container">' +
      '<p>{{question.text}}</p>' +
       '</div>' +
-     '<img class="question-user-picture" src = "{{question.picture}}">' +
+     '<img class="question-user-picture" ng-src="{{question.picture}}">' +
      '<p class="question-name">{{question.name}}</p>' +
      '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
     '</div>',
