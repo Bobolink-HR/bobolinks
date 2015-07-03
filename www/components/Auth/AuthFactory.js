@@ -40,18 +40,10 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function getGitHubAuth(){
-    FirebaseRef.authWithOAuthRedirect("github", function(error) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-      }
-    });
-  }
-
-  function getGitHubProfile(userID){
-    var profileRef = FirebaseRef.child('Users').child(userID);//+'/github/cachedUserProfile/avatar_url'
-    console.log('in getGitHubName');
-    return $firebaseObject(profileRef);
+    FirebaseRef.authWithOAuthRedirect("github", function(){})
+      .then(function(){
+        $state.go($state.current, {}, {reload: true});
+      });
   }
 
     return {
@@ -63,8 +55,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
     requireAuth: requireAuth,
     getAuth: getAuth,
     logout: logout,
-    getGitHubAuth: getGitHubAuth,
-    getGitHubProfile: getGitHubProfile
+    getGitHubAuth: getGitHubAuth
   };
 
 }
