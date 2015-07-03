@@ -40,9 +40,9 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
     return auth.$unauth();
   }
 
-  function getGitHubAuth(){
+  function getGitHubAuth(callback){
     auth.$authWithOAuthPopup("github").then(function(authData) {
-      console.log("Authenticated with ", authData);
+      callback(authData);
     }).catch(function(err) {
       console.log("Not authenticated with ", err);
     });
