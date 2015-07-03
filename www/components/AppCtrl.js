@@ -28,7 +28,8 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, Auth) {
 
   // Open the login modal
   $scope.login = function() {
-    $scope.modal.show();
+    // $scope.modal.show();
+    Auth.getGitHubAuth();
   };
 
   // Perform the login action when the user submits the login form

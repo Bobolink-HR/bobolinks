@@ -60,13 +60,14 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 
   .state('app.forum', {
     url: "/forum/:forumKey",
+    data: {
+      requireLogin: true
+    },
     views: {
       'menuContent': {
         templateUrl: "components/Forum/forum.html",
         controller: 'ForumCtrl'
       }
-    },
-    data: { 
     },
     resolve: {
       forumKey: ['$stateParams', function($stateParams) {
@@ -171,29 +172,31 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   // Event Listeners
   ///////////////////////////////////////////////////////
 
-  Auth.auth.$onAuth(function(authData) {
+  Auth.ref.onAuth(function(authData) {
       if (authData) {
+        console.log("User " + authData.uid + " logged in.");
         //**  LOGGED IN SUCCESFFULLY
-        $rootScope.user = Auth.getAuth(); //Sets User object in rootScope
-        var lastLogin = moment().format();
-
-        authData.lastLogin = lastLogin;
-
+        $rootScope.user = authData; //Sets User object in rootScope
+        $rootScope.lastLogin = moment().format();
         $rootScope.profile = Auth.getUserProfile(authData.uid);
-        $rootScope.user = authData;
-
-        Auth.setUserData(authData.uid, authData);
 
       } else {
         //** LOGGED OUT
         //will not redirect user from home to login
-        if(window.location.hash === '#/app/home') {
-          $state.go('app.home');
-        } else {
-          $state.go('app.login');
-        }
+        console.log("User logged out.")
+        $rootScope.user = null;
       }
     });
+
+  // Restrict forum view to people logged in.
+  $rootScope.$on('$stateChangeStart', function(e, to) {
+    console.log("State change started ", e, to);
+    if (to.data && to.data.requireLogin && !Auth.getAuth()) {
+      console.log("User must be logged in to change to this state");
+      e.preventDefault();
+      $state.go('app.home');
+    }
+  });
 
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireAuth promise is rejected
@@ -272,11 +275,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    if(!$rootScope.profile) {
-      return '';
-    } else {
-      return $rootScope.profile.displayName;
-    }
+    return $rootScope.user.github.displayName || '';
   };
 
   $rootScope.userID = function() {

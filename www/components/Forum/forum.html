@@ -108,13 +108,12 @@
     <h1 class="title">Add Question</h1>
   </ion-footer-bar>
 
-
   <ion-footer-bar ui-sref="app.respondToPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !!user && awaitingResponse" class="bar-positive" style="background-color:green;">
     <h1 class="title">Respond to Poll</h1>
   </ion-footer-bar>
 
   <!-- Add question link (shown if forumAccess is true, user is not moderator, and not logged in with GitHub) -->
-  <ion-footer-bar ng-click="gitHubLogin()" ng-show="forumAccess && !isModerator && !user" class="bar-positive">
+  <ion-footer-bar ng-click="gitHubLogin()" ng-show="!user" class="bar-positive">
     <h1 class="title">GitHub Login</h1>
   </ion-footer-bar>
 
