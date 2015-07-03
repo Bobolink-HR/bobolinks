@@ -86,6 +86,10 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
   function addPoll(forumID, poll) {
     var pollRef = forumRef.child(forumID).child('polls');
     var pollArray = $firebaseArray(pollRef);
+    poll.option1Responses = 0;
+    poll.option2Responses = 0;
+    poll.option3Responses = 0;
+    poll.option4Responses = 0;
     pollArray.$loaded(function(data) {
       if(pollArray.length > 0) {
         pollArray.$remove(0)
@@ -101,7 +105,9 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
   //Add a response to a poll's responses array
   function addResponse(response, forumID) {
     var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
+    var optionString = 'option' + response.value + 'Responses';
     polls.$loaded(function(data) {
+      polls[0][optionString]++;
       polls[0].responses = polls[0].responses || [];
       polls[0].responses.push(response);
       polls.$save(0);
