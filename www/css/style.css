@@ -356,3 +356,7 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.drawing-area {
+  border: solid black 2px;
+}
