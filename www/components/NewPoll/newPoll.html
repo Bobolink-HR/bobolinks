@@ -24,8 +24,9 @@
   <!-- If there is an active poll, show the current poll -->
   <!-- <div ng-show="pollAvailable()"> -->
   <div ng-show="pollAvailable">
-    <h1>There is an active poll!</h1>
+    <h1>Poll in progress:</h1>
     <h2>{{currentPoll[0].text}}</h2>
+    <h4 ng-show="!currentPoll[0].responses">No one has responded yet.</h4>
     <ul>
       <li ng-repeat="response in currentPoll[0].responses">
         {{response.username}}: {{getPollText(response.value)}}
