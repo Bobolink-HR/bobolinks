@@ -104,12 +104,12 @@
   </ion-footer-bar>
 
   <!-- Add question link (shown if forumAccess is true and user is not moderator) -->
-  <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !pollAvailable() && !!user" class="bar-positive">
+  <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !!user && !awaitingResponse" class="bar-positive">
     <h1 class="title">Add Question</h1>
   </ion-footer-bar>
 
 
-  <ion-footer-bar ui-sref="app.respondToPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && pollAvailable() && !!user" class="bar-positive" style="background-color:green;">
+  <ion-footer-bar ui-sref="app.respondToPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !!user && awaitingResponse" class="bar-positive" style="background-color:green;">
     <h1 class="title">Respond to Poll</h1>
   </ion-footer-bar>
 

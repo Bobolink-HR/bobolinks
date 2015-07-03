@@ -36,6 +36,8 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     // If both of these conditions fail, the main forum content is hiddent and the user
     // is asked to enter the forum password
     $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
+
+    $rootScope.awaitingResponse = ForumsFactory.awaitingResponse($rootScope.user.github.username, $stateParams.forumKey)
   });
 
 
@@ -119,13 +121,10 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
   };
 
   $scope.pollAvailable = function() {
-    if($scope.polls[0] && $scope.polls[0].active){
-      return true;
-    } else {
-      return false;
-    }
+    return ForumsFactory.pollAvailable($stateParams.forumKey);
   }
-  // This function is called when active question is clicked
+
+  // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
     if ($scope.isModerator) {
