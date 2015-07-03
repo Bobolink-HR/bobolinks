@@ -344,3 +344,15 @@
   /*background-color: rgba(0, 0, 0, .3);*/
   opacity: .66;
 }
+
+.mod-buttons {
+  width:50%;
+}
+
+.mod-button {
+  width:100%;
+  background-color: #387ef5;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}

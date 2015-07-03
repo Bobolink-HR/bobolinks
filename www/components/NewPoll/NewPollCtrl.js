@@ -5,7 +5,6 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
   // Create empty newPoll object on $scope and set starting rank to 0
   $scope.newPoll = {};
   $scope.newPoll.rank = 0;
-  $scope.newPoll.active = true;
   $scope.currentPoll = ForumsFactory.getPolls($stateParams.forumKey);
   ForumsFactory.pollAvailable($stateParams.forumKey)
     .then(function(result) {
@@ -23,5 +22,11 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
 
   $scope.endPoll = function() {
     ForumsFactory.endPoll($stateParams.forumKey);
+  }
+
+  $scope.getPollText = function(optionNumber) {
+    var optionString = 'option' + optionNumber;
+    console.log($scope.currentPoll[0][optionString]);
+    return $scope.currentPoll[0][optionString];
   }
 }]);

@@ -1,4 +1,4 @@
-<ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
+<ion-view ng-controller="ForumCtrl" view-title ="{{forum.title}}">
   <ion-content>
     
 
@@ -95,11 +95,11 @@
 
   <!-- Add poll link (shown if forumAccess is true and user is moderator) -->
   <ion-footer-bar>
-    <div class="buttons">
-      <button ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="bar-positive">Add Poll</button>
+    <div class="buttons mod-buttons">
+      <button ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="mod-button bar-positive">Poll</button>
     </div>
-    <div class="buttons">
-      <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
+    <div class="buttons mod-buttons">
+      <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="mod-button bar-positive">Drawing</button>
     </div>
   </ion-footer-bar>
 

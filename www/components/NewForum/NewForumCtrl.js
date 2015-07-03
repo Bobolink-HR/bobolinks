@@ -1,25 +1,5 @@
 app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth, forum) {
 
-
-  // $scope.newKey =
-
-  // $scope.newKey = ForumsFactory.generateForumId();
-
-
-
-
-
-  // console.log($scope.newKey);
-
-  // $scope.newKey.$loaded(function(data) {
-  //   // $scope.newKey = $$state.value
-  //   console.log(data);
-  // })
-
-
-  // console.log($scope.newKey);
-
-
   $scope.title = 'Create New Forum';
   $scope.isNewForum = true;
 
@@ -69,6 +49,7 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth,
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
       console.log("Saved forum");
+      $rootScope.goBack();
     }, function(err) {
       console.log("Error saving: ", err);
     });
