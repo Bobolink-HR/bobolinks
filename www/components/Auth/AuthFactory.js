@@ -41,12 +41,10 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function getGitHubAuth(){
-    auth.$authWithOAuthPopup("github", function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authdata: ", authData);
-      }
+    auth.$authWithOAuthPopup("github").then(function(authData) {
+      console.log("Authenticated with ", authData);
+    }).catch(function(err) {
+      console.log("Not authenticated with ", err);
     });
   }
 
