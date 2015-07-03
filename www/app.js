@@ -275,7 +275,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    return $rootScope.user.github.displayName;
+    return $rootScope.user.github.displayName || '';
   };
 
   $rootScope.userID = function() {
