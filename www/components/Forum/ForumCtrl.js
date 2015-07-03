@@ -24,6 +24,9 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     $scope.user = Auth.getAuth() && Auth.getAuth().uid;
 
     // Assign the title to the top nav bar
+
+    $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+    
     $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
     $scope.showDrawing = false;
     $scope.title = $scope.forum.title;
