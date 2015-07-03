@@ -1,4 +1,4 @@
-function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
+function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope) {
 
   var forumRef = FirebaseRef.child('Forums');
   var forumArray = $firebaseArray(forumRef);
@@ -104,20 +104,23 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
 
   //Returns true if the current user has already responded to the poll
   function awaitingResponse(username, forumID) {
-    console.log('awaitingresponse');
     var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
     polls.$loaded(function(responses) {
       if(polls.length < 1) {
+      $rootScope.awaitingResponse = false;
         return false;
       }
       if (!polls[0].responses) {
+      $rootScope.awaitingResponse = true;
         return true;
       }
       for (var i = 0; i < polls[0].responses.length; i++) {
         if (polls[0].responses[i].username === username) {
+      $rootScope.awaitingResponse = false;
           return false;
         }
       }
+      $rootScope.awaitingResponse = true;
       return true;
     });
   }
@@ -153,4 +156,4 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   };
 }
 
-app.factory('ForumsFactory', ['FirebaseRef', '$firebaseArray', '$firebaseObject', ForumsFactory]);
+app.factory('ForumsFactory', ['FirebaseRef', '$firebaseArray', '$firebaseObject', '$rootScope', ForumsFactory]);

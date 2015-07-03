@@ -22,7 +22,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 .config(['$compileProvider', function($compileProvider) {
   // Set $compileProvider so that angular doesn't mark data:image links as unsafe
   // and we can download our drawing.
-  console.log($compileProvider);
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 }])
 /////////////////////////////////////////////////////////////////////////////

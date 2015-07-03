@@ -37,7 +37,7 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     // is asked to enter the forum password
     $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
 
-    $scope.awaitingResponse = ForumsFactory.awaitingResponse($rootScope.user.github.username, $stateParams.forumKey)
+    $rootScope.awaitingResponse = ForumsFactory.awaitingResponse($rootScope.user.github.username, $stateParams.forumKey)
   });
 
 
