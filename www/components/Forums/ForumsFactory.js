@@ -1,4 +1,4 @@
-function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope) {
+function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope, $q) {
 
   var forumRef = FirebaseRef.child('Forums');
   var forumArray = $firebaseArray(forumRef);
@@ -23,13 +23,19 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope)
   }
 
   function pollAvailable(forumID) {
+    var deferred = $q.defer();
     var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
     polls.$loaded(function(data) {
       if(polls.length < 1) {
-        return false;
+        console.log('no poll available')
+          deferred.resolve(false);
+        return;
       }
-      return true;
+      console.log('poll available')
+        deferred.resolve(true);
+      return;
     });
+    return deferred.promise;
   }
 
   // function generateForumId() {
@@ -156,4 +162,4 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope)
   };
 }
 
-app.factory('ForumsFactory', ['FirebaseRef', '$firebaseArray', '$firebaseObject', '$rootScope', ForumsFactory]);
+app.factory('ForumsFactory', ['FirebaseRef', '$firebaseArray', '$firebaseObject', '$rootScope', '$q', ForumsFactory]);
