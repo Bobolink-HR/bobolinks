@@ -28,7 +28,7 @@
     <h2>{{currentPoll[0].text}}</h2>
     <ul>
       <li ng-repeat="response in currentPoll[0].responses">
-        {{response.username}}: {{response.value}}
+        {{response.username}}: {{getPollText(response.value)}}
       </li>
     </ul>
     <button ng-click="endPoll()">End current poll</button>
