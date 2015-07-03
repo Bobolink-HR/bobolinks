@@ -2,6 +2,7 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
 
   // Establishes auth connection with firebase
   var auth = $firebaseAuth(FirebaseRef);
+  var ref = FirebaseRef;
 
 
   // Returns a promise of a firebase object with the user id provided
@@ -40,14 +41,24 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
   }
 
   function getGitHubAuth(){
-    FirebaseRef.authWithOAuthRedirect("github", function(){})
-      .then(function(){
-        $state.go($state.current, {}, {reload: true});
-      });
+    auth.$authWithOAuthPopup("github", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authdata: ", authData);
+      }
+    });
+  }
+
+  function getGitHubProfile(userID){
+    var profileRef = FirebaseRef.child('Users').child(userID);//+'/github/cachedUserProfile/avatar_url'
+    console.log('in getGitHubName');
+    return $firebaseObject(profileRef);
   }
 
     return {
     auth: auth,
+    ref: ref,
     getUserProfile: getUserProfile,
     setUserProfile: setUserProfile,
     setUserData: setUserData,

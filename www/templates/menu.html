@@ -24,8 +24,11 @@
         <ion-item menu-close href="#/app/home">
           Join Forum
         </ion-item>
-        <ion-item ng-click="logout()" menu-close href="#/app/home">
+        <ion-item ng-show="user" ng-click="logout()" menu-close href="#/app/home">
           Sign Out
+        </ion-item>
+        <ion-item ng-show="!user" ng-click="login()" menu-close href="#/app/home">
+          Sign In
         </ion-item>
 
       </ion-list>

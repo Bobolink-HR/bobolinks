@@ -171,27 +171,19 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   // Event Listeners
   ///////////////////////////////////////////////////////
 
-  Auth.auth.$onAuth(function(authData) {
+  Auth.ref.onAuth(function(authData) {
       if (authData) {
+        console.log("User " + authData.uid + " logged in.");
         //**  LOGGED IN SUCCESFFULLY
-        $rootScope.user = Auth.getAuth(); //Sets User object in rootScope
-        var lastLogin = moment().format();
-
-        authData.lastLogin = lastLogin;
-
+        $rootScope.user = authData; //Sets User object in rootScope
+        $rootScope.lastLogin = moment().format();
         $rootScope.profile = Auth.getUserProfile(authData.uid);
-        $rootScope.user = authData;
-
-        Auth.setUserData(authData.uid, authData);
 
       } else {
         //** LOGGED OUT
         //will not redirect user from home to login
-        if(window.location.hash === '#/app/home') {
-          $state.go('app.home');
-        } else {
-          $state.go('app.login');
-        }
+        console.log("User logged out.")
+        $rootScope.user = null;
       }
     });
 
