@@ -5,4 +5,9 @@ app.controller('HomeCtrl', function($scope, $location, Auth, $ionicSideMenuDeleg
 
   // If user is not logged in, hide the side nav bar
   $ionicSideMenuDelegate.canDragContent($scope.loggedIn);
+
+  $scope.gitHubLogin = function(){
+    Auth.getGitHubAuth();
+  };
+
 });

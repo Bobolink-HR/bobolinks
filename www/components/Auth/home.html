@@ -13,7 +13,7 @@
       </form>
   </ion-content>
 
-  <ion-footer-bar class="bar-dark" ng-show="!loggedIn" ui-sref="app.login">
-    <h1 class="title">Moderator Login</h1>
+  <ion-footer-bar ng-click="gitHubLogin()" ng-show="!loggedIn" class="bar-positive">
+    <h1 class="title">GitHub Login</h1>
   </ion-footer-bar>
 </ion-view>

@@ -163,7 +163,11 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
   };
 
   $scope.gitHubLogin = function(){
-    Auth.getGitHubAuth();
+    Auth.getGitHubAuth()
+    .then(function(){
+      $scope.user = Auth.getAuth() && Auth.getAuth().uid;
+      $state.go($state.current, {}, {reload: true});
+    });
   };
 
 });
