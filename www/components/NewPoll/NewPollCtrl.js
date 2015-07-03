@@ -24,10 +24,4 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
     ForumsFactory.endPoll($stateParams.forumKey);
     $rootScope.goBack();
   }
-
-  $scope.getPollText = function(optionNumber) {
-    var optionString = 'option' + optionNumber;
-    console.log($scope.currentPoll[0][optionString]);
-    return $scope.currentPoll[0][optionString];
-  }
 }]);
