@@ -23,7 +23,13 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
   }
 
   function pollAvailable(forumID) {
-    return true;
+    var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
+    polls.$loaded(function(data) {
+      if(polls.length < 1) {
+        return false;
+      }
+      return true;
+    });
   }
 
   // function generateForumId() {
@@ -102,19 +108,17 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject) {
     var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
     polls.$loaded(function(responses) {
       if(polls.length < 1) {
-        
         return false;
       }
       if (!polls[0].responses) {
-                return true;
+        return true;
       }
       for (var i = 0; i < polls[0].responses.length; i++) {
         if (polls[0].responses[i].username === username) {
-          
           return false;
         }
       }
-            return true;
+      return true;
     });
   }
 
