@@ -1,14 +1,38 @@
 <ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
   <ion-content>
-    <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
-      <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
-      <canvas id="simple_sketch" width="800" height="300"></canvas>
+    
+
+
+    <!-- Drawing Dropdown Bar -->
+    <div id="drawing-dropdown" ng-show="isDrawing || drawing">
+      <div class="subheader pending-subheader" ng-click="toggleShowDrawing()">
+        Drawing
+        <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
+      </div>
+      <div class="drawing-container">
+        <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
+          <div class="tools">
+          </div>
+          <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
+          <canvas id="simple_sketch" width="800" height="300"></canvas>
+        </div>
+        <div ng-show="!isModerator">
+          <div class="tools">
+            <span class="sketch_tool" data-download="png" style='float: right; width: 100px;'>
+              <a href="{{forum.drawing}}" download="{{forumKey}}_drawing.jpg">Download</a>
+            </span>
+          </div>
+          <img ng-model="forum.drawing" ng-src="{{forum.drawing}}"/>
+        </div>
+      </div>
     </div>
-    <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button>
-    <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
+
+
+    <!-- <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button> -->
+    <!-- <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
     <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
       <img src="{{drawing}}"/>
-    </div>
+    </div> -->
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
       <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">

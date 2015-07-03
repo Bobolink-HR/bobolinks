@@ -59,18 +59,62 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
     var myImage = canvas.toDataURL();
     return myImage;
   };
-  $scope.toggleShowDrawing = function() {
-    $scope.showDrawing = !$scope.showDrawing;
+  $scope.toggleShowDrawing = function(event) {
+    if ($('.drawing-container').is(':visible') ) {
+      $('.drawing-container').slideUp();
+      
+    } else {
+      $('.drawing-container').slideDown();
+    }
+
+    $('.pending-arrow').toggleClass('rotated');
   };
+
   $scope.showCanvas = function() {
     $scope.isDrawing = !$scope.isDrawing;
+    $('#main-forum-sketch .tools').empty();
+    $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='marker' data-color='" + this + "' style='width: 10px; background: " + this + ";'></span> ");
+    });
+    $.each([3, 5, 10, 15], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-size='" + this + "' style='background: #ccc'>" + this + "</span> ");
+    });
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='eraser'>Erase Drawing</span>");
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-download='png' style='float: right; width: 100px;'>Download</span>");
+    $('.sketch_tool').on('click', function(e) {
+      console.log(e.target);
+      var $this = $(e.target);
+      var $canvas = $("#simple_sketch");
+      var sketch = $canvas.data('sketch');
+      ['color', 'size', 'tool'].forEach(function(el) {
+        if ($this.attr("data-" + el)) {
+          console.log("Setting key in sketch", el, $this.attr("data-" + el));
+          sketch.set(el, $this.attr("data-" + el));
+        }
+      });
+      if (($this).attr('data-download')) {
+        console.log("Downloading");
+        var $canvas = $("#simple_sketch");
+        var sketch = $canvas.data('sketch');
+        sketch.download($(this).attr('data-download'));
+      }
+    });
   };
+
+  $scope.downloadDrawing = function() {
+    var url = $scope.forum.drawing;
+    url = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(url);
+  };
+
   $scope.saveDrawing = function() {
     var forum = ForumsFactory.getForum($stateParams.forumKey);
     forum.$loaded().then(function() {
       forum.drawing = $('#simple_sketch').get(0).toDataURL();
+      console.log($('#simple_sketch').get(0).toDataURL());
       forum.$save();
       $scope.drawing = forum.drawing;
+      console.log($scope.drawing);
     });
   };
 
@@ -81,7 +125,7 @@ app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFac
       return false;
     }
   }
-  // This function is called when active quesiotn is clicked
+  // This function is called when active question is clicked
   // It clears out the active question and assigns a new active question if possible
   $scope.nextQuestion = function() {
     if ($scope.isModerator) {
