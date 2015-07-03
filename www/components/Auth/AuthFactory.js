@@ -1,4 +1,4 @@
-function AuthFactory(FirebaseRef,$state, $firebaseAuth, $firebaseObject) {
+function AuthFactory(FirebaseRef, $state, $firebaseAuth, $firebaseObject) {
 
   // Establishes auth connection with firebase
   var auth = $firebaseAuth(FirebaseRef);
@@ -68,4 +68,4 @@ function AuthFactory(FirebaseRef,$state, $firebaseAuth, $firebaseObject) {
 
 }
 
-app.factory("Auth", ["FirebaseRef","$state", "$firebaseAuth", "$firebaseObject", AuthFactory]);
+app.factory("Auth", ["FirebaseRef", "$state", "$firebaseAuth", "$firebaseObject", AuthFactory]);
