@@ -7,6 +7,10 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
   $scope.newPoll.rank = 0;
   $scope.newPoll.active = true;
   $scope.currentPoll = ForumsFactory.getPolls($stateParams.forumKey);
+  ForumsFactory.pollAvailable($stateParams.forumKey)
+    .then(function(result) {
+      $scope.pollAvailable = result;
+    });
 
   $scope.submitPoll = function() {
     //if text has been inputted in the Poll input
@@ -20,9 +24,4 @@ app.controller('NewPollCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$stateP
   $scope.endPoll = function() {
     ForumsFactory.endPoll($stateParams.forumKey);
   }
-
-  $scope.pollAvailable = function() {
-    return ForumsFactory.pollAvailable($stateParams.forumKey);
-  }
-
 }]);

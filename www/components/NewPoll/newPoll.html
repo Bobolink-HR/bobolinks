@@ -1,7 +1,7 @@
 <ion-view view-title ="{{title}}"> <!--hide-nav-bar=true-->
   <ion-content ng-controller="NewPollCtrl">
   <!-- If there is not an active poll, show the new poll form -->
-  <div ng-show="true">
+  <div ng-show="!pollAvailable">
     <form>
       <p class="forum-poll-form-label">Poll Question</p>
       <label class="item item-input">
@@ -23,7 +23,7 @@
   </div>
   <!-- If there is an active poll, show the current poll -->
   <!-- <div ng-show="pollAvailable()"> -->
-  <div ng-show="true">
+  <div ng-show="pollAvailable">
     <h1>There is an active poll!</h1>
     <h2>{{currentPoll[0].text}}</h2>
     <ul>
