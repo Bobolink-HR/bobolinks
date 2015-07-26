@@ -43,7 +43,6 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
   };
 
   $scope.email = function(forum){
-    console.log('sending email')
     window.location = 'mailto:someone@example.com?subject=Bobolink Forum Key&body=' + forum.$id;
   }
 });

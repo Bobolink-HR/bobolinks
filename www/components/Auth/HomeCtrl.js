@@ -13,7 +13,6 @@ app.controller('HomeCtrl', function($state, $rootScope, $scope, $location, Auth,
         $state.go('app.forum', {forumKey: forumKey});
       });;
     }
-    console.log("Going to ")
     $state.go('app.forum', {forumKey: forumKey});
   };
 

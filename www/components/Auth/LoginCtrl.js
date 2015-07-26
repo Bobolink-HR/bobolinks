@@ -23,7 +23,6 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
 
   // Create user
   $scope.createUser = function (user) {
-    console.log("Create User Function called");
     if (user && user.email && user.password && user.displayname) {
       $ionicLoading.show({
         template: 'Signing Up...'
@@ -57,7 +56,6 @@ app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth
         email: user.email,
         password: user.pwdForLogin
       }).then(function (authData) {
-        console.log("Logged in as:" + authData.uid);
         $ionicSideMenuDelegate.canDragContent(true);
         $rootScope.hide();
         $state.go('app.forums');

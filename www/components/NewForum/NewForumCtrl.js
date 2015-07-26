@@ -44,11 +44,9 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth,
     $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.endsAt.toString().slice(16,33) );
     delete $scope.newForum.endDate;
 
-    console.log($scope.newForum);
     // Save the forum to Firebase
     ForumsFactory.saveForum($scope.newForum).then(function(ref) {
       var id = ref.key();
-      console.log("Saved forum");
       $rootScope.goBack();
     }, function(err) {
       console.log("Error saving: ", err);
@@ -67,11 +65,8 @@ app.controller('NewForumCtrl', function($scope, ForumsFactory, $rootScope, Auth,
     $scope.newForum.endsAt = newForum.endDate.toString().slice(0,16).concat( newForum.endsAt.toString().slice(16,33) );
     delete $scope.newForum.endDate;
 
-    console.log($scope.newForum);
     // Save the forum to Firebase
     ForumsFactory.editForum($scope.newForum).then(function(ref) {
-      // var id = ref.key();
-      // console.log("edited forum with id " + id);
       $scope.resetForm();
       $rootScope.goBack();
     }).catch(function(err) {
