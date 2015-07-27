@@ -174,7 +174,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
   Auth.ref.onAuth(function(authData) {
       if (authData) {
-        console.log("User " + authData.uid + " logged in.");
         //**  LOGGED IN SUCCESFFULLY
         $rootScope.user = authData; //Sets User object in rootScope
         $rootScope.lastLogin = moment().format();
@@ -183,16 +182,13 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
       } else {
         //** LOGGED OUT
         //will not redirect user from home to login
-        console.log("User logged out.")
         $rootScope.user = null;
       }
     });
 
   // Restrict forum view to people logged in.
   $rootScope.$on('$stateChangeStart', function(e, to) {
-    console.log("State change started ", e, to);
     if (to.data && to.data.requireLogin && !Auth.getAuth()) {
-      console.log("User must be logged in to change to this state");
       e.preventDefault();
       $state.go('app.home');
     }
@@ -275,7 +271,10 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    return $rootScope.user.github.displayName || '';
+    if (!$rootScope.user || !rootScope.user.github || !$rootScope.user.github.displayName) {
+      return '';
+    }
+    return $rootScope.user.github.displayName;
   };
 
   $rootScope.userID = function() {
