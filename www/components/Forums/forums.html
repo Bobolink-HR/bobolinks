@@ -11,7 +11,6 @@
     <!-- format to add status: delete on click -->
     <!-- Active Forums List -->
     <div ng-show="active" ng-hide="complete">
-    <!-- <div ng-if="!complete"> -->
       <div      class="forum-card-container"
                 ng-repeat="forum in forums | filter:-forum.endsAt"
                 ng-if="!completed(forum.endsAt) && forum.status!=='delete' && forum.creatorID === userID()"

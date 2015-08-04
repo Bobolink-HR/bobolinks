@@ -45,7 +45,6 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
 
   function editForum(forum) { // Pass this the forum object to be saved to the database
     return forum.$save();
-    //return forumArray.$save(forum); // Returns a promise
   }
 
   function markComplete(forum) {
@@ -142,7 +141,6 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
     endPoll: endPoll,
     pollAvailable: pollAvailable,
     markComplete: markComplete
-    // ,generateForumId: generateForumId
   };
 }
 
