@@ -6,15 +6,6 @@ var app = angular.module('starter', ['ionic', 'firebase'])
 /////////////////////////////////////////////////////////////////////////////
 .run(function($ionicPlatform, $rootScope, $firebase, Auth, $ionicPopup, $ionicViewService, $ionicLoading, $state) {
   $ionicPlatform.ready(function(){
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    // if (window.cordova && window.cordova.plugins.Keyboard) {
-    //   cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    // }
-    // if (window.StatusBar) {
-    //   // org.apache.cordova.statusbar required
-    //   StatusBar.styleDefault();
-    // }
   });
 
   rootScopeInit($rootScope, $ionicPopup, $ionicViewService, $ionicLoading, Auth, $state);
@@ -76,12 +67,8 @@ var app = angular.module('starter', ['ionic', 'firebase'])
     }
   })
   .state('app.forums', {
-    url: "/forums"
-    ,resolve: {
-      // "currentAuth": ["Auth", function(Auth) {
-      //   return Auth.requireAuth();
-      // }]
-    },
+    url: "/forums",
+    resolve: {},
     views: {
       'menuContent': {
         templateUrl: "components/Forums/forums.html",
@@ -174,7 +161,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
   Auth.ref.onAuth(function(authData) {
       if (authData) {
-        console.log("User " + authData.uid + " logged in.");
         //**  LOGGED IN SUCCESFFULLY
         $rootScope.user = authData; //Sets User object in rootScope
         $rootScope.lastLogin = moment().format();
@@ -183,16 +169,13 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
       } else {
         //** LOGGED OUT
         //will not redirect user from home to login
-        console.log("User logged out.")
         $rootScope.user = null;
       }
     });
 
   // Restrict forum view to people logged in.
   $rootScope.$on('$stateChangeStart', function(e, to) {
-    console.log("State change started ", e, to);
     if (to.data && to.data.requireLogin && !Auth.getAuth()) {
-      console.log("User must be logged in to change to this state");
       e.preventDefault();
       $state.go('app.home');
     }
@@ -253,7 +236,6 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
 
   $rootScope.show = function(text) {
     $rootScope.loading = $ionicLoading.show({
-      //content: text ? text : 'Loading..',
       template: text ? text : 'Loading..',
       animation: 'fade-in',
       showBackdrop: true,
@@ -275,7 +257,10 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    return $rootScope.user.github.displayName || '';
+    if (!$rootScope.user || !rootScope.user.github || !$rootScope.user.github.displayName) {
+      return '';
+    }
+    return $rootScope.user.github.displayName;
   };
 
   $rootScope.userID = function() {

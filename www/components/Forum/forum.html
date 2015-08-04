@@ -27,12 +27,6 @@
       </div>
     </div>
 
-
-    <!-- <button ng-show="!isModerator" ng-click="toggleShowDrawing()" type="button" class="button button-positive">Show Drawing</button> -->
-    <!-- <div id="drawing" ng-show="drawing && !isModerator && showDrawing">
-    <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="bar-positive">Add Drawing</button>
-      <img src="{{drawing}}"/>
-    </div> -->
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
       <div id="active-question" ng-show="isModerator || !!questionActive[0]" ng-click="nextQuestion()">

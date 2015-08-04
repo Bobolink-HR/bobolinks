@@ -27,35 +27,14 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
     var polls = $firebaseArray(forumRef.child(forumID + '/polls'));
     polls.$loaded(function(data) {
       if(polls.length < 1) {
-        console.log('no poll available')
           deferred.resolve(false);
         return;
       }
-      console.log('poll available')
         deferred.resolve(true);
       return;
     });
     return deferred.promise;
   }
-
-  // function generateForumId() {
-  //   var text = "";
-  //   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  //
-  //   for (var i=0; i < 5; i++) {
-  //     text += possible.charAt(Math.floor(Math.random() * possible.length));
-  //   }
-  //   var forum = getForum(text);
-  //
-  //   return forum.$loaded(function() {
-  //     if (forum.title === undefined) {
-  //       return text;
-  //     } else {
-  //       return generateForumId();
-  //     }
-  //   });
-  // }
-
 
   //Save a forum
   function saveForum(forum) { // Pass this the forum object to be saved to the database
@@ -66,11 +45,9 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
 
   function editForum(forum) { // Pass this the forum object to be saved to the database
     return forum.$save();
-    //return forumArray.$save(forum); // Returns a promise
   }
 
   function markComplete(forum) {
-    console.dir(forum);
     forum.status='delete';
     forumArray.$save(forum);
   }
@@ -164,7 +141,6 @@ function ForumsFactory(FirebaseRef, $firebaseArray, $firebaseObject, $rootScope,
     endPoll: endPoll,
     pollAvailable: pollAvailable,
     markComplete: markComplete
-    // ,generateForumId: generateForumId
   };
 }
 

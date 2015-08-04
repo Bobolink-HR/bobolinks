@@ -32,7 +32,6 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
   };
 
   // Sets status property of forum to delete on confirmation
-  // BUG WITH CONFIRMATION
   $scope.remove = function(forum){
     // event.stopPropagation();
     $rootScope.showConfirm('Remove this forum?', null, $scope).then(function(res){
@@ -43,7 +42,6 @@ app.controller('ForumsCtrl', function($scope, ForumsFactory, Auth, $rootScope, $
   };
 
   $scope.email = function(forum){
-    console.log('sending email')
     window.location = 'mailto:someone@example.com?subject=Bobolink Forum Key&body=' + forum.$id;
   }
 });
