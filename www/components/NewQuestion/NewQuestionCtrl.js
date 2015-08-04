@@ -11,7 +11,11 @@ app.controller('NewQuestionCtrl', ['$scope', '$rootScope', 'ForumsFactory', '$st
     //if text has been inputted in the question input
     if ($scope.newQuestion.text !== undefined) {
       // Set name equal to input or 'Anonymous' if no name was inputted
-      $scope.newQuestion.name = $scope.newQuestion.name || 'Anonymous';
+      $scope.newQuestion.userID = $rootScope.user.uid;
+      $scope.newQuestion.name = $rootScope.user.github.displayName;
+      $scope.newQuestion.picture = $rootScope.user.github.cachedUserProfile.avatar_url;
+      $scope.newQuestion.githubID = $rootScope.user.github.username;
+      $scope.newQuestion.userUrl = $rootScope.user.github.cachedUserProfile.html_url;
       ForumsFactory.addQuestion($stateParams.forumKey, $scope.newQuestion);
       // Go back to the forum view
       $rootScope.goBack();

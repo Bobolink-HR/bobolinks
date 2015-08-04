@@ -1,7 +1,8 @@
-app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
-
+app.controller('ForumCtrl', function($scope, $rootScope, $stateParams, ForumsFactory, $firebase, Auth, $ionicSideMenuDelegate) {
   // Initially user is set to null
+  // Set isDrawing to false;
   $scope.user = null;
+  $scope.isDrawing = false;
 
   $scope.formData = {};
 
@@ -16,11 +17,17 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
   $scope.forumKey = $stateParams.forumKey;
 
   // Set Forum object to $scope.forum with two way binding
-  ForumsFactory.getForum($scope.forumKey).$bindTo($scope, "forum")
+  ForumsFactory.getForum($scope.forumKey)
+  .$bindTo($scope, "forum")
   .then(function() {
+    //Set user if the user logs in and allows the add question buttion to appear
+    $scope.user = Auth.getAuth() && Auth.getAuth().uid;
 
     // Assign the title to the top nav bar
+    $scope.forumKey = $scope.forum.forumKey; // This might be undefined and might not be used... research later.
+    $scope.showDrawing = false;
     $scope.title = $scope.forum.title;
+    $scope.drawing = $scope.forum.drawing;
 
     // If the forum's creator id equals the current user id, the user is the moderator
     $scope.isModerator = $scope.forum.creatorID === $scope.user;
@@ -29,6 +36,8 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
     // If both of these conditions fail, the main forum content is hiddent and the user
     // is asked to enter the forum password
     $scope.forumAccess = $scope.isModerator || !$scope.forum.password;
+
+    $rootScope.awaitingResponse = ForumsFactory.awaitingResponse($rootScope.user.github.username, $stateParams.forumKey)
   });
 
 
@@ -40,6 +49,75 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
     $scope.updateActiveQuestionContainerText();
   });
   $scope.questionsAnswered = ForumsFactory.getQuestions($scope.forumKey, 'answered');
+
+  $scope.polls = ForumsFactory.getPolls($scope.forumKey);
+
+  /*
+  * DRAWING FUNCTIONALITY
+  */ 
+  $('#simple_sketch').sketch();
+  var imageToDataUrl = function() {
+    var canvas = document.getElementById("simple_sketch");
+    var myImage = canvas.toDataURL();
+    return myImage;
+  };
+  $scope.toggleShowDrawing = function(event) {
+    if ($('.drawing-container').is(':visible') ) {
+      $('.drawing-container').slideUp();
+      
+    } else {
+      $('.drawing-container').slideDown();
+    }
+
+    $('.pending-arrow').toggleClass('rotated');
+  };
+
+  $scope.showCanvas = function() {
+    $scope.isDrawing = !$scope.isDrawing;
+    $('#main-forum-sketch .tools').empty();
+    $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='marker' data-color='" + this + "' style='width: 10px; background: " + this + ";'></span> ");
+    });
+    $.each([3, 5, 10, 15], function() {
+      $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-size='" + this + "' style='background: #ccc'>" + this + "</span> ");
+    });
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-tool='eraser'>Erase Drawing</span>");
+    $('#main-forum-sketch .tools').append("<span class='sketch_tool' data-download='png' style='float: right; width: 100px;'>Download</span>");
+    $('.sketch_tool').on('click', function(e) {
+      var $this = $(e.target);
+      var $canvas = $("#simple_sketch");
+      var sketch = $canvas.data('sketch');
+      ['color', 'size', 'tool'].forEach(function(el) {
+        if ($this.attr("data-" + el)) {
+          sketch.set(el, $this.attr("data-" + el));
+        }
+      });
+      if (($this).attr('data-download')) {
+        var $canvas = $("#simple_sketch");
+        var sketch = $canvas.data('sketch');
+        sketch.download($(this).attr('data-download'));
+      }
+    });
+  };
+
+  $scope.downloadDrawing = function() {
+    var url = $scope.forum.drawing;
+    url = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(url);
+  };
+
+  $scope.saveDrawing = function() {
+    var forum = ForumsFactory.getForum($stateParams.forumKey);
+    forum.$loaded().then(function() {
+      forum.drawing = $('#simple_sketch').get(0).toDataURL();
+      forum.$save();
+      $scope.drawing = forum.drawing;
+    });
+  };
+
+  $scope.pollAvailable = function() {
+    return ForumsFactory.pollAvailable($stateParams.forumKey);
+  }
 
   // This function is called when active quesiotn is clicked
   // It clears out the active question and assigns a new active question if possible
@@ -121,6 +199,11 @@ app.controller('ForumCtrl', function($scope, $stateParams, ForumsFactory, $fireb
 
     $('.answered-arrow').toggleClass('rotated');
   };
+
+  $scope.gitHubLogin = function(){
+    Auth.getGitHubAuth()
+  };
+
 });
 
 // Custom directive for pending questions
@@ -136,7 +219,9 @@ app.directive('ngPendingQuestion', function() {
     '<div class="question-text-container">' +
      ' <p>{{question.text}}</p>' +
     '</div>' +
+    '<img class="question-user-picture" ng-src="{{question.picture}}">' +
     '<p class="question-name">{{question.name}}</p>' +
+    '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
   '</div>',
    link: function($scope, element, attribute) {
       $scope.upVote = function(event) {
@@ -189,7 +274,10 @@ app.directive('ngAnsweredQuestion', function() {
     '<div class="question-text-container">' +
      '<p>{{question.text}}</p>' +
       '</div>' +
-      '<p class="question-name">{{question.name}}</p>' +
+     '<img class="question-user-picture" ng-src="{{question.picture}}">' +
+     '<p class="question-name">{{question.name}}</p>' +
+     '<a class="question-githubID" href="{{question.userUrl}}">{{question.githubID}}</a>' +
     '</div>',
   };
 });
+

@@ -1,7 +1,8 @@
-function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
+function AuthFactory(FirebaseRef, $state, $firebaseAuth, $firebaseObject) {
 
   // Establishes auth connection with firebase
   var auth = $firebaseAuth(FirebaseRef);
+  var ref = FirebaseRef;
 
 
   // Returns a promise of a firebase object with the user id provided
@@ -39,17 +40,32 @@ function AuthFactory(FirebaseRef, $firebaseAuth, $firebaseObject) {
     return auth.$unauth();
   }
 
-  return {
+  function getGitHubAuth(){
+    auth.$authWithOAuthPopup("github").then(function(authData) {
+      $state.go($state.current, {}, {reload: true});
+    }).catch(function(err) {
+      console.log("Not authenticated with ", err);
+    });
+  }
+
+  function getGitHubProfile(userID){
+    var profileRef = FirebaseRef.child('Users').child(userID);
+    return $firebaseObject(profileRef);
+  }
+
+    return {
     auth: auth,
+    ref: ref,
     getUserProfile: getUserProfile,
     setUserProfile: setUserProfile,
     setUserData: setUserData,
     waitForAuth: waitForAuth,
     requireAuth: requireAuth,
     getAuth: getAuth,
-    logout: logout
+    logout: logout,
+    getGitHubAuth: getGitHubAuth
   };
 
 }
 
-app.factory("Auth", ["FirebaseRef", "$firebaseAuth", "$firebaseObject", AuthFactory]);
+app.factory("Auth", ["FirebaseRef", "$state", "$firebaseAuth", "$firebaseObject", AuthFactory]);

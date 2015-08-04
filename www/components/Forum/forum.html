@@ -1,5 +1,31 @@
-<ion-view ng-controller="ForumCtrl" view-title ="{{title}}">
+<ion-view ng-controller="ForumCtrl" view-title ="{{forum.title}}">
   <ion-content>
+    
+
+
+    <!-- Drawing Dropdown Bar -->
+    <div id="drawing-dropdown" ng-show="isDrawing || forum.drawing">
+      <div class="subheader pending-subheader" ng-click="toggleShowDrawing()">
+        Drawing
+        <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
+      </div>
+      <div class="drawing-container">
+        <div id="main-forum-sketch" ng-show="isDrawing && isModerator">
+          <div class="tools">
+          </div>
+          <button ng-click="saveDrawing()" type="button" class="button button-positive button-full">Save Drawing</button>
+          <canvas class="drawing-area"id="simple_sketch" width="800" height="300"></canvas>
+        </div>
+        <div ng-show="!isModerator">
+          <div class="tools">
+            <span class="sketch_tool" data-download="png" style='float: right; width: 100px;'>
+              <a href="{{forum.drawing}}" download="{{forumKey}}_drawing.jpg">Download</a>
+            </span>
+          </div>
+          <img ng-model="forum.drawing" ng-src="{{forum.drawing}}"/>
+        </div>
+      </div>
+    </div>
 
     <!-- Main forum content (shown if forumAccess is true) -->
     <div id="main-forum-view" ng-show="forumAccess">
@@ -15,7 +41,9 @@
             <div class="question-text-container">
               <p>{{questionActive[0].text}}</p>
             </div>
+            <img class="question-user-picture" src = "{{questionActive[0].picture}}">
             <p class="question-name">{{questionActive[0].name}}</p>
+            <a class="question-githubID" href="{{question.userUrl}}">{{questionActive[0].githubID}}</a>
           </div>
         </div>
       </div>
@@ -26,7 +54,7 @@
         <img class="pending-arrow rotated" src="https://bobolinks.firebaseapp.com/img/arrow.png">
         </div>
         <div class="pending-questions-container">
-          <div class="question" ng-repeat="question in questionsPending | orderBy: '-rank'">
+          <div class="question"  ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="question in questionsPending | orderBy: '-rank'">
             <ng-pending-question question="question"></ng-question>
           </div>
           </ng-pending-question>
@@ -59,8 +87,28 @@
     </div>
   </ion-content>
 
+  <!-- Add poll link (shown if forumAccess is true and user is moderator) -->
+  <ion-footer-bar>
+    <div class="buttons mod-buttons">
+      <button ui-sref="app.newPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && isModerator" class="mod-button bar-positive">Poll</button>
+    </div>
+    <div class="buttons mod-buttons">
+      <button ng-click="showCanvas()" ng-show="forumAccess && isModerator" class="mod-button bar-positive">Drawing</button>
+    </div>
+  </ion-footer-bar>
+
   <!-- Add question link (shown if forumAccess is true and user is not moderator) -->
-  <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator" class="bar-positive">
+  <ion-footer-bar ui-sref="app.newQuestion({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !!user && !awaitingResponse" class="bar-positive">
     <h1 class="title">Add Question</h1>
   </ion-footer-bar>
+
+  <ion-footer-bar ui-sref="app.respondToPoll({forumKey: '{{forumKey}}' })" ng-show="forumAccess && !isModerator && !!user && awaitingResponse" class="bar-positive" style="background-color:green;">
+    <h1 class="title">Respond to Poll</h1>
+  </ion-footer-bar>
+
+  <!-- Add question link (shown if forumAccess is true, user is not moderator, and not logged in with GitHub) -->
+  <ion-footer-bar ng-click="gitHubLogin()" ng-show="!user" class="bar-positive">
+    <h1 class="title">GitHub Login</h1>
+  </ion-footer-bar>
+
 </ion-view>

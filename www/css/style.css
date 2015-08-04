@@ -1,4 +1,20 @@
+/*Drawing Buttons*/
+
+.tools span {
+  border: 1px solid black;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+  font-weight: bold;
+}
+
 /*Forum View*/
+
 .question {
   min-height: 95px;
   overflow: hidden;
@@ -59,7 +75,7 @@
 }
 
 .answered-question {
-  background-color: #EFF9EE;
+  background-color: #D7E0D6;
 }
 
 .left-content {
@@ -67,10 +83,6 @@
   width: auto;
   overflow: hidden;
   padding: 5px;
-}
-
-.question-name {
-  margin: 0px;
 }
 
 .right-content {
@@ -167,6 +179,23 @@
 .question-text-container {
   min-height: 70px;
   overflow: auto;
+}
+
+.question-user-picture{
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+  float: left;
+}
+
+.question-name {
+  margin: 0px;
+  font-weight: bold;
+}
+
+.question-githubID {
+  margin: 0px;
+  font-style: italic;
 }
 
 .subheader {
@@ -268,6 +297,14 @@
 }
 
 /* Forums */
+.odd {
+  background-color: #F8F8F8;
+}
+
+.even {
+  background-color: #FFFFFF;
+}
+
 .item-display-info {
   color: slateblue;
 }
@@ -306,4 +343,20 @@
 .faded {
   /*background-color: rgba(0, 0, 0, .3);*/
   opacity: .66;
+}
+
+.mod-buttons {
+  width:50%;
+}
+
+.mod-button {
+  width:100%;
+  background-color: #387ef5;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.drawing-area {
+  border: solid black 2px;
 }
