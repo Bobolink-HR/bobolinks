@@ -61,8 +61,15 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       }
     },
     resolve: {
-      forumKey: ['$stateParams', function($stateParams) {
-        return $stateParams.forumKey;
+      forumKey: ['$stateParams', '$state', 'ForumsFactory', function($stateParams, $state, ForumsFactory) {
+        var forum = ForumsFactory.getForum($stateParams.forumKey);
+
+        forum.$loaded(function() {
+          if (forum.title === undefined) {
+            $state.go('app.home');
+            return $stateParams.forumKey;
+          }
+        });
       }]
     }
   })
@@ -105,14 +112,14 @@ var app = angular.module('starter', ['ionic', 'firebase'])
       "currentAuth": ["Auth", function(Auth) {
         return Auth.requireAuth();
       }],
-      forum: function($stateParams, $location, ForumsFactory) {
+      forum: function($stateParams, $state, ForumsFactory) {
         // Pull forum from Firebase database
         var forum = ForumsFactory.getForum($stateParams.forumKey);
 
         forum.$loaded(function() {
           // If forum title is undefined (aka forum doesn't exist), redirect to home
           if (forum.title === undefined) {
-            $location.path('/home');
+            $state.go('app.home');
           }
         });
 
@@ -257,7 +264,7 @@ var rootScopeInit = function($rootScope, $ionicPopup, $ionicViewService, $ionicL
   };
 
   $rootScope.displayName = function() {
-    if (!$rootScope.user || !rootScope.user.github || !$rootScope.user.github.displayName) {
+    if (!$rootScope.user || !$rootScope.user.github || !$rootScope.user.github.displayName) {
       return '';
     }
     return $rootScope.user.github.displayName;
